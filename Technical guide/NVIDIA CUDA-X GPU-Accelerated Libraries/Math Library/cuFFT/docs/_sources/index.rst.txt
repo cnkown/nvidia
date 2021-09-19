@@ -1,0 +1,40 @@
+.. cuFFTDx documentation master file, created by
+   sphinx-quickstart on Tue May 14 11:18:06 2019.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+NVIDIA cuFFTDx documentation
+============================
+
+Welcome to the Early Access version of the cuFFT Device Extensions (cuFFTDx) library.
+The Early Access (EA) documentation consists of two main components:
+  * A quick start guide, :ref:`first-fft-label`.
+  * An :ref:`api-reference-label` for a comprehensive overview of the provided functionality.
+
+
+Highlights
+==========
+* Fast Fourier Transform (FFT) embeddable into a CUDA kernel
+* High performance, no unnecessary data movement
+* Customizability, options to adjust selection of FFT routine for different needs
+* Compatibility with future versions of CUDA Toolkit
+
+.. ifconfig:: "dev" in release
+
+   .. warning::
+         You are currently viewing unstable developer preview of the documentation.
+
+.. toctree::
+   :hidden:
+
+   Documentation home <self>
+
+.. toctree::
+   :maxdepth: 2
+   :caption: User guide:
+
+   introduction
+   performance
+   requirements_func
+   api/index
+   issues

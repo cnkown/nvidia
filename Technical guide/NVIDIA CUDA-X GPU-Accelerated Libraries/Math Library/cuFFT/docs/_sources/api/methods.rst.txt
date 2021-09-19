@@ -1,0 +1,131 @@
+.. role:: cpp(code)
+   :language: cpp
+   :class: highlight
+
+.. default-role:: cpp
+.. highlight:: cpp
+
+.. cpp:namespace:: cufftdx
+
+.. _execution-methods-label:
+
+Execution Methods
+=================
+
+These methods are used to run the FFT operation.
+
+A code example:
+
+.. code-block::
+
+  #include <cufftdx.hpp>
+
+  using FFT = decltype( cufftdx::Size<128>() + cufftdx::Type<fft_type::c2c>()
+                      + cufftdx::Direction<fft_direction::forward>()
+                      + cufftdx::Precision<float>() + cufftdx::Block() );
+
+  using complex_type = typename FFT::value_type;
+
+  // Shared memory pointer
+  extern __shared__ complex_type shared_mem[];
+
+  // Register data
+  complex_type thread_data[FFT::storage_size];
+
+  // Load data into registers (thread_data)
+  // ...
+
+  FFT().execute(thread_data, shared_mem);
+
+.. _thread-execute-method-label:
+
+Thread Execute Method
+--------------------
+
+.. code-block::
+
+  void FFT().execute<typename T>(T* input)
+
+Runs the FFT operation defined by the FFT descriptor. `T` can be any type (such as `float2` or `double2`),
+as long as its alignment and element size are the same as those of `FFT::value_type`
+(see :ref:`valuetype-thread-trait-label`).
+
+This method is available if the descriptor has been constructed using the :ref:`thread-operator-label` and :ref:`isfftcompleteexecution-trait-label` is `true`.
+
+.. _block-execute-method-label:
+
+Block Execute Method
+--------------------
+
+.. code-block:: cpp
+
+  // #1
+  void FFT().execute<typename T>(T* input, void* shared_memory, FFT::workspace_type& workspace)
+
+  // #2: Overload for FFTs which don't require workspace
+  void FFT().execute<typename T>(T* input, void* shared_memory)
+
+Runs the FFT operation defined by the FFT descriptor. `T` can be any type (such as `float2` or `double2`),
+as long as its alignment and element size are the same as those of `FFT::value_type`
+(see :ref:`valuetype-block-trait-label`).
+
+When :ref:`requiresworkspace-block-trait-label` is `false`, overload #2 can be used. Otherwise, user has to use
+#1 overload and pass reference to a workspace.
+
+This method is available if the descriptor has been constructed using the :ref:`block-operator-label`
+and :ref:`isfftcompleteexecution-trait-label` is `true`.
+
+.. _make-workspace-method-label:
+
+Make Workspace Function
+-----------------------
+
+.. code-block:: cpp
+
+  template<class FFT>
+  auto cufftdx::make_workspace<FFT>(cudaError_t& error)
+
+`cufftdx::make_workspace<FFT>(cudaError_t&)` is a helper function for creating workspace required for block `execute(..)` method
+when `FFT::requires_workspace` (:ref:`requiresworkspace-block-trait-label`) is `true`. `FFT` is type of FFT descriptor.
+If after calling the function `error` is not `cudaSuccess` the workspace was not created correctly and is invalid.
+
+* If `FFT::requires_workspace` (:ref:`requiresworkspace-block-trait-label`) trait is `false`, user doesn't have to create workspace.
+* Workspace can be created for FFT with `FFT::requires_workspace` equal to false: such workspace is an empty workspace with no global memory allocation.
+* Workspace object is valid only for FFT it was created for.
+* Workspace object can allocate global memory, however never more than `FFT::workspace_size` (:ref:`workspacesize-block-trait-label`),
+  and it's responsible for freeing it.
+* Allocated global memory is freed upon destruction of the last copy of created workspace object.
+* Workspace object can be implicitly casted to `FFT::workspace_type`.
+
+.. note::
+  .. include:: empty_workspace_list.rst
+
+.. warning::
+  `FFT::workspace_type` (:ref:`workspacetype-block-trait-label`) object doesn't track lifetime of underlying memory, and
+  is only valid within a lifetime of workspace object it was casted from.
+
+.. warning::
+  Type returned by `cufftdx::make_workspace<FFT>(cudaError_t&)` can be different for different FFT descriptions,
+  and is not same as `FFT::workspace_type` (:ref:`workspacetype-block-trait-label`). User should use `auto` when
+  creating a workspace object. Example:
+
+  .. code-block:: cpp
+
+      // Kernel
+      template<class FFT>
+      __launch_bounds__(FFT::max_threads_per_block)
+      __global__ void block_fft_kernel(typename FFT::value_type* data, typename FFT::workspace_type workspace) {
+          // ...
+
+          // Execute FFT
+          FFT().execute(thread_data, shared_mem, workspace);
+      }
+
+      // Create workspace
+      cudaError_t error = 0;
+      auto workspace = cufftdx::make_workspace<FFT>(error);
+
+      // ...
+
+      // Run kernel with FFT
+      block_fft_kernel<FFT><<<1, FFT::block_dim, FFT::shared_memory_size>>>(data, workspace);

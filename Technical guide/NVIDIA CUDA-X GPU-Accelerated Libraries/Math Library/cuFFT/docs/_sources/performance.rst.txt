@@ -1,0 +1,66 @@
+Achieving high performance
+==========================
+
+In High-Performance Computing, the ability to write customized code enables
+users to target better performance. In the case of cuFFTDx, the potential for
+performance improvement of existing FFT applications is high, but it greatly
+depends on how the library is used. Taking the regular cuFFT library as
+baseline, the performance may be up to one order of magnitude better or worse.
+For this reason porting existing sources to cuFFTDx should always be done in
+parallel with performance analysis. Below we list general advice that
+may help in this process.
+
+General advice
+**************
+
+- Use library provided settings to start with best compute performance
+- Best parameters for compute bound and memory bound kernels might not be identical
+- Ensure FFT kernel runs enough blocks to fill GPU for peak performance
+- Merge adjacent memory bound kernels into FFT kernel
+
+Global memory
+*************
+
+- Avoid reading/writing data from global memory
+- Ensure global memory read/writes are coalesced (increase value of
+  :ref:`fftsperblock-operator-label` if needed)
+  
+- Use `shared` memory or extra
+  registers to store temporary data
+
+Kernel fusion
+*************
+
+- For complex kernels consider adjusting FFT operation to match user kernel
+  (ie. by tweaking :ref:`ept-operator-label`). Upcoming versions of
+  cuFFTDx will offer more customization options.
+  
+- For simple operations consider merging operations into FFT kernel optimized
+  for FFT performance.
+
+Advanced
+********
+
+- For FFT loads not filling GPU entirely consider running parallel kernels in separate stream
+- `CUDA Occupancy Calculator`_ and/or `cudaOccupancyMaxActiveBlocksPerMultiprocessor`_ function to
+  determine optimum launch parameters
+- Use `CUDA Occupancy Calculator`_ to determine what extra resources are
+  available without losing occupancy
+
+Further reading
+***************
+
+- `CUDA Best Practices Guide`_
+- `Turing Tuning Guide`_
+- `Volta Tuning Guide`_
+
+References
+^^^^^^^^^^
+
+.. target-notes::
+
+.. _`CUDA Best Practices Guide`: https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html
+.. _`Turing Tuning Guide`: https://docs.nvidia.com/cuda/turing-tuning-guide/index.html
+.. _`Volta Tuning Guide`: https://docs.nvidia.com/cuda/volta-tuning-guide/index.html
+.. _`CUDA Occupancy Calculator`: https://docs.nvidia.com/cuda/cuda-occupancy-calculator/index.html
+.. _`cudaOccupancyMaxActiveBlocksPerMultiprocessor`: https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__OCCUPANCY.html

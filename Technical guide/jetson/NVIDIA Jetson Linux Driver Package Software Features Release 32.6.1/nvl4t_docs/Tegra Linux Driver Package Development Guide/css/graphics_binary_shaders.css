@@ -1,0 +1,167 @@
+div.Normal, caption.Normal
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: small;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-left: .25in;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  word-spacing: normal;
+}
+
+H3.Heading_3, div.Heading_3, caption.Heading_3
+{
+  border-top-color: #DEE4F0;
+  border-top-style: solid;
+  border-top-width: 2pt;
+  color: #004831;
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: large;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 5pt;
+  margin-left: .25in;
+  margin-top: 12pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 9pt;
+  word-spacing: normal;
+}
+
+div.Heading_5, caption.Heading_5
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: medium;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bolder;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 5pt;
+  margin-left: .25in;
+  margin-top: 12pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  text-indent: 0pt;
+  word-spacing: normal;
+}
+
+div.List_Number, caption.List_Number
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: small;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 6pt;
+  margin-left: .5in;
+  margin-right: 0in;
+  margin-top: 6pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  text-indent: -18pt;
+  word-spacing: normal;
+}
+
+div.Body_Text, caption.Body_Text
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: small;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 12pt;
+  margin-left: .25in;
+  margin-right: 0in;
+  margin-top: 6pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  text-indent: 0pt;
+  word-spacing: normal;
+}
+
+H1.Heading_2_Top, div.Heading_2_Top, caption.Heading_2_Top
+{
+  color: #004831;
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: x-large;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 5pt;
+  margin-left: .25in;
+  margin-top: 12pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 9pt;
+  word-spacing: normal;
+}
+
+span.Default_Paragraph_Font, span.Default_Paragraph_Font a, span.Default_Paragraph_Font a:active, abbreviation.Default_Paragraph_Font, abbreviation.Default_Paragraph_Font a, abbreviation.Default_Paragraph_Font a:active, acronym.Default_Paragraph_Font, acronym.Default_Paragraph_Font a, acronym.Default_Paragraph_Font a:active, citation.Default_Paragraph_Font, citation.Default_Paragraph_Font a, citation.Default_Paragraph_Font a:active
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;;
+}
+
+span.Code_Char, span.Code_Char a, span.Code_Char a:active, abbreviation.Code_Char, abbreviation.Code_Char a, abbreviation.Code_Char a:active, acronym.Code_Char, acronym.Code_Char a, acronym.Code_Char a:active, citation.Code_Char, citation.Code_Char a, citation.Code_Char a:active
+{
+  font-family: "Courier New";
+}
+
+table.Table_Normal
+{
+  border-bottom-color: Silver;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  border-collapse: collapse;
+  border-left-color: Silver;
+  border-left-style: solid;
+  border-left-width: thin;
+  border-right-color: Silver;
+  border-right-style: solid;
+  border-right-width: thin;
+  border-top-color: Silver;
+  border-top-style: solid;
+  border-top-width: thin;
+  margin-left: -5.4pt;
+  padding-bottom: 0pt;
+  padding-left: 5.4pt;
+  padding-right: 5.4pt;
+  padding-top: 0pt;
+  width: 90%;
+}
+
+img.Default
+{
+  margin-left: .5in;
+  overflow: scroll;
+}
+
+video.Default
+{
+  margin-left: .5in;
+  overflow: scroll;
+}
+

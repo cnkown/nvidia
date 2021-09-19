@@ -1,0 +1,10 @@
+.ww_skin_breadcrumbs {
+  color: black;
+  background: transparent;
+  filter: none; }
+
+.ww_skin_page_toolbar, .ww_social {
+  display: none; }
+
+div#disqus_thread {
+  display: block; }

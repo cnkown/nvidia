@@ -1,0 +1,133 @@
+@charset "UTF-8";
+/*~~~~~ COLORS ~~~~~*/
+/*~~~~~~~~~~~~~~~~~~*/
+/* custom colors                               */
+/*                                             */
+/* define custom values here for easy tracking */
+/* NVIDIA customization as dark green. */
+/* Pale grey in the toolbar icons and text, except where we override it */
+/* NVIDIA cusotmization as lime green, used in hover. */
+/* Charcoal grey used in the TOC font, previously #444142. */
+/* Really pale grey used only as the miniTOC background color. */
+/* This is the charcoal color in the header and footer background, previously #444142. */
+/* This is blue. I replaced references with $nvidia_dark_green. */
+/* NOTE: Gradients as background colors are supported through linear/radial-gradient property values.*/
+/*       It is suggested to put the gradient value only where it is needed, as it will cause errors  */
+/*       if it is used in the darken() or lighten() functions.                                       */
+/*       If a gradient value is set for a $_layout_color property, you must remove all darken() and  */
+/*       lighten() calls that derive from the gradient, or there will be no color output where those */
+/*       properties are used.                                                                        */
+/*                                                                                                   */
+/*       Usage documentation for Gradients: https://www.w3schools.com/css/css3_gradients.asp         */
+/* layout colors: set these for a quick application to the output.                                   */
+/*                                                                                                   */
+/* this is set to NVIDIA dark green */
+/* used for the TOC text color */
+/* Defaults for structure items */
+/*                              */
+/* Mini TOC */
+/*          */
+/* this is NVIDIA dark green */
+/* this is NVIDIA lime green */
+/* Related Topics */
+/*                */
+/* Search Result Highlight */
+/*                         */
+/* Monochromatic version of NVIDIA Green */
+/* colors for specific items */
+/*                           */
+/* toolbar */
+/* menu (nav & toc/index) */
+/* page */
+/* disqus */
+/* search */
+/* header */
+/* NVIDIA color change to get white text in header */
+/* footer */
+/* NVIDIA color change to get white text in footer */
+/* back-to-top button */
+/* progress bar */
+/* modal (cookies disabled message) */
+/*
+ * lightbox
+*/
+/* unsupported browser */
+/* no javascript warning */
+/*~~~~~ ICONS ~~~~~*/
+/*~~~~~~~~~~~~~~~~~*/
+/*
+  This file contains the character codes applied to the icons in the output.
+
+  Usage: Find the character code of the icon to be used in the font-awesome cheatsheet.
+         The 4-character code is next to it's respective icon.
+         (ex: f002 for search)
+         Apply to variable value in quotes and a leading backslash
+         (ex: "\f002")
+
+  font-awesome cheatsheet: https://fontawesome.com/v4.7.0/cheatsheet/
+
+  The cheatsheet can also be found in the ePublisher Installation Directory at:
+
+  <Install Location>/WebWorks/ePublisher/<version>/Helpers/font-awesome/Font Awesome Cheatsheet.html
+*/
+/* toolbar */
+/* menu */
+/* page */
+/* header */
+/* footer */
+/* search */
+/* modal (cookies disabled message) */
+#social_links {
+  display: inline-block; }
+
+.ww_social {
+  color: #B9BCC9; }
+
+a.ww_social {
+  text-decoration: none;
+  outline-width: 0; }
+
+.ww_social_twitter {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 24px;
+  margin-left: 6px;
+  margin-right: 6px; }
+  .ww_social_twitter i:before {
+    content: ""; }
+
+a.ww_social_twitter {
+  color: #B9BCC9; }
+  a.ww_social_twitter:hover {
+    color: #17a2f3; }
+
+.ww_social_facebook {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 24px;
+  margin-left: 6px;
+  margin-right: 6px; }
+  .ww_social_facebook i:before {
+    content: ""; }
+
+a.ww_social_facebook {
+  color: #B9BCC9; }
+  a.ww_social_facebook:hover {
+    color: #4267b2; }
+
+.ww_social_linkedin {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 24px;
+  margin-left: 6px;
+  margin-right: 6px; }
+  .ww_social_linkedin i:before {
+    content: ""; }
+
+a.ww_social_linkedin {
+  color: #B9BCC9; }
+  a.ww_social_linkedin:hover {
+    color: #0077b5; }

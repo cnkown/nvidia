@@ -1,0 +1,671 @@
+.. role:: cpp(code)
+   :language: cpp
+   :class: highlight
+
+.. default-role:: cpp
+.. highlight:: cpp
+
+.. cpp:namespace:: cufftdx
+
+.. |size-trait-label| replace:: `size_of<Description>::value`
+.. |type-trait-label| replace:: `type_of<Description>::value`
+.. |direction-trait-label| replace:: `direction_of<Description>::value`
+.. |precision-trait-label| replace:: `precision_of<Description>`
+.. |stride-trait-label| replace:: `stride_of<Description>`
+.. |isfft-trait-label| replace:: `is_fft<Description>`
+.. |isfftexecution-trait-label| replace:: `is_fft_execution<Description>`
+.. |isfftcomplete-trait-label| replace:: `is_complete_fft<Description>`
+.. |isfftcompleteexecution-trait-label| replace:: `is_complete_fft_execution<Description>`
+
+.. |valuetype-thread-trait-label| replace:: `Description::value_type`
+.. |inputtype-thread-trait-label| replace:: `Description::input_type`
+.. |outputtype-thread-trait-label| replace:: `Description::output_type`
+.. |implicit-type-batching-thread-trait-label| replace:: `Description::implicit_type_batching`
+.. |ept-thread-trait-label| replace:: `Description::elements_per_thread`
+.. |storage-thread-trait-label| replace:: `Description::storage_size`
+.. |valuetype-block-trait-label| replace:: `Description::value_type`
+.. |inputtype-block-trait-label| replace:: `Description::input_type`
+.. |outputtype-block-trait-label| replace:: `Description::output_type`
+.. |workspacetype-block-trait-label| replace:: `Description::workspace_type`
+.. |implicit-type-batching-block-trait-label| replace:: `Description::implicit_type_batching`
+.. |ept-block-trait-label| replace:: `Description::elements_per_thread`
+.. |storage-block-trait-label| replace:: `Description::storage_size`
+.. |fftsperblock-block-trait-label| replace:: `Description::ffts_per_block`
+.. |suggestedfftsperblock-block-trait-label| replace:: `Description::suggested_ffts_per_block`
+.. |sharedmemory-block-trait-label| replace:: `Description::shared_memory_size`
+.. |blockdim-block-trait-label| replace:: `Description::block_dim`
+.. |maxthreads-block-trait-label| replace:: `Description::max_threads_per_block`
+.. |minblocks-block-trait-label| replace:: `Description::min_blocks_per_multiprocessor`
+.. |requiresworkspace-block-trait-label| replace:: `Description::requires_workspace`
+.. |workspacesize-block-trait-label| replace:: `Description::workspace_size`
+
+.. _traits-label:
+
+Traits
+=========================
+
+Traits provide the user with information about the FFT description constructed using :ref:`operators-label`. They are divided into
+`Description Traits`_ and `Execution Traits`_.
+
+------------------------------------------------------------------------------------------
+
+Description Traits
+-------------------------
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 10 20
+
+  * - Trait
+    - Default value
+    - Description
+  * - |size-trait-label|_
+    - None.
+    - Size of the FFT to compute.
+  * - |type-trait-label|_
+    - `fft_type::c2c`
+    - Type of the FFT operation, either `fft_type::c2c`, `fft_type::r2c` or `fft_type::c2r`.
+  * - |direction-trait-label|_
+    - See :ref:`direction-trait-label`.
+    - Direction of the FFT operation, either `fft_direction::inverse` or `fft_direction::forward`.
+  * - |precision-trait-label|_
+    - `float`
+    - Type of the underlying floating-point values used to compute the FFT: `double`, `float` or `__half`.
+  * - |stride-trait-label|_
+    - `1`
+    - Not implemented yet.
+  * - |isfft-trait-label|_
+    - None.
+    - `true` if `Description` is an FFT description, formed with :ref:`description-operators-label`.
+  * - |isfftexecution-trait-label|_
+    - None.
+    - `true` if `Description` is an FFT description, configured with :ref:`execution-operators-label`.
+  * - |isfftcomplete-trait-label|_
+    - None.
+    - `true` if `Description` is a valid FFT description, formed with :ref:`description-operators-label`.
+  * - |isfftcompleteexecution-trait-label|_
+    - None.
+    - `true` if |isfftcomplete-trait-label|_ is `true` and |isfftexecution-trait-label|_ is `true`.
+
+Description traits can be retrieved from an FFT descriptor using the helper functions provided. For example:
+
+.. code-block::
+
+  #include <iostream>
+  #include <cufftdx.hpp>
+
+  using FFT = decltype( cufftdx::Size<8>() + cufftdx::Type<fft_type::c2c>()
+                        + cufftdx::Direction<fft_direction::forward>()
+                        + cufftdx::Precision<double>() + cufftdx::Thread() );
+
+  if(cufftdx::is_complete<FFT>::value)
+    std::cout << "Size of the FFT operation: " << cufftdx::size_of<FFT>::value << std::endl;
+
+.. _size-trait-label:
+
+Size Trait
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block::
+
+  cufftdx::size_of<FFT>::value
+
+Size of the FFT to compute, as set by :ref:`size-operator-label`.
+
+There is no default size. If the descriptor was not created using a :ref:`size-operator-label`, compilation will fail with an error message.
+
+.. _type-trait-label:
+
+Type Trait
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block::
+
+  cufftdx::type_of<FFT>::value
+
+Type of the FFT operation, as set by :ref:`type-operator-label`.
+
+The default type is complex-to-complex, `fft_type::c2c`.
+
+.. _direction-trait-label:
+
+Direction Trait
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block::
+
+  cufftdx::direction_of<FFT>::value
+
+Direction of the FFT operation, as set by :ref:`direction-operator-label`.
+
+Default direction:
+    * If the FFT type is `fft_type::r2c`, the default direction is `fft_direction::forward`.
+    * If the FFT type is `fft_type::c2r`, the default direction is `fft_direction::inverse`.
+    * For any other type, there is no default direction. If the descriptor was not created using a :ref:`direction-operator-label`, compilation will fail with an error message.
+
+.. _precision-trait-label:
+
+Precision Trait
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block::
+
+  cufftdx::precision_of<FFT>::type
+
+Floating-point precision of the FFT operation, as set by :ref:`precision-operator-label`.
+
+The default precision is `float`.
+
+.. _stride-trait-label:
+
+Stride Trait
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block::
+
+  cufftdx::stride_of<FFT>::value
+
+Stride between elements in the FFT operation.
+
+The default value is `1`.
+
+.. note::
+  In Early Access, stride is always equal to `1`.
+
+.. _isfft-trait-label:
+
+Is FFT? Trait
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block::
+
+  cufftdx::is_fft<FFT>::value
+
+Trait is `true` if the descriptor is an FFT description, formed with :ref:`description-operators-label`.
+
+There is no default value. The descriptor either is or is not an FFT description.
+
+.. _isfftexecution-trait-label:
+
+Is FFT Execution? Trait
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block::
+
+  cufftdx::is_fft_execution<FFT>::value
+
+Trait is `true` if the descriptor is an FFT description, formed with :ref:`description-operators-label` and a :ref:`execution-operators-label`.
+
+There is no default value. The descriptor either is or is not an FFT description including an :ref:`execution-operators-label`.
+
+.. _isfftcomplete-trait-label:
+
+Is FFT-complete? Trait
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block::
+
+  cufftdx::is_complete_fft<FFT>::value
+
+Trait is `true` if the descriptor is a complete FFT description, formed with :ref:`description-operators-label`.
+
+.. note::
+  Complete in this context means that the descriptor has been formed with all the necessary :ref:`description-operators-label` and it is only missing an :ref:`execution-operators-label` to be able to run.
+
+For an FFT descriptor to be complete, the following is required:
+  * One, and only one, :ref:`size-operator-label`.
+  * One, and only one, :ref:`direction-operator-label` unless either `cufftdx::Type<fft_type::r2c>()` or `cufftdx::Type<fft_type::c2r>()` are added.
+  * One, and only one, :ref:`sm-operator-label` unless a :ref:`thread-operator-label` is added.
+
+There is no default value. The descriptor either is or is not an FFT-complete description.
+
+.. _isfftcompleteexecution-trait-label:
+
+Is FFT-complete Execution? Trait
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block::
+
+  cufftdx::is_complete_fft_execution<FFT>::value
+
+Trait is `true` if both :ref:`isfftexecution-trait-label` and :ref:`isfftcomplete-trait-label` are `true`.
+
+.. note::
+  If :ref:`isfftcompleteexecution-trait-label` is `true` for a descriptor `FFT`, then we can use the :ref:`execution-methods-label`
+  to compute the FFT.
+
+There is no default value.
+
+------------------------------------------------------------------------------------------
+
+.. _execution-traits-label:
+
+Execution Traits
+-----------------------------
+
+Execution traits can be retrieved directly from an FFT descriptor that has been configured with :ref:`execution-operators-label`.
+The available execution traits depend on the operator used to build the descriptor; either a :ref:`thread-operator-label` or a :ref:`block-operator-label`.
+
+.. _thread-traits-label:
+
+Thread Traits
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 10 20
+
+  * - Trait
+    - Default value
+    - Description
+  * - |valuetype-thread-trait-label|_
+    - `detail::complex<float>`
+    - Complex type of the underlying data used to compute the FFT.
+  * - |inputtype-thread-trait-label|_
+    - `Description::value_type`
+    - Type of the underlying data used as input for the FFT.
+  * - |outputtype-thread-trait-label|_
+    - `Description::value_type`
+    - Type of the underlying data used as output for the FFT.
+  * - |implicit-type-batching-thread-trait-label|_
+    - `2` if `cufftdx::precision_of<FFT>::type` is `__half`, otherwise - `1`
+    - Number of values from different FFTs batched into one element of type `Description::value_type`.
+  * - |ept-thread-trait-label|_
+    - `size_of<Description>::value`
+    - Number of FFT elements to be computed per thread.
+  * - |storage-thread-trait-label|_
+    - `Description::elements_per_thread`
+    - Number of `Description::value_type` elements that each thread must allocate to compute the FFT.
+
+Thread traits can be retrieved from descriptors built with :ref:`thread-operator-label`.
+
+For example:
+
+.. code-block::
+
+  #include <cufftdx.hpp>
+
+  using FFT          = decltype(cufftdx::Size<8>() + cufftdx::Type<fft_type::c2c>()
+                              + cufftdx::Direction<fft_direction::forward>()
+                              + cufftdx::Precision<double>() + Thread());
+
+
+  // Retrieve the FFT data type
+  using complex_type = typename FFT::value_type;
+
+  // Retrieve the number of elements per thread
+  auto elements_per_thread = FFT::elements_per_thread;
+
+.. _valuetype-thread-trait-label:
+
+Value Type Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::value_type
+
+Complex type of the underlying data used for FFT computation.
+
+The default type is `cufftdx::detail::complex<float>`, as defined in the `types.hpp` header file.
+
+.. _inputtype-thread-trait-label:
+
+Input Type Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::input_type
+
+Complex type of the underlying data used as input of the FFT computation.
+
+The default type is the same as :ref:`valuetype-thread-trait-label`.
+
+.. _outputtype-thread-trait-label:
+
+Output Type Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::output_type
+
+Complex type of the underlying data used as output of the FFT computation.
+
+The default type is the same as :ref:`valuetype-thread-trait-label`.
+
+.. _implicit-type-batching-thread-trait-label:
+
+Implicit Type Batching Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::implicit_type_batching
+
+Number of values from different FFTs batched into one element of type `Description::value_type` used in FFT computation. If
+it's higher than one it means that Thread FFT object calculates multiple FFTs in one go.
+
+The value is `2` if `cufftdx::precision_of<FFT>::type` is `__half`, and `1` otherwise.
+
+.. note::
+
+  Please note that in future releases of cuFFTDx `FFT::implicit_type_batching` may be replaced, and/or extended.
+
+.. _ept-thread-trait-label:
+
+Elements Per Thread Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::elements_per_thread
+
+Number of FFT elements of the type returned by :ref:`valuetype-thread-trait-label` that each thread will compute.
+
+The default value is the same as :ref:`size-trait-label`.
+
+.. _storage-thread-trait-label:
+
+Storage Size Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::storage_size
+
+Number of `Description::value_type` elements that each thread must allocate to compute the FFT.
+
+The default value is the same as :ref:`ept-thread-trait-label`.
+
+.. _block-traits-label:
+
+Block Traits
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 10 20
+
+  * - Trait
+    - Default value
+    - Description
+  * - |valuetype-block-trait-label|_
+    - `detail::complex<float>`
+    - Complex type of the underlying data used to compute the FFT.
+  * - |inputtype-block-trait-label|_
+    - `Description::value_type`
+    - Type of the underlying data used as input for the FFT.
+  * - |outputtype-block-trait-label|_
+    - `Description::value_type`
+    - Type of the underlying data used as output for the FFT.
+  * - |workspacetype-block-trait-label|_
+    - `Description::workspace_type`
+    - Device-side type of workspace required for FFT computation.
+  * - |implicit-type-batching-thread-trait-label|_
+    - `2` if `cufftdx::precision_of<FFT>::type` is `__half`, otherwise - `1`
+    - Number of values from different FFTs batched into one element of type `Description::value_type`.
+  * - |ept-block-trait-label|_
+    - Heuristic.
+    - Number of FFT elements to be computer per thread.
+  * - |storage-block-trait-label|_
+    - Determined from `Description::elements_per_thread`
+    - Number of `Description::value_type` elements that each thread must allocate to compute the FFT.
+  * - |fftsperblock-block-trait-label|_
+    - `1`
+    - Number of FFTs to compute by a CUDA block in this FFT operation.
+  * - |suggestedfftsperblock-block-trait-label|_
+    - Heuristic.
+    - Suggested number of FFTs to compute by a CUDA block to target maximum performance.
+  * - |sharedmemory-block-trait-label|_
+    - Determined from `Description::ffts_per_block` and `Description::elements_per_thread`
+    - Size of the shared memory in bytes.
+  * - |blockdim-block-trait-label|_
+    - See :ref:`blockdim-block-trait-label`.
+    - `dim3` of the CUDA block to compute the FFT operation.
+  * - |maxthreads-block-trait-label|_
+    - Determined from `Description::block_dim`
+    - Total number of threads in the CUDA block.
+  * - |minblocks-block-trait-label|_
+    - `1`
+    - Not implemented yet (set to 1).
+  * - |requiresworkspace-block-trait-label|_
+    - `True` if FFT implementation requires extra workspace; otherwise - `false`.
+    - Determines if user has to allocate extra workspace in global memory using `cufftdx::make_workspace(cudaError_t&)`.
+  * - |workspacesize-block-trait-label|_
+    - `0` if |workspacesize-block-trait-label|_ is true, otherwise `> 0`.
+    - Size of global memory required for workspace (in bytes).
+
+Block traits can be retrieved from descriptors built with :ref:`block-operator-label`.
+
+For example:
+
+.. code-block::
+
+  #include <cufftdx.hpp>
+
+  using FFT = decltype( cufftdx::Size<128>() + cufftdx::Type<fft_type::c2c>()
+                      + cufftdx::Direction<fft_direction::forward>()
+                      + cufftdx::Precision<float>() + cufftdx::Block()
+                      + cufftdx::ElementsPerThread<8>() + cufftdx::FFTsPerBlock<2>() );
+
+  // Retrieve the FFT data type
+  using complex_type = typename FFT::value_type;
+
+  // Allocate managed memory for input/output
+  complex_type* data;
+  auto          size       = FFT::ffts_per_block * cufftdx::size_of<FFT>::value;
+  auto          size_bytes = size * sizeof(complex_type);
+
+  cudaMallocManaged(&data, size_bytes);
+
+.. _valuetype-block-trait-label:
+
+Value Type Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::value_type
+
+Complex type of the underlying data used for FFT computation.
+
+The default type is `cufftdx::detail::complex<float>`, as defined in the `types.hpp` header file.
+
+.. _inputtype-block-trait-label:
+
+Input Type Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::input_type
+
+Complex type of the underlying data used as input of the FFT computation.
+
+The default type is the same as :ref:`valuetype-block-trait-label`.
+
+.. _outputtype-block-trait-label:
+
+Output Type Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::output_type
+
+Complex type of the underlying data used as output of the FFT computation.
+
+The default type is the same as :ref:`valuetype-block-trait-label`.
+
+.. _workspacetype-block-trait-label:
+
+Workspace Type Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::workspace_type
+
+Type of a workspace required by `execute(...)` function of `FFT`. User should check if `FFT` needs workspace
+using |requiresworkspace-block-trait-label|_ trait, and create one with `cufftdx::make_workspace<FFT>(cudaError_t&)`.
+
+See :ref:`make-workspace-method-label` for more details about workspace.
+
+.. warning::
+  `FFT::workspace_type` object doesn't track lifetime of underlying memory, and is only valid within a lifetime of
+  workspace object it was casted from.
+
+.. warning::
+
+  Type returned by `cufftdx::make_workspace<FFT>(cudaError_t&)` can be different for different FFT descriptions,
+  and is not same as `FFT::workspace_type`. User should use `auto` when creating a workspace object.
+
+.. _implicit-type-batching-block-trait-label:
+
+Implicit Type Batching Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::implicit_type_batching
+
+Number of values from different FFTs batched into one element of type `Description::value_type` used in FFT computation. If
+it's higher than one it means that Block FFT object calculates multiple FFTs in one go.
+
+The value is `2` if `cufftdx::precision_of<FFT>::type` is `__half`, and `1` otherwise.
+
+.. note::
+
+  Please note that in future releases of cuFFTDx `FFT::implicit_type_batching` may be replaced, and/or extended.
+
+.. _ept-block-trait-label:
+
+Elements Per Thread Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::elements_per_thread
+
+Number of FFT elements of the type returned by :ref:`_valuetype-thread-trait-label` that each thread will compute.
+
+The default value is the same as :ref:`size-trait-label`.
+
+.. _storage-block-trait-label:
+
+Storage Size Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::storage_size
+
+Number of `Description::value_type` elements that each thread must allocate to compute the FFT.
+
+The default value is the same as :ref:`ept-block-trait-label`.
+
+.. _fftsperblock-block-trait-label:
+
+FFTs Per Block Trait
+""""""""""""""""""""
+
+.. code-block::
+
+  FFT::ffts_per_block
+
+Number of FFTs to compute in parallel within a CUDA block, as part of the collective FFT operation.
+
+The default value is `1`.
+
+.. _suggestedfftsperblock-block-trait-label:
+
+Suggested FFTs Per Block Trait
+""""""""""""""""""""""""""""""
+
+.. code-block::
+
+  FFT::suggested_ffts_per_block
+
+Suggested number of FFTs to compute in parallel within a CUDA block, as part of the collective FFT operation, to maximize performance.
+
+The default value is heuristic, and depends on the size of the FFT, the number of elements per thread, and other parameters.
+
+.. _sharedmemory-block-trait-label:
+
+Shared Memory Size Trait
+""""""""""""""""""""""""
+
+.. code-block::
+
+  FFT::shared_memory_size
+
+Size of the required shared memory for the FFT operation to execute, in bytes.
+
+The default value is determined from :ref:`fftsperblock-block-trait-label` and :ref:`ept-block-trait-label`.
+
+.. _blockdim-block-trait-label:
+
+Block Dim Trait
+""""""""""""""""
+
+.. code-block::
+
+  FFT::block_dim
+
+`BlockDim<unsigned int X, Y, Z>` with `x = size_of<Description>::value/Description::elements_per_thread`, `y = Description::ffts_per_block`, `z = 1`
+
+.. _maxthreads-block-trait-label:
+
+Max Threads Per Block Trait
+"""""""""""""""""""""""""
+
+.. code-block::
+
+  FFT::max_threads_per_block
+
+Maximum number of threads for the FFT in the CUDA block.
+
+The default value is determined from :ref:`fftsperblock-block-trait-label` and :ref:`ept-block-trait-label`.
+
+.. _minblocks-block-trait-label:
+
+Min Blocks Per Multiprocessor Trait
+"""""""""""""""""""""""""
+
+.. code-block::
+
+  FFT::min_blocks_per_multiprocessor
+
+Minimum number of blocks that fit in a streaming multiprocessor.
+
+The default value is `1`.
+
+.. note::
+  Min Blocks Per Multiprocessor is always `1` in Early Access.
+
+.. _requiresworkspace-block-trait-label:
+
+Requires Workspace Trait
+"""""""""""""""""""""""""
+
+.. code-block::
+
+  FFT::requires_workspace
+
+Boolean value. If `true` user has to create workspace using `cufftdx::make_workspace<FFT>(cudaError_t&)` function. Otherwise,
+user doesn't have to create workspace. Workspace created for FFT which doesn't require one will be empty and won't allocate any
+global memory.
+
+.. _workspacesize-block-trait-label:
+
+Workspace Size Trait
+"""""""""""""""""""""""""
+
+.. code-block::
+
+  FFT::workspace_size
+
+Informs user how much global memory will be allocated by required workspace. If |workspacesize-block-trait-label|_ is `false`
+it's `0`; otherwise it's greater than zero.

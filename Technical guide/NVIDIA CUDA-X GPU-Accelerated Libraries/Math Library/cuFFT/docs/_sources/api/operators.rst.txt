@@ -1,0 +1,357 @@
+.. role:: cpp(code)
+   :language: cpp
+   :class: highlight
+
+.. default-role:: cpp
+.. highlight:: cpp
+
+.. cpp:namespace:: cufftdx
+
+.. |size-operator-label| replace:: `Size<unsigned int S>`
+.. |direction-operator-label| replace:: `Direction<fft_direction>`
+.. |type-operator-label| replace:: `Type<fft_type>`
+.. |precision-operator-label| replace:: `Precision<P>`
+.. |stride-operator-label| replace:: `Stride<unsigned int S>`
+.. |sm-operator-label| replace:: `SM<unsigned int CC>`
+.. |block-operator-label| replace:: `Block`
+.. |thread-operator-label| replace:: `Thread`
+.. |fftsperblock-operator-label| replace:: `FFTsPerBlock<unsigned int F>`
+.. |ept-operator-label| replace:: `ElementsPerThread<unsigned int E>`
+.. |blockdim-operator-label| replace:: `BlockDim<unsigned int X, Y, Z>`
+
+.. _operators-label:
+
+Operators
+=========================
+
+Operators are used to describe the FFT operation to solve, and to configure the execution. They are divided into
+:ref:`description-operators-label` and :ref:`execution-operators-label`.
+
+------------------------------------------------------------------------------------------
+
+.. _description-operators-label:
+
+Description Operators
+-------------------------
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 10 20
+
+  * - Operator
+    - Default value
+    - Description
+  * - |size-operator-label|_
+    - Not set.
+    - Size `S` of the FFT to calculate.
+  * - |direction-operator-label|_
+    - Not set.
+    - Direction of the FFT, either `fft_direction::inverse` or `fft_direction::forward`.
+  * - |type-operator-label|_
+    - `fft_type::c2c`
+    - Types of input and output data (C2C, R2C, C2R).
+  * - |precision-operator-label|_
+    - `float`
+    - Precision `P` of the floating-point values used to compute the FFT: `double`, `float` or `__half`.
+  * - |stride-operator-label|_
+    - `1`
+    - Not implemented yet.
+  * - |sm-operator-label|_
+    - Not set.
+    - Target CUDA architecure for which the FFT function should be generated.
+
+Description operators define the FFT operation to be solved. Combined with :ref:`execution-operators-label`, they form a
+complete FFT descriptor that can be executed on a GPU.
+
+Operators are added to construct the FFT descriptor type. For example, for a forward FFT operation consisting of a FFT with 8 `double` elements per thread:
+
+.. code-block::
+
+  #include <cufftdx.hpp>
+
+  using FFT = decltype( cufftdx::Size<8>() + cufftdx::Type<fft_type::c2c>()
+                      + cufftdx::Direction<fft_direction::forward>()
+                      + cufftdx::Precision<double>() + cufftdx::Thread() );
+
+For an FFT descriptor to be complete, the following is required:
+  * One, and only one, :ref:`size-operator-label`.
+  * One, and only one, :ref:`direction-operator-label` unless either `cufftdx::Type<fft_type::r2c>()` or `cufftdx::Type<fft_type::c2r>()` are added.
+  * One, and only one, :ref:`sm-operator-label` unless a :ref:`thread-operator-label` is added.
+
+.. _size-operator-label:
+
+Size Operator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block::
+
+  cufftdx::Size<unsigned int S>()
+
+Sets the size `S` of the FFT operation to compute.
+
+There is no default size.
+
+Restrictions:
+    * `S` must be greater than `1`.
+
+.. _direction-operator-label:
+
+Direction Operator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block::
+
+  cufftdx::Direction<cufftdx::fft_direction>()
+
+Sets the direction of the FFT, either `fft_direction::inverse` or `fft_direction::forward`.
+
+There is no default direction.
+
+If the FFT is constructed with the :class:`Type\<R2C\>` operator, direction is assumed to be forward and
+a direction operator is not necessary.
+
+If the FFT is constructed with the :class:`Type\<C2R\>` operator, direction is assumed to be inverse and
+a direction operator is not necessary.
+
+Restrictions:
+    * `fft_direction::forward` requires :class:`Type\<C2C\>` or :class:`Type\<R2C\>`.
+    * `fft_direction::inverse` requires :class:`Type\<C2C\>` or :class:`Type\<C2R\>`.
+
+.. _type-operator-label:
+
+Type Operator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block::
+
+  cufftdx::Type<cufftdx::fft_type>()
+
+Sets the type of the FFT to compute, either `fft_type::c2c` for complex-to-complex; `fft_type::r2c` for
+real-to-complex; or `fft_type::c2r` for complex-to-real.
+
+The default type is `fft_type::c2c`.
+
+Restrictions:
+    * `fft_type::r2c` requires `fft_direction::forward`. If no direction is specified, it is assumed to be `fft_direction::forward`.
+    * `fft_type::c2r` requires `fft_direction::inverse`. If no direction is specified, it is assumed to be `fft_direction::inverse`.
+    * cuFFDx performs unnormalized Fast Fourier Transform calculations.
+
+.. _precision-operator-label:
+
+Precision Operator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block::
+
+  cufftdx::Precision<__half>()
+
+  cufftdx::Precision<float>()
+
+  cufftdx::Precision<double>()
+
+Sets the floating-point precision used to compute the FFT. This is the type of the values used for input and output, as well as the
+underlying type of the values used to compute the FFT.
+
+The default precision is `float`.
+
+.. _stride-operator-label:
+
+Stride Operator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block::
+
+  cufftdx::Stride<unsigned int S>()
+
+Sets the stride between elements to compute the FFT operation.
+
+The default stride is `1`.
+
+.. note::
+  Stride operator is not available in Early Access.
+
+.. _sm-operator-label:
+
+SM Operator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block::
+
+  cufftdx::SM<unsigned int CC>()
+
+Sets the target architecture `CC` for the underlying FFT function to use. Supported architectures are
+`600`, `610` and `620` (Pascal; sm_60, sm_61, and sm_62), `700` (Volta; sm_70), and `750` (Turing; sm_75).
+
+.. note::
+  cuFFTDx doesn't support any form of warp synchronous programming that can be used in Pascal GPUs (see
+  https://docs.nvidia.com/cuda/volta-tuning-guide/index.html#sm-independent-thread-scheduling and https://devblogs.nvidia.com/inside-volta/).
+  Using this technique with cuFFTDx can lead to undefined behavior.
+
+.. note::
+  cuFFTDx support for SM_62 architecture is limited in terms of maximum FFT sizes, limiting factor is maximum register count
+  per block, more details on differences between architectures can be found in
+  https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#features-and-technical-specifications.
+
+
+------------------------------------------------------------------------------------------
+
+.. _execution-operators-label:
+
+Execution Operators
+-------------------------
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 10 20
+
+  * - Operator
+    - Default value
+    - Description
+  * - |thread-operator-label|_
+    - Not set.
+    - Creates FFT thread execution object.
+  * - |block-operator-label|_
+    - Not set.
+    - Creates FFT block execution object. See `Block Configuration Operators`_.
+
+Execution operators configure how the FFT operation will run on the GPU. Combined with :ref:`description-operators-label`, they form a
+complete FFT descriptor that can be executed on a GPU.
+
+Operators are added to construct the FFT descriptor type. For example, for a forward FFT operation consisting of two FFTs with 128 `float` elements each, running simultaneously in one CUDA block:
+
+.. code-block::
+
+  #include <cufftdx.hpp>
+
+  using FFT = decltype( cufftdx::Size<128>() + cufftdx::Type<fft_type::c2c>()
+                      + cufftdx::Direction<fft_direction::forward>()
+                      + cufftdx::Precision<float>() + cufftdx::Block()
+                      + cufftdx::ElementsPerThread<8>() + cufftdx::FFTsPerBlock<2>() );
+
+.. _thread-operator-label:
+
+Thread Operator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block::
+
+  cufftdx::Thread()
+
+Sets the FFT operation to run in a thread context. The FFT operation will simultaneously run a single, independent FFT (described using :ref:`description-operators-label`) per thread.
+
+Each thread will compute one FFT of the size defined by the `Size Operator`_.
+
+Restrictions:
+    * Is mutually exclusive with :class:`Block` operator
+    * Compilation will fail when used with block-only operators: :class:`FFTsPerBlock`, :class:`ElementsPerThread`, :class:`BlockDim`.
+    * With :class:`Precision\<__half\>` restricts :class:`Size` to range :math:`[2, 32]`.
+    * With :class:`Precision\<float\>` restricts :class:`Size` to range :math:`[2, 32]`.
+    * With :class:`Precision\<double\>` restricts :class:`Size` to range :math:`[2, 16]`.
+
+.. _block-operator-label:
+
+Block Operator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block::
+
+  cufftdx::Block()
+
+Generates a collective FFT operation to run in a single CUDA block. One or more threads will cooperate to compute the
+collective FFT operation.
+
+The number of FFTs to compute, as well as the number of threads used to calculate each FFT, can be configured using
+`Block Configuration Operators`_.
+
+Restrictions:
+    * Is mutually exclusive with :class:`Thread` operator
+    * Unless a :ref:`blockdim-operator-label` is used, the collective FFT operation can only be executed
+      inside a 2D block of sizes:
+        - `blockDim.x = size_of<Description>::value/Description::elements_per_thread`.
+        - `blockDim.y = Description::ffts_per_block`.
+        - `blockDim.z = 1`.
+    * :ref:`blockdim-operator-label` is not available in Early Access.
+    .. only:: public
+
+      * Operator `cufftdx::Precision<__half>()` restricts `cufftdx::Size<U>()` to range :math:`[2, 4096]`.
+
+    .. only:: internal
+
+      * Operator `cufftdx::Precision<__half>()` restricts `cufftdx::Size<U>()` to range :math:`[2, 4096]`.
+          - Needs exception for Viasat kernels, or increased range to 8192.
+
+    * Operator `cufftdx::Precision<float>()` restricts `cufftdx::Size<U>()` to range :math:`[2, 4096]`.
+    * Operator `cufftdx::Precision<double>()` restricts `cufftdx::Size<U>()` to range :math:`[2, 2048]`.
+
+Block Configuration Operators
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+  :header-rows: 1
+  :widths: 10 10 20
+
+  * - Operators
+    - Default value
+    - Description
+  * - |fftsperblock-operator-label|_
+    - 1
+    - Number `F` of FFTs calculated per CUDA block.
+  * - |ept-operator-label|_
+    - Heuristic.
+    - Number `E` of FFT values per CUDA thread.
+  * - |blockdim-operator-label|_
+    - Not set.
+    - Required for executing block FFT within block
+      with custom dimensions.
+
+Block-configuration operators allow the user to tune how the collective FFT operation will run on a single CUDA block.
+
+.. note::
+  Block configuration operators can only be used with :ref:`block-operator-label`.
+
+
+.. _fftsperblock-operator-label:
+
+FFTs Per Block Operator
+"""""""""""""""""""""""""""""
+
+.. code-block::
+
+  cufftdx::FFTsPerBlock<unsigned int>()
+
+Sets the number of FFT to compute in parallel within a single CUDA block. Each FFT is computed concurrently by a
+separate group of threads.
+
+The default is one FFT per block.
+
+.. _ept-operator-label:
+
+Elements Per Thread Operator
+"""""""""""""""""""""""""""""
+
+.. code-block::
+
+  cufftdx::ElementsPerThread<unsigned int>()
+
+Sets the number of FFT elements to be computed by each thread.
+
+The default is determined heuristically to target performance.
+
+Restrictions
+    * Must be divider of requested FFT size.
+    * Must be in range :math:`[2; 32]` for `cufftdx::Precision<float>()` and `cufftdx::Precision<__half>()`.
+    * Must be in range :math:`[2; 16]` for `cufftdx::Precision<double>()`.
+
+.. _blockdim-operator-label:
+
+BlockDim Operator
+"""""""""""""""""""""""""""""
+
+.. code-block::
+
+  struct cufftdx::BlockDim<unsigned int X, unsigned int Y, unsigned int Z>()
+
+Sets the CUDA block size to (X, Y, Z), to configure the execution.
+
+Using this operator, the user can run the collective FFT operation with 2D or 3D CUDA blocks.
+
+Default BlockDim size:
+  * `blockDim.x = size_of<Description>::value/Description::elements_per_thread`.
+  * `blockDim.y = Description::ffts_per_block`.
+  * `blockDim.z = 1`.
+See :ref:`blockdim-block-trait-label`.
+
+.. note::
+  BlockDim operator is not available in Early Access.

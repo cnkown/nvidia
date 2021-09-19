@@ -1,0 +1,512 @@
+@charset "UTF-8";
+/*~~~~~ COLORS ~~~~~*/
+/*~~~~~~~~~~~~~~~~~~*/
+/* custom colors                               */
+/*                                             */
+/* define custom values here for easy tracking */
+/* NVIDIA customization as dark green. */
+/* Pale grey in the toolbar icons and text, except where we override it */
+/* NVIDIA cusotmization as lime green, used in hover. */
+/* Charcoal grey used in the TOC font, previously #444142. */
+/* Really pale grey used only as the miniTOC background color. */
+/* This is the charcoal color in the header and footer background, previously #444142. */
+/* This is blue. I replaced references with $nvidia_dark_green. */
+/* NOTE: Gradients as background colors are supported through linear/radial-gradient property values.*/
+/*       It is suggested to put the gradient value only where it is needed, as it will cause errors  */
+/*       if it is used in the darken() or lighten() functions.                                       */
+/*       If a gradient value is set for a $_layout_color property, you must remove all darken() and  */
+/*       lighten() calls that derive from the gradient, or there will be no color output where those */
+/*       properties are used.                                                                        */
+/*                                                                                                   */
+/*       Usage documentation for Gradients: https://www.w3schools.com/css/css3_gradients.asp         */
+/* layout colors: set these for a quick application to the output.                                   */
+/*                                                                                                   */
+/* this is set to NVIDIA dark green */
+/* used for the TOC text color */
+/* Defaults for structure items */
+/*                              */
+/* Mini TOC */
+/*          */
+/* this is NVIDIA dark green */
+/* this is NVIDIA lime green */
+/* Related Topics */
+/*                */
+/* Search Result Highlight */
+/*                         */
+/* Monochromatic version of NVIDIA Green */
+/* colors for specific items */
+/*                           */
+/* toolbar */
+/* menu (nav & toc/index) */
+/* page */
+/* disqus */
+/* search */
+/* header */
+/* NVIDIA color change to get white text in header */
+/* footer */
+/* NVIDIA color change to get white text in footer */
+/* back-to-top button */
+/* progress bar */
+/* modal (cookies disabled message) */
+/*
+ * lightbox
+*/
+/* unsupported browser */
+/* no javascript warning */
+/*~~~~~ ICONS ~~~~~*/
+/*~~~~~~~~~~~~~~~~~*/
+/*
+  This file contains the character codes applied to the icons in the output.
+
+  Usage: Find the character code of the icon to be used in the font-awesome cheatsheet.
+         The 4-character code is next to it's respective icon.
+         (ex: f002 for search)
+         Apply to variable value in quotes and a leading backslash
+         (ex: "\f002")
+
+  font-awesome cheatsheet: https://fontawesome.com/v4.7.0/cheatsheet/
+
+  The cheatsheet can also be found in the ePublisher Installation Directory at:
+
+  <Install Location>/WebWorks/ePublisher/<version>/Helpers/font-awesome/Font Awesome Cheatsheet.html
+*/
+/* toolbar */
+/* menu */
+/* page */
+/* header */
+/* footer */
+/* search */
+/* modal (cookies disabled message) */
+/*~~~~~ FONTS ~~~~~*/
+/*~~~~~~~~~~~~~~~~~*/
+/*
+ * toolbar
+*/
+/*
+ * menu (nav & toc/index)
+*/
+/*
+ * page
+*/
+/*
+ * mini toc
+*/
+/*
+ * related topics
+*/
+/*
+ * search
+*/
+/*
+ * header
+*/
+/* NVIDIA */
+/*
+ * footer
+*/
+/*
+ * lightbox
+*/
+/*
+ * unsupported browser
+*/
+/*
+ * modal (cookies disabled message)
+*/
+/*~~~~~ SIZING ~~~~~*/
+/*~~~~~~~~~~~~~~~~~~*/
+/*
+ * generation variables
+ * these are modified by the generation process according to Target Settings
+*/
+/*
+ * generic values
+ * NVIDIA: customized logo height.
+*/
+/*
+ * header
+ * NVIDIA: customized header height.
+*/
+/*
+ * footer
+ * NVIDIA custmized footer height, previously 200px.
+ * NVIDIA customized footer padding, previously 10px.
+*/
+/*
+ * menu
+*/
+/*
+ * toolbar
+ *
+ * $toolbar-height should be equal or greater than all other
+ * values or the layout will produce unexpected results
+*/
+/* NVIDIA customization from the Corporate Grey, previously 62px */
+/*
+ * toolbar - logo section (Menu Button & Logo)
+*/
+/* NVIDIA kathy modified from 300px */
+/*
+ * toolbar - search section (Search Scope Selector, Search Input, & Search Button)
+*/
+/* NVIDIA customization */
+/*
+ * toolbar - button section (Previous Button, Next Button, Home Button)
+*/
+/* We want the toolbar width to be $toolbar_button_previous_width + $toolbar_button_next_width + $toolbar_button_home_width + 520px */
+/*
+ * was this helpful buttons & message
+*/
+/*
+ * page
+*/
+/*
+ * mini toc
+*/
+/*
+ * related topics
+*/
+/*
+ * search
+*/
+/*
+ * lightbox
+*/
+/*
+ * unsupported browser
+*/
+/*
+ * calculated sizes
+ *
+ * the values in the below section are calculated & dependent upon multiple above values.
+*/
+/*
+ * toolbar
+*/
+/*
+ * menu
+*/
+/*
+ * page
+*/
+/*~~~~~ COLORS ~~~~~*/
+/*~~~~~~~~~~~~~~~~~~*/
+/* custom colors                               */
+/*                                             */
+/* define custom values here for easy tracking */
+/* NVIDIA customization as dark green. */
+/* Pale grey in the toolbar icons and text, except where we override it */
+/* NVIDIA cusotmization as lime green, used in hover. */
+/* Charcoal grey used in the TOC font, previously #444142. */
+/* Really pale grey used only as the miniTOC background color. */
+/* This is the charcoal color in the header and footer background, previously #444142. */
+/* This is blue. I replaced references with $nvidia_dark_green. */
+/* NOTE: Gradients as background colors are supported through linear/radial-gradient property values.*/
+/*       It is suggested to put the gradient value only where it is needed, as it will cause errors  */
+/*       if it is used in the darken() or lighten() functions.                                       */
+/*       If a gradient value is set for a $_layout_color property, you must remove all darken() and  */
+/*       lighten() calls that derive from the gradient, or there will be no color output where those */
+/*       properties are used.                                                                        */
+/*                                                                                                   */
+/*       Usage documentation for Gradients: https://www.w3schools.com/css/css3_gradients.asp         */
+/* layout colors: set these for a quick application to the output.                                   */
+/*                                                                                                   */
+/* this is set to NVIDIA dark green */
+/* used for the TOC text color */
+/* Defaults for structure items */
+/*                              */
+/* Mini TOC */
+/*          */
+/* this is NVIDIA dark green */
+/* this is NVIDIA lime green */
+/* Related Topics */
+/*                */
+/* Search Result Highlight */
+/*                         */
+/* Monochromatic version of NVIDIA Green */
+/* colors for specific items */
+/*                           */
+/* toolbar */
+/* menu (nav & toc/index) */
+/* page */
+/* disqus */
+/* search */
+/* header */
+/* NVIDIA color change to get white text in header */
+/* footer */
+/* NVIDIA color change to get white text in footer */
+/* back-to-top button */
+/* progress bar */
+/* modal (cookies disabled message) */
+/*
+ * lightbox
+*/
+/* unsupported browser */
+/* no javascript warning */
+/*~~~~~ SIZING ~~~~~*/
+/*~~~~~~~~~~~~~~~~~~*/
+/*
+ * generation variables
+ * these are modified by the generation process according to Target Settings
+*/
+/*
+ * generic values
+ * NVIDIA: customized logo height.
+*/
+/*
+ * header
+ * NVIDIA: customized header height.
+*/
+/*
+ * footer
+ * NVIDIA custmized footer height, previously 200px.
+ * NVIDIA customized footer padding, previously 10px.
+*/
+/*
+ * menu
+*/
+/*
+ * toolbar
+ *
+ * $toolbar-height should be equal or greater than all other
+ * values or the layout will produce unexpected results
+*/
+/* NVIDIA customization from the Corporate Grey, previously 62px */
+/*
+ * toolbar - logo section (Menu Button & Logo)
+*/
+/* NVIDIA kathy modified from 300px */
+/*
+ * toolbar - search section (Search Scope Selector, Search Input, & Search Button)
+*/
+/* NVIDIA customization */
+/*
+ * toolbar - button section (Previous Button, Next Button, Home Button)
+*/
+/* We want the toolbar width to be $toolbar_button_previous_width + $toolbar_button_next_width + $toolbar_button_home_width + 520px */
+/*
+ * was this helpful buttons & message
+*/
+/*
+ * page
+*/
+/*
+ * mini toc
+*/
+/*
+ * related topics
+*/
+/*
+ * search
+*/
+/*
+ * lightbox
+*/
+/*
+ * unsupported browser
+*/
+/*
+ * calculated sizes
+ *
+ * the values in the below section are calculated & dependent upon multiple above values.
+*/
+/*
+ * toolbar
+*/
+/*
+ * menu
+*/
+/*
+ * page
+*/
+/* ~~~~ FUNCTIONS ~~~~ */
+/*                     */
+/*~~~~~ BORDERS ~~~~~*/
+/*~~~~~~~~~~~~~~~~~~~*/
+/*
+  DISCLAIMER: By default, border size properties do not conform with the other size properties of HTML.
+  This means that when a border is set on an element with a defined height or width, the final size of
+  an element will calculate to HEIGHT/WIDTH + BORDER WIDTH. This has been mitigated as much as possible
+  using the 'box-sizing: border-box' property, but there is always a possibility for some instances
+  where this will not work. (ex. An element with a border inside another element inside it with a border.
+  The toolbar in some skins is like this)
+
+  If widths in this file are to be changed, you understand that this may change the uniformity of the
+  layout, and that there may also be height and width properties that also need to be changed in
+  _sizes.scss to get the layout to line up properly.
+
+
+*/
+/* Toolbar */
+/*         */
+/* Toolbar - Logo Section */
+/*                        */
+/* Toolbar - Search Section */
+/*                          */
+/* Toolbar - Button Section */
+/*                          */
+/* Menu */
+/*      */
+/* Menu - TOC */
+/*            */
+/* Menu - Index */
+/*              */
+/* Page */
+/*      */
+/* Mini TOC */
+/*          */
+/* NVIDIA customization */
+/* Search */
+/*        */
+/* Header */
+/*        */
+/* Footer */
+/*        */
+/* Back to Top */
+/*             */
+/* Modal */
+/*       */
+body {
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: 10pt;
+  color: #006445;
+  background-color: #FFFFFF; }
+
+body * {
+  box-sizing: border-box; }
+
+a {
+  color: #006445; }
+
+.ww_skin_search_background {
+  border-style: none;
+  border-width: 0px;
+  border-color: transparent;
+  border-radius: 0px; }
+
+.ww_search_container {
+  background-color: #FFFFFF;
+  padding: 0px;
+  text-align: center; }
+
+.ww_search_content {
+  display: inline-block;
+  text-align: left;
+  width: 100%;
+  max-width: 900px; }
+
+.search_title {
+  margin: 0px;
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: 16pt;
+  color: #006445;
+  padding: 20px 10px;
+  border-style: none;
+  border-width: 0px;
+  border-color: transparent;
+  border-radius: 0px; }
+
+#search_filter_message_container {
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: 10pt;
+  color: #006445;
+  padding: 5px 10px; }
+  #search_filter_message_container #search_filter_by_message {
+    font-weight: bold; }
+
+#search_results_count_container {
+  display: none;
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: 10pt;
+  color: #006445;
+  padding: 5px 10px; }
+  #search_results_count_container #search_results_count_message {
+    font-weight: bold; }
+
+#search_results_container {
+  padding: 0.5em 0; }
+
+.search_result {
+  box-sizing: border-box;
+  padding: 0px;
+  min-height: 50px;
+  background-color: #FFFFFF;
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: transparent transparent #cccccc transparent;
+  border-radius: 0px; }
+  .search_result:hover {
+    background-color: #f2f2f2;
+    border-style: none none solid none;
+    border-width: 1px;
+    border-color: transparent transparent #999999 transparent;
+    border-radius: 0px; }
+  .search_result .search_result_title {
+    padding: 10px 10px 5px 10px;
+    font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+    font-size: 10pt;
+    border-style: none;
+    border-width: 0px;
+    border-color: transparent;
+    border-radius: 0px; }
+    .search_result .search_result_title:hover {
+      border-style: none;
+      border-width: 0px;
+      border-color: transparent;
+      border-radius: 0px; }
+    .search_result .search_result_title .search_result_highlight {
+      background-color: #a5ff06;
+      color: #006445; }
+    .search_result .search_result_title > a {
+      color: #006445;
+      font-weight: bold;
+      text-decoration: none; }
+      .search_result .search_result_title > a:active {
+        color: #558600; }
+      .search_result .search_result_title > a:visited {
+        color: #355300; }
+      .search_result .search_result_title > a:hover {
+        color: #76B900; }
+    .search_result .search_result_title i {
+      font-size: 10pt;
+      margin-right: 2px;
+      color: #006445; }
+      .search_result .search_result_title i.search_result_icon_external:before {
+        content: ""; }
+      .search_result .search_result_title i.search_result_icon_html:before {
+        content: ""; }
+      .search_result .search_result_title i.search_result_icon_pdf:before {
+        content: ""; }
+  .search_result .search_result_summary {
+    font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+    font-size: 10pt;
+    padding: 5px 10px 15px 10px;
+    color: #006445;
+    border-style: none;
+    border-width: 0px;
+    border-color: transparent;
+    border-radius: 0px; }
+    .search_result .search_result_summary:hover {
+      border-style: none;
+      border-width: 0px;
+      border-color: transparent;
+      border-radius: 0px; }
+    .search_result .search_result_summary .search_result_highlight {
+      background-color: #a5ff06;
+      color: #006445; }
+  .search_result .search_result_group_name {
+    font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+    font-size: 10pt;
+    padding: 5px 10px;
+    color: #31ffbf;
+    background-color: #f2f2f2;
+    text-align: right;
+    border-style: none;
+    border-width: 0px;
+    border-color: transparent;
+    border-radius: 0px; }
+    .search_result .search_result_group_name:hover {
+      border-style: none;
+      border-width: 0px;
+      border-color: transparent;
+      border-radius: 0px; }

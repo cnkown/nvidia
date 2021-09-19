@@ -1,0 +1,244 @@
+div.Body, caption.Body
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: small;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 12pt;
+  margin-left: .25in;
+  margin-right: 0in;
+  margin-top: 6pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  word-spacing: normal;
+}
+
+div.Code_Block, caption.Code_Block
+{
+  background-color: #F2F2F2;
+  font-family: "Courier New", Courier, FreeMono, mono;
+  font-size: small;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-left: .5in;
+  overflow: auto;
+  padding-bottom: 0px;
+  padding-left: .2in;
+  padding-right: 0px;
+  padding-top: 0px;
+  white-space: pre-wrap;
+  word-spacing: normal;
+}
+
+H2.Heading_2, div.Heading_2, caption.Heading_2
+{
+  border-top-color: #DEE4F0;
+  border-top-style: solid;
+  border-top-width: 2pt;
+  color: #004831;
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: x-large;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 5pt;
+  margin-left: .25in;
+  margin-top: 12pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 9pt;
+  word-spacing: normal;
+}
+
+H3.Heading_3, div.Heading_3, caption.Heading_3
+{
+  border-top-color: #DEE4F0;
+  border-top-style: solid;
+  border-top-width: 2pt;
+  color: #004831;
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: large;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 5pt;
+  margin-left: .25in;
+  margin-top: 12pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 9pt;
+  word-spacing: normal;
+}
+
+H4.Heading_4, div.Heading_4, caption.Heading_4
+{
+  border-top-color: #DEE4F0;
+  border-top-style: solid;
+  border-top-width: 1pt;
+  color: #004831;
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: medium;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bolder;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 5pt;
+  margin-left: .25in;
+  margin-top: 12pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 9pt;
+  word-spacing: normal;
+}
+
+div.Heading_5, caption.Heading_5
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: medium;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bolder;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 5pt;
+  margin-left: .25in;
+  margin-top: 12pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  word-spacing: normal;
+}
+
+div.Table_Cell_Body, caption.Table_Cell_Body
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: small;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 0px;
+  margin-left: 0in;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 2px;
+  word-spacing: normal;
+}
+
+div.Table_Cell_Heading, caption.Table_Cell_Heading
+{
+  font-family: 'Trebuchet MS', 'Palatino Linotype', 'Book Antiqua', FreeSerif;
+  font-size: small;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 2px;
+  vertical-align: bottom;
+  word-spacing: normal;
+}
+
+div.UList_L1_-_Body, caption.UList_L1_-_Body
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: small;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 6pt;
+  margin-left: .5in;
+  margin-right: 0in;
+  margin-top: 6pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  text-indent: -18pt;
+  word-spacing: normal;
+}
+
+span.Bold, span.Bold a, span.Bold a:active, abbreviation.Bold, abbreviation.Bold a, abbreviation.Bold a:active, acronym.Bold, acronym.Bold a, acronym.Bold a:active, citation.Bold, citation.Bold a, citation.Bold a:active
+{
+  font-weight: bold;
+}
+
+span.Code, span.Code a, span.Code a:active, abbreviation.Code, abbreviation.Code a, abbreviation.Code a:active, acronym.Code, acronym.Code a, acronym.Code a:active, citation.Code, citation.Code a, citation.Code a:active
+{
+  background-color: #efefef;
+  font-family: "Courier New", Courier, FreeMono, mono;
+  white-space: pre;
+}
+
+span.Italic, span.Italic a, span.Italic a:active, abbreviation.Italic, abbreviation.Italic a, abbreviation.Italic a:active, acronym.Italic, acronym.Italic a, acronym.Italic a:active, citation.Italic, citation.Italic a, citation.Italic a:active
+{
+  font-style: italic;
+}
+
+table.Default
+{
+  background-color: White;
+  border-bottom-color: Silver;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  border-left-color: Silver;
+  border-left-style: solid;
+  border-left-width: thin;
+  border-right-color: Silver;
+  border-right-style: solid;
+  border-right-width: thin;
+  border-top-color: Silver;
+  border-top-style: solid;
+  border-top-width: thin;
+  margin-bottom: 12pt;
+  margin-left: 36pt;
+  margin-top: 12pt;
+  padding-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0px;
+  width: 90%;
+}
+
+img.Default
+{
+  margin-left: .5in;
+  overflow: scroll;
+}
+
+video.Default
+{
+  margin-left: .5in;
+  overflow: scroll;
+}
+

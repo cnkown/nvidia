@@ -1,0 +1,510 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+      <meta name="copyright" content="(C) Copyright 2005"></meta>
+      <meta name="DC.rights.owner" content="(C) Copyright 2005"></meta>
+      <meta name="DC.Type" content="concept"></meta>
+      <meta name="DC.Title" content="Notices"></meta>
+      <meta name="DC.Format" content="XHTML"></meta>
+      <meta name="DC.Identifier" content="notices-header"></meta>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/commonltr.css"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/site.css"></link>
+      <title>CUDA Driver API :: CUDA Toolkit Documentation</title>
+      <!--[if lt IE 9]>
+      <script src="../common/formatting/html5shiv-printshiv.min.js"></script>
+      <![endif]-->
+      <script type="text/javascript" charset="utf-8" src="//assets.adobedtm.com/b92787824f2e0e9b68dc2e993f9bd995339fe417/satelliteLib-7ba51e58dc61bcb0e9311aadd02a0108ab24cc6c.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/scripts/tynt/tynt.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.ba-hashchange.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.scrollintoview.min.js"></script>
+      <script type="text/javascript" src="../search/htmlFileList.js"></script>
+      <script type="text/javascript" src="../search/htmlFileInfoList.js"></script>
+      <script type="text/javascript" src="../search/nwSearchFnt.min.js"></script>
+      <script type="text/javascript" src="../search/stemmers/en_stemmer.min.js"></script>
+      <script type="text/javascript" src="../search/index-1.js"></script>
+      <script type="text/javascript" src="../search/index-2.js"></script>
+      <script type="text/javascript" src="../search/index-3.js"></script>
+      <link rel="canonical" href="http://docs.nvidia.com/cuda/cuda-driver-api/index.html"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/qwcode.highlight.css"></link>
+   </head>
+   <body>
+      
+      <header id="header"><span id="company">NVIDIA</span><span id="site-title">CUDA Toolkit Documentation</span><form id="search" method="get" action="search">
+            <input type="text" name="search-text"></input><fieldset id="search-location">
+               <legend>Search In:</legend>
+               <label><input type="radio" name="search-type" value="site"></input>Entire Site</label>
+               <label><input type="radio" name="search-type" value="document"></input>Just This Document</label></fieldset>
+            <button type="reset">clear search</button>
+            <button id="submit" type="submit">search</button></form>
+      </header>
+      <div id="site-content">
+         <nav id="site-nav">
+            <div class="category closed"><a href="../index.html" title="The root of the site.">CUDA Toolkit 
+                  
+                  
+                  v11.3.1</a></div>
+            <div class="category"><a href="index.html" title="CUDA Driver API">CUDA Driver API</a></div>
+            <ul>
+               <li>
+                  <div class="section-link"><a href="driver-vs-runtime-api.html#driver-vs-runtime-api">1.&nbsp;Difference between the driver and runtime APIs </a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="api-sync-behavior.html#api-sync-behavior">2.&nbsp;API synchronization behavior </a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="stream-sync-behavior.html#stream-sync-behavior">3.&nbsp;Stream synchronization behavior</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="graphs-thread-safety.html#graphs-thread-safety">4.&nbsp;Graph object thread safety</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="version-mixing-rules.html#version-mixing-rules">5.&nbsp;Rules for version mixing </a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="modules.html#modules">6.&nbsp;Modules</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES">6.1.&nbsp;Data types used by CUDA driver</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__ERROR.html#group__CUDA__ERROR">6.2.&nbsp;Error Handling</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__INITIALIZE.html#group__CUDA__INITIALIZE">6.3.&nbsp;Initialization</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__VERSION.html#group__CUDA__VERSION">6.4.&nbsp;Version Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__DEVICE.html#group__CUDA__DEVICE">6.5.&nbsp;Device Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__DEVICE__DEPRECATED.html#group__CUDA__DEVICE__DEPRECATED">6.6.&nbsp;Device Management [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__PRIMARY__CTX.html#group__CUDA__PRIMARY__CTX">6.7.&nbsp;Primary Context Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__CTX.html#group__CUDA__CTX">6.8.&nbsp;Context Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__CTX__DEPRECATED.html#group__CUDA__CTX__DEPRECATED">6.9.&nbsp;Context Management [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__MODULE.html#group__CUDA__MODULE">6.10.&nbsp;Module Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__MEM.html#group__CUDA__MEM">6.11.&nbsp;Memory Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__VA.html#group__CUDA__VA">6.12.&nbsp;Virtual Memory Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC">6.13.&nbsp;Stream Ordered Memory Allocator</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__UNIFIED.html#group__CUDA__UNIFIED">6.14.&nbsp;Unified Addressing</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__STREAM.html#group__CUDA__STREAM">6.15.&nbsp;Stream Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__EVENT.html#group__CUDA__EVENT">6.16.&nbsp;Event Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__EXTRES__INTEROP.html#group__CUDA__EXTRES__INTEROP">6.17.&nbsp;External Resource Interoperability</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__MEMOP.html#group__CUDA__MEMOP">6.18.&nbsp;Stream memory operations</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__EXEC.html#group__CUDA__EXEC">6.19.&nbsp;Execution Control</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__EXEC__DEPRECATED.html#group__CUDA__EXEC__DEPRECATED">6.20.&nbsp;Execution Control [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__GRAPH.html#group__CUDA__GRAPH">6.21.&nbsp;Graph Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__OCCUPANCY.html#group__CUDA__OCCUPANCY">6.22.&nbsp;Occupancy</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__TEXREF__DEPRECATED.html#group__CUDA__TEXREF__DEPRECATED">6.23.&nbsp;Texture Reference Management [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__SURFREF__DEPRECATED.html#group__CUDA__SURFREF__DEPRECATED">6.24.&nbsp;Surface Reference Management [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__TEXOBJECT.html#group__CUDA__TEXOBJECT">6.25.&nbsp;Texture Object Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__SURFOBJECT.html#group__CUDA__SURFOBJECT">6.26.&nbsp;Surface Object Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__PEER__ACCESS.html#group__CUDA__PEER__ACCESS">6.27.&nbsp;Peer Context Memory Access</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__GRAPHICS.html#group__CUDA__GRAPHICS">6.28.&nbsp;Graphics Interoperability</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__DRIVER__ENTRY__POINT.html#group__CUDA__DRIVER__ENTRY__POINT">6.29.&nbsp;Driver Entry Point Access</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__PROFILER__DEPRECATED.html#group__CUDA__PROFILER__DEPRECATED">6.30.&nbsp;Profiler Control [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__PROFILER.html#group__CUDA__PROFILER">6.31.&nbsp;Profiler Control</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__GL.html#group__CUDA__GL">6.32.&nbsp;OpenGL Interoperability</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="group__CUDA__GL__DEPRECATED.html#group__CUDA__GL__DEPRECATED">6.32.1.&nbsp;OpenGL Interoperability [DEPRECATED]</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__VDPAU.html#group__CUDA__VDPAU">6.33.&nbsp;VDPAU Interoperability</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__EGL.html#group__CUDA__EGL">6.34.&nbsp;EGL Interoperability</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="annotated.html#annotated">7.&nbsp;Data Structures</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="structCUaccessPolicyWindow__v1.html#structCUaccessPolicyWindow__v1">7.1.&nbsp;CUaccessPolicyWindow_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUarrayMapInfo__v1.html#structCUarrayMapInfo__v1">7.2.&nbsp;CUarrayMapInfo_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__ARRAY3D__DESCRIPTOR__v2.html#structCUDA__ARRAY3D__DESCRIPTOR__v2">7.3.&nbsp;CUDA_ARRAY3D_DESCRIPTOR_v2</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__ARRAY__DESCRIPTOR__v2.html#structCUDA__ARRAY__DESCRIPTOR__v2">7.4.&nbsp;CUDA_ARRAY_DESCRIPTOR_v2</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__ARRAY__SPARSE__PROPERTIES__v1.html#structCUDA__ARRAY__SPARSE__PROPERTIES__v1">7.5.&nbsp;CUDA_ARRAY_SPARSE_PROPERTIES_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXT__SEM__SIGNAL__NODE__PARAMS__v1.html#structCUDA__EXT__SEM__SIGNAL__NODE__PARAMS__v1">7.6.&nbsp;CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXT__SEM__WAIT__NODE__PARAMS__v1.html#structCUDA__EXT__SEM__WAIT__NODE__PARAMS__v1">7.7.&nbsp;CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__MEMORY__BUFFER__DESC__v1.html#structCUDA__EXTERNAL__MEMORY__BUFFER__DESC__v1">7.8.&nbsp;CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__MEMORY__HANDLE__DESC__v1.html#structCUDA__EXTERNAL__MEMORY__HANDLE__DESC__v1">7.9.&nbsp;CUDA_EXTERNAL_MEMORY_HANDLE_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__MEMORY__MIPMAPPED__ARRAY__DESC__v1.html#structCUDA__EXTERNAL__MEMORY__MIPMAPPED__ARRAY__DESC__v1">7.10.&nbsp;CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__SEMAPHORE__HANDLE__DESC__v1.html#structCUDA__EXTERNAL__SEMAPHORE__HANDLE__DESC__v1">7.11.&nbsp;CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__SEMAPHORE__SIGNAL__PARAMS__v1.html#structCUDA__EXTERNAL__SEMAPHORE__SIGNAL__PARAMS__v1">7.12.&nbsp;CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__SEMAPHORE__WAIT__PARAMS__v1.html#structCUDA__EXTERNAL__SEMAPHORE__WAIT__PARAMS__v1">7.13.&nbsp;CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__HOST__NODE__PARAMS__v1.html#structCUDA__HOST__NODE__PARAMS__v1">7.14.&nbsp;CUDA_HOST_NODE_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__KERNEL__NODE__PARAMS__v1.html#structCUDA__KERNEL__NODE__PARAMS__v1">7.15.&nbsp;CUDA_KERNEL_NODE_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__LAUNCH__PARAMS__v1.html#structCUDA__LAUNCH__PARAMS__v1">7.16.&nbsp;CUDA_LAUNCH_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__MEMCPY2D__v2.html#structCUDA__MEMCPY2D__v2">7.17.&nbsp;CUDA_MEMCPY2D_v2</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__MEMCPY3D__PEER__v1.html#structCUDA__MEMCPY3D__PEER__v1">7.18.&nbsp;CUDA_MEMCPY3D_PEER_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__MEMCPY3D__v2.html#structCUDA__MEMCPY3D__v2">7.19.&nbsp;CUDA_MEMCPY3D_v2</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__MEMSET__NODE__PARAMS__v1.html#structCUDA__MEMSET__NODE__PARAMS__v1">7.20.&nbsp;CUDA_MEMSET_NODE_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__POINTER__ATTRIBUTE__P2P__TOKENS__v1.html#structCUDA__POINTER__ATTRIBUTE__P2P__TOKENS__v1">7.21.&nbsp;CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__RESOURCE__DESC__v1.html#structCUDA__RESOURCE__DESC__v1">7.22.&nbsp;CUDA_RESOURCE_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__RESOURCE__VIEW__DESC__v1.html#structCUDA__RESOURCE__VIEW__DESC__v1">7.23.&nbsp;CUDA_RESOURCE_VIEW_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__TEXTURE__DESC__v1.html#structCUDA__TEXTURE__DESC__v1">7.24.&nbsp;CUDA_TEXTURE_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUdevprop__v1.html#structCUdevprop__v1">7.25.&nbsp;CUdevprop_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUeglFrame__v1.html#structCUeglFrame__v1">7.26.&nbsp;CUeglFrame_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUipcEventHandle__v1.html#structCUipcEventHandle__v1">7.27.&nbsp;CUipcEventHandle_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUipcMemHandle__v1.html#structCUipcMemHandle__v1">7.28.&nbsp;CUipcMemHandle_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="unionCUkernelNodeAttrValue__v1.html#unionCUkernelNodeAttrValue__v1">7.29.&nbsp;CUkernelNodeAttrValue_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUmemAccessDesc__v1.html#structCUmemAccessDesc__v1">7.30.&nbsp;CUmemAccessDesc_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUmemAllocationProp__v1.html#structCUmemAllocationProp__v1">7.31.&nbsp;CUmemAllocationProp_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUmemLocation__v1.html#structCUmemLocation__v1">7.32.&nbsp;CUmemLocation_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUmemPoolProps__v1.html#structCUmemPoolProps__v1">7.33.&nbsp;CUmemPoolProps_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUmemPoolPtrExportData__v1.html#structCUmemPoolPtrExportData__v1">7.34.&nbsp;CUmemPoolPtrExportData_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="unionCUstreamAttrValue__v1.html#unionCUstreamAttrValue__v1">7.35.&nbsp;CUstreamAttrValue_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="unionCUstreamBatchMemOpParams__v1.html#unionCUstreamBatchMemOpParams__v1">7.36.&nbsp;CUstreamBatchMemOpParams_v1</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="functions.html#functions">8.&nbsp;Data Fields</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="deprecated.html#deprecated">9.&nbsp;Deprecated List</a></div>
+               </li>
+            </ul>
+         </nav>
+         <div id="resize-nav"></div>
+         <nav id="search-results">
+            <h2>Search Results</h2>
+            <ol></ol>
+         </nav>
+         
+         <div id="contents-container">
+            <div id="breadcrumbs-container">
+               <div id="breadcrumbs"><a href="deprecated.html" shape="rect">&lt; Previous</a> | Next &gt;
+               </div>
+               <div id="release-info">CUDA Driver API
+                  (<a href="../pdf/CUDA_Driver_API.pdf">PDF</a>)
+                  -
+                   
+                  
+                  
+                  v11.3.1
+                  (<a href="https://developer.nvidia.com/cuda-toolkit-archive">older</a>)
+                  -
+                  Last updated May 20, 2021
+                  -
+                  <a href="mailto:CUDAIssues@nvidia.com?subject=CUDA Toolkit Documentation Feedback: CUDA Driver API">Send Feedback</a></div>
+            </div>
+            <article id="contents">
+               <div class="topic nested1" id="notices-header"><a name="notices-header" shape="rect">
+                     <!-- --></a><h2 class="topictitle2">Notices</h2>
+                  <div class="topic reference nested1" id="notice"><a name="notice" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Notice</h3>
+                           <p class="p" id="notice__notice-para-1"><a name="notice__notice-para-1" shape="rect">
+                                 <!-- --></a>This document is provided for information
+                              purposes only and shall not be regarded as a warranty of a
+                              certain functionality, condition, or quality of a product.
+                              NVIDIA Corporation (“NVIDIA”) makes no representations or
+                              warranties, expressed or implied, as to the accuracy or
+                              completeness of the information contained in this document
+                              and assumes no responsibility for any errors contained
+                              herein. NVIDIA shall have no liability for the consequences
+                              or use of such information or for any infringement of
+                              patents or other rights of third parties that may result
+                              from its use. This document is not a commitment to develop,
+                              release, or deliver any Material (defined below), code, or
+                              functionality.
+                           </p>
+                           <p class="p" id="notice__notice-para-2"><a name="notice__notice-para-2" shape="rect">
+                                 <!-- --></a>NVIDIA reserves the right to make corrections, modifications,
+                              enhancements, improvements, and any other changes to this
+                              document, at any time without notice.
+                           </p>
+                           <p class="p" id="notice__notice-para-3"><a name="notice__notice-para-3" shape="rect">
+                                 <!-- --></a>Customer should obtain the latest relevant information before
+                              placing orders and should verify that such information is
+                              current and complete.
+                           </p>
+                           <p class="p" id="notice__notice-para-4"><a name="notice__notice-para-4" shape="rect">
+                                 <!-- --></a>NVIDIA products are sold subject to the NVIDIA standard terms and
+                              conditions of sale supplied at the time of order
+                              acknowledgement, unless otherwise agreed in an individual
+                              sales agreement signed by authorized representatives of
+                              NVIDIA and customer (“Terms of Sale”). NVIDIA hereby
+                              expressly objects to applying any customer general terms and
+                              conditions with regards to the purchase of the NVIDIA
+                              product referenced in this document. No contractual
+                              obligations are formed either directly or indirectly by this
+                              document.
+                           </p>
+                           <p class="p" id="notice__notice-para-5"><a name="notice__notice-para-5" shape="rect">
+                                 <!-- --></a>NVIDIA products are not designed, authorized, or warranted to be
+                              suitable for use in medical, military, aircraft, space, or
+                              life support equipment, nor in applications where failure or
+                              malfunction of the NVIDIA product can reasonably be expected
+                              to result in personal injury, death, or property or
+                              environmental damage. NVIDIA accepts no liability for
+                              inclusion and/or use of NVIDIA products in such equipment or
+                              applications and therefore such inclusion and/or use is at
+                              customer’s own risk.
+                           </p>
+                           <p class="p" id="notice__notice-para-6"><a name="notice__notice-para-6" shape="rect">
+                                 <!-- --></a>NVIDIA makes no representation or warranty that products based on
+                              this document will be suitable for any specified use.
+                              Testing of all parameters of each product is not necessarily
+                              performed by NVIDIA. It is customer’s sole responsibility to
+                              evaluate and determine the applicability of any information
+                              contained in this document, ensure the product is suitable
+                              and fit for the application planned by customer, and perform
+                              the necessary testing for the application in order to avoid
+                              a default of the application or the product. Weaknesses in
+                              customer’s product designs may affect the quality and
+                              reliability of the NVIDIA product and may result in
+                              additional or different conditions and/or requirements
+                              beyond those contained in this document. NVIDIA accepts no
+                              liability related to any default, damage, costs, or problem
+                              which may be based on or attributable to: (i) the use of the
+                              NVIDIA product in any manner that is contrary to this
+                              document or (ii) customer product designs.
+                           </p>
+                           <p class="p" id="notice__notice-para-7"><a name="notice__notice-para-7" shape="rect">
+                                 <!-- --></a>No license, either expressed or implied, is granted under any NVIDIA
+                              patent right, copyright, or other NVIDIA intellectual
+                              property right under this document. Information published by
+                              NVIDIA regarding third-party products or services does not
+                              constitute a license from NVIDIA to use such products or
+                              services or a warranty or endorsement thereof. Use of such
+                              information may require a license from a third party under
+                              the patents or other intellectual property rights of the
+                              third party, or a license from NVIDIA under the patents or
+                              other intellectual property rights of NVIDIA.
+                           </p>
+                           <p class="p" id="notice__notice-para-8"><a name="notice__notice-para-8" shape="rect">
+                                 <!-- --></a>Reproduction of information in this document is permissible only if
+                              approved in advance by NVIDIA in writing, reproduced without
+                              alteration and in full compliance with all applicable export
+                              laws and regulations, and accompanied by all associated
+                              conditions, limitations, and notices.
+                           </p>
+                           <p class="p" id="notice__notice-para-9"><a name="notice__notice-para-9" shape="rect">
+                                 <!-- --></a>THIS DOCUMENT AND ALL NVIDIA DESIGN SPECIFICATIONS, REFERENCE
+                              BOARDS, FILES, DRAWINGS, DIAGNOSTICS, LISTS, AND OTHER
+                              DOCUMENTS (TOGETHER AND SEPARATELY, “MATERIALS”) ARE BEING
+                              PROVIDED “AS IS.” NVIDIA MAKES NO WARRANTIES, EXPRESSED,
+                              IMPLIED, STATUTORY, OR OTHERWISE WITH RESPECT TO THE
+                              MATERIALS, AND EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF
+                              NONINFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
+                              PARTICULAR PURPOSE. TO THE EXTENT NOT PROHIBITED BY LAW, IN
+                              NO EVENT WILL NVIDIA BE LIABLE FOR ANY DAMAGES, INCLUDING
+                              WITHOUT LIMITATION ANY DIRECT, INDIRECT, SPECIAL,
+                              INCIDENTAL, PUNITIVE, OR CONSEQUENTIAL DAMAGES, HOWEVER
+                              CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING
+                              OUT OF ANY USE OF THIS DOCUMENT, EVEN IF NVIDIA HAS BEEN
+                              ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. Notwithstanding
+                              any damages that customer might incur for any reason
+                              whatsoever, NVIDIA’s aggregate and cumulative liability
+                              towards customer for the products described herein shall be
+                              limited in accordance with the Terms of Sale for the
+                              product.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="vesa"><a name="vesa" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">VESA DisplayPort</h3>
+                           <p class="p">DisplayPort and DisplayPort Compliance Logo, DisplayPort Compliance Logo for
+                              Dual-mode Sources, and DisplayPort Compliance Logo for Active Cables are
+                              trademarks owned by the Video Electronics Standards Association in the United
+                              States and other countries.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="hdmi"><a name="hdmi" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">HDMI</h3>
+                           <p class="p">HDMI, the HDMI logo, and High-Definition Multimedia Interface are trademarks or
+                              registered trademarks of HDMI Licensing LLC.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="opencl"><a name="opencl" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">OpenCL</h3>
+                           <p class="p">OpenCL is a trademark of Apple Inc. used under license to the Khronos Group Inc.</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="trademarks"><a name="trademarks" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Trademarks</h3>
+                           <p class="p">NVIDIA and the NVIDIA logo are trademarks or registered trademarks of NVIDIA Corporation
+                              in the U.S. and other countries.  Other company and product names may be trademarks of
+                              the respective companies with which they are associated.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="copyright-past-to-present"><a name="copyright-past-to-present" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <h3 class="title sectiontitle">Copyright</h3>
+                           <p class="p">© <span class="ph">2007</span>-<span class="ph">2021</span> NVIDIA
+                              Corporation. All rights reserved.
+                           </p>
+                           <p class="p">This product includes software developed by the Syncro Soft SRL (http://www.sync.ro/).</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <hr id="contents-end"></hr>
+               
+            </article>
+         </div>
+      </div>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/formatting/common.min.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-write.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-tracker.js"></script>
+      <script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher: "998dc202-a267-4d8e-bce9-14debadb8d92", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script><script type="text/javascript">_satellite.pageBottom();</script></body>
+</html>

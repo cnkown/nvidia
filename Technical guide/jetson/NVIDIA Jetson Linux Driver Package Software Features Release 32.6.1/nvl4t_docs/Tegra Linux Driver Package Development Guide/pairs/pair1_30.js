@@ -1,0 +1,23 @@
+var pairs =
+{
+"bootloader":{"update":1}
+,"update":{"redundancy":1}
+,"nvidia":{"jetson":1}
+,"jetson":{"linux":1,"platforms":1,"nano":1,"tx1":1,"xavier":1,"tx2":1}
+,"linux":{"driver":1}
+,"driver":{"package":1}
+,"package":{"supports":1}
+,"supports":{"bootloader":1}
+,"redundancy":{"jetson":1,"nvidia":1}
+,"platforms":{"however":1,"substantially":1}
+,"however":{"implementations":1}
+,"implementations":{"update":1}
+,"nano":{"jetson":1}
+,"tx1":{"platforms":1}
+,"substantially":{"different":1}
+,"different":{"nvidia":1}
+,"xavier":{"series":1}
+,"series":{"nvidia":1,"platforms":1}
+,"tx2":{"series":1}
+}
+;Search.control.loadWordPairs(pairs);

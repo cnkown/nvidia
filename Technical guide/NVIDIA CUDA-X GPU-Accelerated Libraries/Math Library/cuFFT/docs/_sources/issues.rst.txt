@@ -1,0 +1,27 @@
+
+.. role:: cpp(code)
+   :language: cpp
+   :class: highlight
+
+.. default-role:: cpp
+.. highlight:: cpp
+
+.. _requirements-label:
+
+Known issues
+============
+
+On this page, you can find a list of known issues present in the EA. Unless noted, these issues should
+not impact functionality. When functionality is impacted, we offer a work-around to avoid the issue (if available).
+Our goal is to solve every issue when the EA is over.
+
+------------------------------------------------------------------------------------------
+
+Warnings
+--------
+
+.. code-block:: bash
+
+  ptxas warning : Program uses 32-bit address on line 'XXX' which is conflicting with .address_size 64
+
+This warning may appear when compiling, but it does not impact functionality or performance.

@@ -1,0 +1,101 @@
+div.Normal, caption.Normal
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: small;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-left: .25in;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  word-spacing: normal;
+}
+
+H1.Heading_1, div.Heading_1, caption.Heading_1
+{
+  border-top-style: none;
+  border-top-width: 3pt;
+  color: #004831;
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: xx-large;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 5pt;
+  margin-left: .25in;
+  margin-top: 12pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  text-align: left;
+  word-spacing: normal;
+}
+
+div.Body_Text, caption.Body_Text
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;
+  font-size: small;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 12pt;
+  margin-left: .25in;
+  margin-right: 0in;
+  margin-top: 6pt;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  text-indent: 0pt;
+  word-spacing: normal;
+}
+
+span.Default_Paragraph_Font, span.Default_Paragraph_Font a, span.Default_Paragraph_Font a:active, abbreviation.Default_Paragraph_Font, abbreviation.Default_Paragraph_Font a, abbreviation.Default_Paragraph_Font a:active, acronym.Default_Paragraph_Font, acronym.Default_Paragraph_Font a, acronym.Default_Paragraph_Font a:active, citation.Default_Paragraph_Font, citation.Default_Paragraph_Font a, citation.Default_Paragraph_Font a:active
+{
+  font-family: Trebuchet MS, Arial, FreeSans, sans-serif;;
+}
+
+table.Table_Normal
+{
+  border-bottom-color: Silver;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  border-collapse: collapse;
+  border-left-color: Silver;
+  border-left-style: solid;
+  border-left-width: thin;
+  border-right-color: Silver;
+  border-right-style: solid;
+  border-right-width: thin;
+  border-top-color: Silver;
+  border-top-style: solid;
+  border-top-width: thin;
+  margin-left: -5.4pt;
+  padding-bottom: 0pt;
+  padding-left: 5.4pt;
+  padding-right: 5.4pt;
+  padding-top: 0pt;
+  width: 90%;
+}
+
+img.Default
+{
+  margin-left: .5in;
+  overflow: scroll;
+}
+
+video.Default
+{
+  margin-left: .5in;
+  overflow: scroll;
+}
+

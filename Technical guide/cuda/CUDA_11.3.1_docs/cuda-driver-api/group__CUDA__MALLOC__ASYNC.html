@@ -1,0 +1,977 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+      <meta name="copyright" content="(C) Copyright 2005"></meta>
+      <meta name="DC.rights.owner" content="(C) Copyright 2005"></meta>
+      <meta name="DC.Type" content="cppModule"></meta>
+      <meta name="DC.Title" content="Stream Ordered Memory Allocator"></meta>
+      <meta name="abstract" content=""></meta>
+      <meta name="description" content=""></meta>
+      <meta name="DC.Format" content="XHTML"></meta>
+      <meta name="DC.Identifier" content="group__CUDA__MALLOC__ASYNC"></meta>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/commonltr.css"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/site.css"></link>
+      <title>CUDA Driver API :: CUDA Toolkit Documentation</title>
+      <!--[if lt IE 9]>
+      <script src="../common/formatting/html5shiv-printshiv.min.js"></script>
+      <![endif]-->
+      <script type="text/javascript" charset="utf-8" src="//assets.adobedtm.com/b92787824f2e0e9b68dc2e993f9bd995339fe417/satelliteLib-7ba51e58dc61bcb0e9311aadd02a0108ab24cc6c.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/scripts/tynt/tynt.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.ba-hashchange.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.scrollintoview.min.js"></script>
+      <script type="text/javascript" src="../search/htmlFileList.js"></script>
+      <script type="text/javascript" src="../search/htmlFileInfoList.js"></script>
+      <script type="text/javascript" src="../search/nwSearchFnt.min.js"></script>
+      <script type="text/javascript" src="../search/stemmers/en_stemmer.min.js"></script>
+      <script type="text/javascript" src="../search/index-1.js"></script>
+      <script type="text/javascript" src="../search/index-2.js"></script>
+      <script type="text/javascript" src="../search/index-3.js"></script>
+      <link rel="canonical" href="http://docs.nvidia.com/cuda/cuda-driver-api/index.html"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/qwcode.highlight.css"></link>
+   </head>
+   <body>
+      
+      <header id="header"><span id="company">NVIDIA</span><span id="site-title">CUDA Toolkit Documentation</span><form id="search" method="get" action="search">
+            <input type="text" name="search-text"></input><fieldset id="search-location">
+               <legend>Search In:</legend>
+               <label><input type="radio" name="search-type" value="site"></input>Entire Site</label>
+               <label><input type="radio" name="search-type" value="document"></input>Just This Document</label></fieldset>
+            <button type="reset">clear search</button>
+            <button id="submit" type="submit">search</button></form>
+      </header>
+      <div id="site-content">
+         <nav id="site-nav">
+            <div class="category closed"><a href="../index.html" title="The root of the site.">CUDA Toolkit 
+                  
+                  
+                  v11.3.1</a></div>
+            <div class="category"><a href="index.html" title="CUDA Driver API">CUDA Driver API</a></div>
+            <ul>
+               <li>
+                  <div class="section-link"><a href="driver-vs-runtime-api.html#driver-vs-runtime-api">1.&nbsp;Difference between the driver and runtime APIs </a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="api-sync-behavior.html#api-sync-behavior">2.&nbsp;API synchronization behavior </a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="stream-sync-behavior.html#stream-sync-behavior">3.&nbsp;Stream synchronization behavior</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="graphs-thread-safety.html#graphs-thread-safety">4.&nbsp;Graph object thread safety</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="version-mixing-rules.html#version-mixing-rules">5.&nbsp;Rules for version mixing </a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="modules.html#modules">6.&nbsp;Modules</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES">6.1.&nbsp;Data types used by CUDA driver</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__ERROR.html#group__CUDA__ERROR">6.2.&nbsp;Error Handling</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__INITIALIZE.html#group__CUDA__INITIALIZE">6.3.&nbsp;Initialization</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__VERSION.html#group__CUDA__VERSION">6.4.&nbsp;Version Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__DEVICE.html#group__CUDA__DEVICE">6.5.&nbsp;Device Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__DEVICE__DEPRECATED.html#group__CUDA__DEVICE__DEPRECATED">6.6.&nbsp;Device Management [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__PRIMARY__CTX.html#group__CUDA__PRIMARY__CTX">6.7.&nbsp;Primary Context Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__CTX.html#group__CUDA__CTX">6.8.&nbsp;Context Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__CTX__DEPRECATED.html#group__CUDA__CTX__DEPRECATED">6.9.&nbsp;Context Management [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__MODULE.html#group__CUDA__MODULE">6.10.&nbsp;Module Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__MEM.html#group__CUDA__MEM">6.11.&nbsp;Memory Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__VA.html#group__CUDA__VA">6.12.&nbsp;Virtual Memory Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC">6.13.&nbsp;Stream Ordered Memory Allocator</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__UNIFIED.html#group__CUDA__UNIFIED">6.14.&nbsp;Unified Addressing</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__STREAM.html#group__CUDA__STREAM">6.15.&nbsp;Stream Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__EVENT.html#group__CUDA__EVENT">6.16.&nbsp;Event Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__EXTRES__INTEROP.html#group__CUDA__EXTRES__INTEROP">6.17.&nbsp;External Resource Interoperability</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__MEMOP.html#group__CUDA__MEMOP">6.18.&nbsp;Stream memory operations</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__EXEC.html#group__CUDA__EXEC">6.19.&nbsp;Execution Control</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__EXEC__DEPRECATED.html#group__CUDA__EXEC__DEPRECATED">6.20.&nbsp;Execution Control [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__GRAPH.html#group__CUDA__GRAPH">6.21.&nbsp;Graph Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__OCCUPANCY.html#group__CUDA__OCCUPANCY">6.22.&nbsp;Occupancy</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__TEXREF__DEPRECATED.html#group__CUDA__TEXREF__DEPRECATED">6.23.&nbsp;Texture Reference Management [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__SURFREF__DEPRECATED.html#group__CUDA__SURFREF__DEPRECATED">6.24.&nbsp;Surface Reference Management [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__TEXOBJECT.html#group__CUDA__TEXOBJECT">6.25.&nbsp;Texture Object Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__SURFOBJECT.html#group__CUDA__SURFOBJECT">6.26.&nbsp;Surface Object Management</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__PEER__ACCESS.html#group__CUDA__PEER__ACCESS">6.27.&nbsp;Peer Context Memory Access</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__GRAPHICS.html#group__CUDA__GRAPHICS">6.28.&nbsp;Graphics Interoperability</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__DRIVER__ENTRY__POINT.html#group__CUDA__DRIVER__ENTRY__POINT">6.29.&nbsp;Driver Entry Point Access</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__PROFILER__DEPRECATED.html#group__CUDA__PROFILER__DEPRECATED">6.30.&nbsp;Profiler Control [DEPRECATED]</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__PROFILER.html#group__CUDA__PROFILER">6.31.&nbsp;Profiler Control</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__GL.html#group__CUDA__GL">6.32.&nbsp;OpenGL Interoperability</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="group__CUDA__GL__DEPRECATED.html#group__CUDA__GL__DEPRECATED">6.32.1.&nbsp;OpenGL Interoperability [DEPRECATED]</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__VDPAU.html#group__CUDA__VDPAU">6.33.&nbsp;VDPAU Interoperability</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="group__CUDA__EGL.html#group__CUDA__EGL">6.34.&nbsp;EGL Interoperability</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="annotated.html#annotated">7.&nbsp;Data Structures</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="structCUaccessPolicyWindow__v1.html#structCUaccessPolicyWindow__v1">7.1.&nbsp;CUaccessPolicyWindow_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUarrayMapInfo__v1.html#structCUarrayMapInfo__v1">7.2.&nbsp;CUarrayMapInfo_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__ARRAY3D__DESCRIPTOR__v2.html#structCUDA__ARRAY3D__DESCRIPTOR__v2">7.3.&nbsp;CUDA_ARRAY3D_DESCRIPTOR_v2</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__ARRAY__DESCRIPTOR__v2.html#structCUDA__ARRAY__DESCRIPTOR__v2">7.4.&nbsp;CUDA_ARRAY_DESCRIPTOR_v2</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__ARRAY__SPARSE__PROPERTIES__v1.html#structCUDA__ARRAY__SPARSE__PROPERTIES__v1">7.5.&nbsp;CUDA_ARRAY_SPARSE_PROPERTIES_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXT__SEM__SIGNAL__NODE__PARAMS__v1.html#structCUDA__EXT__SEM__SIGNAL__NODE__PARAMS__v1">7.6.&nbsp;CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXT__SEM__WAIT__NODE__PARAMS__v1.html#structCUDA__EXT__SEM__WAIT__NODE__PARAMS__v1">7.7.&nbsp;CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__MEMORY__BUFFER__DESC__v1.html#structCUDA__EXTERNAL__MEMORY__BUFFER__DESC__v1">7.8.&nbsp;CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__MEMORY__HANDLE__DESC__v1.html#structCUDA__EXTERNAL__MEMORY__HANDLE__DESC__v1">7.9.&nbsp;CUDA_EXTERNAL_MEMORY_HANDLE_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__MEMORY__MIPMAPPED__ARRAY__DESC__v1.html#structCUDA__EXTERNAL__MEMORY__MIPMAPPED__ARRAY__DESC__v1">7.10.&nbsp;CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__SEMAPHORE__HANDLE__DESC__v1.html#structCUDA__EXTERNAL__SEMAPHORE__HANDLE__DESC__v1">7.11.&nbsp;CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__SEMAPHORE__SIGNAL__PARAMS__v1.html#structCUDA__EXTERNAL__SEMAPHORE__SIGNAL__PARAMS__v1">7.12.&nbsp;CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__EXTERNAL__SEMAPHORE__WAIT__PARAMS__v1.html#structCUDA__EXTERNAL__SEMAPHORE__WAIT__PARAMS__v1">7.13.&nbsp;CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__HOST__NODE__PARAMS__v1.html#structCUDA__HOST__NODE__PARAMS__v1">7.14.&nbsp;CUDA_HOST_NODE_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__KERNEL__NODE__PARAMS__v1.html#structCUDA__KERNEL__NODE__PARAMS__v1">7.15.&nbsp;CUDA_KERNEL_NODE_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__LAUNCH__PARAMS__v1.html#structCUDA__LAUNCH__PARAMS__v1">7.16.&nbsp;CUDA_LAUNCH_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__MEMCPY2D__v2.html#structCUDA__MEMCPY2D__v2">7.17.&nbsp;CUDA_MEMCPY2D_v2</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__MEMCPY3D__PEER__v1.html#structCUDA__MEMCPY3D__PEER__v1">7.18.&nbsp;CUDA_MEMCPY3D_PEER_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__MEMCPY3D__v2.html#structCUDA__MEMCPY3D__v2">7.19.&nbsp;CUDA_MEMCPY3D_v2</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__MEMSET__NODE__PARAMS__v1.html#structCUDA__MEMSET__NODE__PARAMS__v1">7.20.&nbsp;CUDA_MEMSET_NODE_PARAMS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__POINTER__ATTRIBUTE__P2P__TOKENS__v1.html#structCUDA__POINTER__ATTRIBUTE__P2P__TOKENS__v1">7.21.&nbsp;CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__RESOURCE__DESC__v1.html#structCUDA__RESOURCE__DESC__v1">7.22.&nbsp;CUDA_RESOURCE_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__RESOURCE__VIEW__DESC__v1.html#structCUDA__RESOURCE__VIEW__DESC__v1">7.23.&nbsp;CUDA_RESOURCE_VIEW_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUDA__TEXTURE__DESC__v1.html#structCUDA__TEXTURE__DESC__v1">7.24.&nbsp;CUDA_TEXTURE_DESC_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUdevprop__v1.html#structCUdevprop__v1">7.25.&nbsp;CUdevprop_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUeglFrame__v1.html#structCUeglFrame__v1">7.26.&nbsp;CUeglFrame_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUipcEventHandle__v1.html#structCUipcEventHandle__v1">7.27.&nbsp;CUipcEventHandle_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUipcMemHandle__v1.html#structCUipcMemHandle__v1">7.28.&nbsp;CUipcMemHandle_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="unionCUkernelNodeAttrValue__v1.html#unionCUkernelNodeAttrValue__v1">7.29.&nbsp;CUkernelNodeAttrValue_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUmemAccessDesc__v1.html#structCUmemAccessDesc__v1">7.30.&nbsp;CUmemAccessDesc_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUmemAllocationProp__v1.html#structCUmemAllocationProp__v1">7.31.&nbsp;CUmemAllocationProp_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUmemLocation__v1.html#structCUmemLocation__v1">7.32.&nbsp;CUmemLocation_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUmemPoolProps__v1.html#structCUmemPoolProps__v1">7.33.&nbsp;CUmemPoolProps_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="structCUmemPoolPtrExportData__v1.html#structCUmemPoolPtrExportData__v1">7.34.&nbsp;CUmemPoolPtrExportData_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="unionCUstreamAttrValue__v1.html#unionCUstreamAttrValue__v1">7.35.&nbsp;CUstreamAttrValue_v1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="unionCUstreamBatchMemOpParams__v1.html#unionCUstreamBatchMemOpParams__v1">7.36.&nbsp;CUstreamBatchMemOpParams_v1</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="functions.html#functions">8.&nbsp;Data Fields</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="deprecated.html#deprecated">9.&nbsp;Deprecated List</a></div>
+               </li>
+            </ul>
+         </nav>
+         <div id="resize-nav"></div>
+         <nav id="search-results">
+            <h2>Search Results</h2>
+            <ol></ol>
+         </nav>
+         
+         <div id="contents-container">
+            <div id="breadcrumbs-container">
+               <div id="breadcrumbs"><a href="group__CUDA__VA.html" shape="rect">&lt; Previous</a> | <a href="group__CUDA__UNIFIED.html" shape="rect">Next &gt;</a></div>
+               <div id="release-info">CUDA Driver API
+                  (<a href="../pdf/CUDA_Driver_API.pdf">PDF</a>)
+                  -
+                   
+                  
+                  
+                  v11.3.1
+                  (<a href="https://developer.nvidia.com/cuda-toolkit-archive">older</a>)
+                  -
+                  Last updated May 20, 2021
+                  -
+                  <a href="mailto:CUDAIssues@nvidia.com?subject=CUDA Toolkit Documentation Feedback: CUDA Driver API">Send Feedback</a></div>
+            </div>
+            <article id="contents">
+               <div class="topic reference apiRef apiPackage cppModule" id="group__CUDA__MALLOC__ASYNC"><a name="group__CUDA__MALLOC__ASYNC" shape="rect">
+                     <!-- --></a><h2 class="topictitle2 cppModule">6.13.&nbsp;Stream Ordered Memory Allocator</h2>
+                  <div class="section">
+                     <p>This section describes the stream ordered memory allocator exposed by the low-level CUDA driver application programming interface.</p>
+                     <p class="p apiDesc_subtitle"><strong class="ph b">overview</strong></p>
+                     <p class="p">The asynchronous allocator allows the user to allocate and free in stream order. All asynchronous accesses of the allocation
+                        must happen between the stream executions of the allocation and the free. If the memory is accessed outside of the promised
+                        stream order, a use before allocation / use after free error will cause undefined behavior.
+                     </p>
+                     <p class="p">The allocator is free to reallocate the memory as long as it can guarantee that compliant memory accesses will not overlap
+                        temporally. The allocator may refer to internal stream ordering as well as inter-stream dependencies (such as CUDA events
+                        and null stream dependencies) when establishing the temporal guarantee. The allocator may also insert inter-stream dependencies
+                        to establish the temporal guarantee.
+                     </p>
+                     <p class="p apiDesc_subtitle"><strong class="ph b">Supported Platforms</strong></p>
+                     <p class="p">Whether or not a device supports the integrated stream ordered memory allocator may be queried by calling <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1g9c3e1414f0ad901d3278a4d6645fc266" title="Returns information about the device." shape="rect">cuDeviceGetAttribute()</a> with the device attribute <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gge12b8a782bebe21b1ac0091bf9f4e2a3f867cfe1025bda03e88ee109eeaa178e" shape="rect">CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED</a></p>
+                  </div>
+                  <h3 class="fake_sectiontitle member_header">Functions</h3>
+                  <dl class="members">
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" shape="rect">cuMemAllocAsync</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g183f7b0d8ad008ea2a5fd552537ace4e" title="" shape="rect">CUdeviceptr</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">dptr</span>, size_t<span>&nbsp;</span><span class="keyword keyword apiItemName">bytesize</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gb946c7f02e09efd788a204718015d88a" title="" shape="rect">CUstream</a><span>&nbsp;</span><span class="keyword keyword apiItemName">hStream</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Allocates memory with stream ordered semantics. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1gf1dd6e1e2e8f767a5e0ea63f38ff260b" shape="rect">cuMemAllocFromPoolAsync</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g183f7b0d8ad008ea2a5fd552537ace4e" title="" shape="rect">CUdeviceptr</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">dptr</span>, size_t<span>&nbsp;</span><span class="keyword keyword apiItemName">bytesize</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gb946c7f02e09efd788a204718015d88a" title="" shape="rect">CUstream</a><span>&nbsp;</span><span class="keyword keyword apiItemName">hStream</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Allocates memory from a specified pool with stream ordered semantics. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" shape="rect">cuMemFreeAsync</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g183f7b0d8ad008ea2a5fd552537ace4e" title="" shape="rect">CUdeviceptr</a><span>&nbsp;</span><span class="keyword keyword apiItemName">dptr</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gb946c7f02e09efd788a204718015d88a" title="" shape="rect">CUstream</a><span>&nbsp;</span><span class="keyword keyword apiItemName">hStream</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Frees memory with stream ordered semantics. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" shape="rect">cuMemPoolCreate</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, const <a href="structCUmemPoolProps__v1.html#structCUmemPoolProps__v1" title="" shape="rect">CUmemPoolProps</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">poolProps</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Creates a memory pool. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1ge0e211115e5ad1c79250b9dd425b77f7" shape="rect">cuMemPoolDestroy</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Destroys the specified memory pool. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1gfe89f0478d26edaa91eb8a2e0349329d" shape="rect">cuMemPoolExportPointer</a> (  <a href="structCUmemPoolPtrExportData__v1.html#structCUmemPoolPtrExportData__v1" title="" shape="rect">CUmemPoolPtrExportData</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">shareData_out</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g183f7b0d8ad008ea2a5fd552537ace4e" title="" shape="rect">CUdeviceptr</a><span>&nbsp;</span><span class="keyword keyword apiItemName">ptr</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Export data to share a memory pool allocation between processes. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1g79ed285fdfffb76932871fb96fbba8f8" shape="rect">cuMemPoolExportToShareableHandle</a> (  void*<span>&nbsp;</span><span class="keyword keyword apiItemName">handle_out</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g450a23153d86fce0afe30e25d63caef9" title="" shape="rect">CUmemAllocationHandleType</a><span>&nbsp;</span><span class="keyword keyword apiItemName">handleType</span>, unsigned long long<span>&nbsp;</span><span class="keyword keyword apiItemName">flags</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Exports a memory pool to the requested handle type. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1g838f28fd535a1cbd06c5f7fe0edbdcc7" shape="rect">cuMemPoolGetAccess</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gfba87b8c4a8cd091554d8e2c3fc9b40a" title="" shape="rect">CUmemAccess_flags</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">flags</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">memPool</span>, <a href="structCUmemLocation__v1.html#structCUmemLocation__v1" title="" shape="rect">CUmemLocation</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">location</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Returns the accessibility of a pool from a device. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1gd45ea7c43e4a1add4b971d06fa72eda4" shape="rect">cuMemPoolGetAttribute</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, CUmemPool_attribute<span>&nbsp;</span><span class="keyword keyword apiItemName">attr</span>, void*<span>&nbsp;</span><span class="keyword keyword apiItemName">value</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Gets attributes of a memory pool. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1g02b4f18dd8a1c45b7f302800e90cec5b" shape="rect">cuMemPoolImportFromShareableHandle</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">pool_out</span>, void*<span>&nbsp;</span><span class="keyword keyword apiItemName">handle</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g450a23153d86fce0afe30e25d63caef9" title="" shape="rect">CUmemAllocationHandleType</a><span>&nbsp;</span><span class="keyword keyword apiItemName">handleType</span>, unsigned long long<span>&nbsp;</span><span class="keyword keyword apiItemName">flags</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">imports a memory pool from a shared handle. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1g2620bb972ed5edcce312d3689454acbd" shape="rect">cuMemPoolImportPointer</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g183f7b0d8ad008ea2a5fd552537ace4e" title="" shape="rect">CUdeviceptr</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">ptr_out</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, <a href="structCUmemPoolPtrExportData__v1.html#structCUmemPoolPtrExportData__v1" title="" shape="rect">CUmemPoolPtrExportData</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">shareData</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Import a memory pool allocation from another process. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1gff3ce33e252443f4b087b94e42913406" shape="rect">cuMemPoolSetAccess</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, const <a href="structCUmemAccessDesc__v1.html#structCUmemAccessDesc__v1" title="" shape="rect">CUmemAccessDesc</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">map</span>, size_t<span>&nbsp;</span><span class="keyword keyword apiItemName">count</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Controls visibility of pools between devices. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1g223e786cb217709235a06e41bccaec00" shape="rect">cuMemPoolSetAttribute</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, CUmemPool_attribute<span>&nbsp;</span><span class="keyword keyword apiItemName">attr</span>, void*<span>&nbsp;</span><span class="keyword keyword apiItemName">value</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Sets attributes of a memory pool. </span></dd>
+                     <dt><span class="member_type"><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a>&nbsp;</span><span class="member_name"><a href="#group__CUDA__MALLOC__ASYNC_1g9c7e267e3460945b0ca76c48314bb669" shape="rect">cuMemPoolTrimTo</a> (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, size_t<span>&nbsp;</span><span class="keyword keyword apiItemName">minBytesToKeep</span> ) </span></dt>
+                     <dd class="shortdesc"><span></span><span class="desc">Tries to release memory back to the OS. </span></dd>
+                  </dl>
+                  <div class="description">
+                     <h3 class="sectiontitle">Functions</h3>
+                     <dl class="description">
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" id="group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemAllocAsync (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g183f7b0d8ad008ea2a5fd552537ace4e" title="" shape="rect">CUdeviceptr</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">dptr</span>, size_t<span>&nbsp;</span><span class="keyword keyword apiItemName">bytesize</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gb946c7f02e09efd788a204718015d88a" title="" shape="rect">CUstream</a><span>&nbsp;</span><span class="keyword keyword apiItemName">hStream</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Allocates memory with stream ordered semantics. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">dptr</span></tt></dt>
+                                 <dd>- Returned device pointer </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">bytesize</span></tt></dt>
+                                 <dd>- Number of bytes to allocate </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">hStream</span></tt></dt>
+                                 <dd>- The stream establishing the stream ordering contract and the memory pool to allocate from </dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e98feb999f0af99b4a25ab26b3866f4df8" shape="rect">CUDA_ERROR_NOT_INITIALIZED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a484e9af32c1e9893ff21f0e0191a12d" shape="rect">CUDA_ERROR_INVALID_CONTEXT</a> (default stream specified with no current context), <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e954756ae7ade0dfd09faeccb513dd831b" shape="rect">CUDA_ERROR_NOT_SUPPORTED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9264c50688ed110e8476b591befe60c02" shape="rect">CUDA_ERROR_OUT_OF_MEMORY</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Inserts an allocation operation into <tt class="ph tt code">hStream</tt>. A pointer to the allocated memory is returned immediately in *dptr. The allocation must not be accessed until the the allocation
+                                 operation completes. The allocation comes from the memory pool current to the stream's device.
+                              </p>
+                              <p class="p">
+                                 <div class="note note"><span class="notetitle">Note:</span><ul class="ul">
+                                       <li class="li">
+                                          <p class="p">The default memory pool of a device contains device memory from that device. </p>
+                                       </li>
+                                       <li class="li">
+                                          <p class="p">Basic stream ordering allows future work submitted into the same stream to use the allocation. Stream query, stream synchronize,
+                                             and CUDA events can be used to guarantee that the allocation operation completes before work submitted in a separate stream
+                                             runs.
+                                          </p>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gf1dd6e1e2e8f767a5e0ea63f38ff260b" title="Allocates memory from a specified pool with stream ordered semantics." shape="rect">cuMemAllocFromPoolAsync</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" title="Frees memory with stream ordered semantics." shape="rect">cuMemFreeAsync</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1g4f2f276b84d9c2eaefdc76d6274db4a0" title="Sets the current memory pool of a device." shape="rect">cuDeviceSetMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gc8bca3c97a78816303b8aa5773b741f2" title="Returns the default mempool of a device." shape="rect">cuDeviceGetDefaultMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gdf186e9559d53a5eb18e572d48c1121b" title="Gets the current mempool for a device." shape="rect">cuDeviceGetMemPool</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" title="Creates a memory pool." shape="rect">cuMemPoolCreate</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gff3ce33e252443f4b087b94e42913406" title="Controls visibility of pools between devices." shape="rect">cuMemPoolSetAccess</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g223e786cb217709235a06e41bccaec00" title="Sets attributes of a memory pool." shape="rect">cuMemPoolSetAttribute</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1gf1dd6e1e2e8f767a5e0ea63f38ff260b" id="group__CUDA__MALLOC__ASYNC_1gf1dd6e1e2e8f767a5e0ea63f38ff260b" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemAllocFromPoolAsync (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g183f7b0d8ad008ea2a5fd552537ace4e" title="" shape="rect">CUdeviceptr</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">dptr</span>, size_t<span>&nbsp;</span><span class="keyword keyword apiItemName">bytesize</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gb946c7f02e09efd788a204718015d88a" title="" shape="rect">CUstream</a><span>&nbsp;</span><span class="keyword keyword apiItemName">hStream</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Allocates memory from a specified pool with stream ordered semantics. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">dptr</span></tt></dt>
+                                 <dd>- Returned device pointer </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">bytesize</span></tt></dt>
+                                 <dd>- Number of bytes to allocate </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">pool</span></tt></dt>
+                                 <dd>- The pool to allocate from </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">hStream</span></tt></dt>
+                                 <dd>- The stream establishing the stream ordering semantic</dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e98feb999f0af99b4a25ab26b3866f4df8" shape="rect">CUDA_ERROR_NOT_INITIALIZED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a484e9af32c1e9893ff21f0e0191a12d" shape="rect">CUDA_ERROR_INVALID_CONTEXT</a> (default stream specified with no current context), <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e954756ae7ade0dfd09faeccb513dd831b" shape="rect">CUDA_ERROR_NOT_SUPPORTED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9264c50688ed110e8476b591befe60c02" shape="rect">CUDA_ERROR_OUT_OF_MEMORY</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Inserts an allocation operation into <tt class="ph tt code">hStream</tt>. A pointer to the allocated memory is returned immediately in *dptr. The allocation must not be accessed until the the allocation
+                                 operation completes. The allocation comes from the specified memory pool.
+                              </p>
+                              <p class="p">
+                                 <div class="note note"><span class="notetitle">Note:</span><div class="p">
+                                       <ul class="ul">
+                                          <li class="li">
+                                             <p class="p">The specified memory pool may be from a device different than that of the specified <tt class="ph tt code">hStream</tt>.
+                                             </p>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </p>
+                              <p class="p">
+                                 <ul class="ul">
+                                    <li class="li">
+                                       <p class="p">Basic stream ordering allows future work submitted into the same stream to use the allocation. Stream query, stream synchronize,
+                                          and CUDA events can be used to guarantee that the allocation operation completes before work submitted in a separate stream
+                                          runs.
+                                       </p>
+                                    </li>
+                                 </ul>
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" title="Allocates memory with stream ordered semantics." shape="rect">cuMemAllocAsync</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" title="Frees memory with stream ordered semantics." shape="rect">cuMemFreeAsync</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gc8bca3c97a78816303b8aa5773b741f2" title="Returns the default mempool of a device." shape="rect">cuDeviceGetDefaultMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gdf186e9559d53a5eb18e572d48c1121b" title="Gets the current mempool for a device." shape="rect">cuDeviceGetMemPool</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" title="Creates a memory pool." shape="rect">cuMemPoolCreate</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gff3ce33e252443f4b087b94e42913406" title="Controls visibility of pools between devices." shape="rect">cuMemPoolSetAccess</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g223e786cb217709235a06e41bccaec00" title="Sets attributes of a memory pool." shape="rect">cuMemPoolSetAttribute</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" id="group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemFreeAsync (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g183f7b0d8ad008ea2a5fd552537ace4e" title="" shape="rect">CUdeviceptr</a><span>&nbsp;</span><span class="keyword keyword apiItemName">dptr</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gb946c7f02e09efd788a204718015d88a" title="" shape="rect">CUstream</a><span>&nbsp;</span><span class="keyword keyword apiItemName">hStream</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Frees memory with stream ordered semantics. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">dptr</span></tt></dt>
+                                 <dd>- memory to free </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">hStream</span></tt></dt>
+                                 <dd>- The stream establishing the stream ordering contract. </dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e98feb999f0af99b4a25ab26b3866f4df8" shape="rect">CUDA_ERROR_NOT_INITIALIZED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a484e9af32c1e9893ff21f0e0191a12d" shape="rect">CUDA_ERROR_INVALID_CONTEXT</a> (default stream specified with no current context), <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e954756ae7ade0dfd09faeccb513dd831b" shape="rect">CUDA_ERROR_NOT_SUPPORTED</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Inserts a free operation into <tt class="ph tt code">hStream</tt>. The allocation must not be accessed after stream execution reaches the free. After this API returns, accessing the memory
+                                 from any subsequent work launched on the GPU or querying its pointer attributes results in undefined behavior.
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" id="group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemPoolCreate (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, const <a href="structCUmemPoolProps__v1.html#structCUmemPoolProps__v1" title="" shape="rect">CUmemPoolProps</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">poolProps</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Creates a memory pool. </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e98feb999f0af99b4a25ab26b3866f4df8" shape="rect">CUDA_ERROR_NOT_INITIALIZED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9264c50688ed110e8476b591befe60c02" shape="rect">CUDA_ERROR_OUT_OF_MEMORY</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e954756ae7ade0dfd09faeccb513dd831b" shape="rect">CUDA_ERROR_NOT_SUPPORTED</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Creates a CUDA memory pool and returns the handle in <tt class="ph tt code">pool</tt>. The <tt class="ph tt code">poolProps</tt> determines the properties of the pool such as the backing device and IPC capabilities.
+                              </p>
+                              <p class="p">By default, the pool's memory will be accessible from the device it is allocated on.</p>
+                              <p class="p">
+                                 <div class="note note"><span class="notetitle">Note:</span><p class="p">Specifying CU_MEM_HANDLE_TYPE_NONE creates a memory pool that will not support IPC.</p>
+                                 </div>
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1g4f2f276b84d9c2eaefdc76d6274db4a0" title="Sets the current memory pool of a device." shape="rect">cuDeviceSetMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gdf186e9559d53a5eb18e572d48c1121b" title="Gets the current mempool for a device." shape="rect">cuDeviceGetMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gc8bca3c97a78816303b8aa5773b741f2" title="Returns the default mempool of a device." shape="rect">cuDeviceGetDefaultMemPool</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gf1dd6e1e2e8f767a5e0ea63f38ff260b" title="Allocates memory from a specified pool with stream ordered semantics." shape="rect">cuMemAllocFromPoolAsync</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g79ed285fdfffb76932871fb96fbba8f8" title="Exports a memory pool to the requested handle type." shape="rect">cuMemPoolExportToShareableHandle</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1ge0e211115e5ad1c79250b9dd425b77f7" id="group__CUDA__MALLOC__ASYNC_1ge0e211115e5ad1c79250b9dd425b77f7" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemPoolDestroy (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Destroys the specified memory pool. </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>If any pointers obtained from this pool haven't been freed or the pool has free operations that haven't completed when <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1ge0e211115e5ad1c79250b9dd425b77f7" title="Destroys the specified memory pool." shape="rect">cuMemPoolDestroy</a> is invoked, the function will return immediately and the resources associated with the pool will be released automatically
+                                 once there are no more outstanding allocations.
+                              </p>
+                              <p class="p">Destroying the current mempool of a device sets the default mempool of that device as the current mempool for that device.</p>
+                              <p class="p">
+                                 <div class="note note"><span class="notetitle">Note:</span><p class="p">A device's default memory pool cannot be destroyed.</p>
+                                 </div>
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" title="Frees memory with stream ordered semantics." shape="rect">cuMemFreeAsync</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1g4f2f276b84d9c2eaefdc76d6274db4a0" title="Sets the current memory pool of a device." shape="rect">cuDeviceSetMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gdf186e9559d53a5eb18e572d48c1121b" title="Gets the current mempool for a device." shape="rect">cuDeviceGetMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gc8bca3c97a78816303b8aa5773b741f2" title="Returns the default mempool of a device." shape="rect">cuDeviceGetDefaultMemPool</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" title="Creates a memory pool." shape="rect">cuMemPoolCreate</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1gfe89f0478d26edaa91eb8a2e0349329d" id="group__CUDA__MALLOC__ASYNC_1gfe89f0478d26edaa91eb8a2e0349329d" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemPoolExportPointer (  <a href="structCUmemPoolPtrExportData__v1.html#structCUmemPoolPtrExportData__v1" title="" shape="rect">CUmemPoolPtrExportData</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">shareData_out</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g183f7b0d8ad008ea2a5fd552537ace4e" title="" shape="rect">CUdeviceptr</a><span>&nbsp;</span><span class="keyword keyword apiItemName">ptr</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Export data to share a memory pool allocation between processes. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">shareData_out</span></tt></dt>
+                                 <dd>- Returned export data </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">ptr</span></tt></dt>
+                                 <dd>- pointer to memory being exported</dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e98feb999f0af99b4a25ab26b3866f4df8" shape="rect">CUDA_ERROR_NOT_INITIALIZED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9264c50688ed110e8476b591befe60c02" shape="rect">CUDA_ERROR_OUT_OF_MEMORY</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Constructs <tt class="ph tt code">shareData_out</tt> for sharing a specific allocation from an already shared memory pool. The recipient process can import the allocation with
+                                 the <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g2620bb972ed5edcce312d3689454acbd" title="Import a memory pool allocation from another process." shape="rect">cuMemPoolImportPointer</a> api. The data is not a handle and may be shared through any IPC mechanism.
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g79ed285fdfffb76932871fb96fbba8f8" title="Exports a memory pool to the requested handle type." shape="rect">cuMemPoolExportToShareableHandle</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g02b4f18dd8a1c45b7f302800e90cec5b" title="imports a memory pool from a shared handle." shape="rect">cuMemPoolImportFromShareableHandle</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g2620bb972ed5edcce312d3689454acbd" title="Import a memory pool allocation from another process." shape="rect">cuMemPoolImportPointer</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1g79ed285fdfffb76932871fb96fbba8f8" id="group__CUDA__MALLOC__ASYNC_1g79ed285fdfffb76932871fb96fbba8f8" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemPoolExportToShareableHandle (  void*<span>&nbsp;</span><span class="keyword keyword apiItemName">handle_out</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g450a23153d86fce0afe30e25d63caef9" title="" shape="rect">CUmemAllocationHandleType</a><span>&nbsp;</span><span class="keyword keyword apiItemName">handleType</span>, unsigned long long<span>&nbsp;</span><span class="keyword keyword apiItemName">flags</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Exports a memory pool to the requested handle type. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">handle_out</span></tt></dt>
+                                 <dd>- Returned OS handle </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">pool</span></tt></dt>
+                                 <dd>- pool to export </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">handleType</span></tt></dt>
+                                 <dd>- the type of handle to create </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">flags</span></tt></dt>
+                                 <dd>- must be 0</dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e98feb999f0af99b4a25ab26b3866f4df8" shape="rect">CUDA_ERROR_NOT_INITIALIZED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9264c50688ed110e8476b591befe60c02" shape="rect">CUDA_ERROR_OUT_OF_MEMORY</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Given an IPC capable mempool, create an OS handle to share the pool with another process. A recipient process can convert
+                                 the shareable handle into a mempool with <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g02b4f18dd8a1c45b7f302800e90cec5b" title="imports a memory pool from a shared handle." shape="rect">cuMemPoolImportFromShareableHandle</a>. Individual pointers can then be shared with the <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gfe89f0478d26edaa91eb8a2e0349329d" title="Export data to share a memory pool allocation between processes." shape="rect">cuMemPoolExportPointer</a> and <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g2620bb972ed5edcce312d3689454acbd" title="Import a memory pool allocation from another process." shape="rect">cuMemPoolImportPointer</a> APIs. The implementation of what the shareable handle is and how it can be transferred is defined by the requested handle
+                                 type.
+                              </p>
+                              <p class="p">
+                                 <div class="note note"><span class="notetitle">Note:</span><p class="p">: To create an IPC capable mempool, create a mempool with a CUmemAllocationHandleType other than CU_MEM_HANDLE_TYPE_NONE.</p>
+                                 </div>
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g02b4f18dd8a1c45b7f302800e90cec5b" title="imports a memory pool from a shared handle." shape="rect">cuMemPoolImportFromShareableHandle</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gfe89f0478d26edaa91eb8a2e0349329d" title="Export data to share a memory pool allocation between processes." shape="rect">cuMemPoolExportPointer</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g2620bb972ed5edcce312d3689454acbd" title="Import a memory pool allocation from another process." shape="rect">cuMemPoolImportPointer</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" title="Allocates memory with stream ordered semantics." shape="rect">cuMemAllocAsync</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" title="Frees memory with stream ordered semantics." shape="rect">cuMemFreeAsync</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gc8bca3c97a78816303b8aa5773b741f2" title="Returns the default mempool of a device." shape="rect">cuDeviceGetDefaultMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gdf186e9559d53a5eb18e572d48c1121b" title="Gets the current mempool for a device." shape="rect">cuDeviceGetMemPool</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" title="Creates a memory pool." shape="rect">cuMemPoolCreate</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gff3ce33e252443f4b087b94e42913406" title="Controls visibility of pools between devices." shape="rect">cuMemPoolSetAccess</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g223e786cb217709235a06e41bccaec00" title="Sets attributes of a memory pool." shape="rect">cuMemPoolSetAttribute</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1g838f28fd535a1cbd06c5f7fe0edbdcc7" id="group__CUDA__MALLOC__ASYNC_1g838f28fd535a1cbd06c5f7fe0edbdcc7" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemPoolGetAccess (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gfba87b8c4a8cd091554d8e2c3fc9b40a" title="" shape="rect">CUmemAccess_flags</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">flags</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">memPool</span>, <a href="structCUmemLocation__v1.html#structCUmemLocation__v1" title="" shape="rect">CUmemLocation</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">location</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Returns the accessibility of a pool from a device. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">flags</span></tt></dt>
+                                 <dd>- the accessibility of the pool from the specified location </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">memPool</span></tt></dt>
+                                 <dd>- the pool being queried </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">location</span></tt></dt>
+                                 <dd>- the location accessing the pool</dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Returns the accessibility of the pool's memory from the specified location.</p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" title="Allocates memory with stream ordered semantics." shape="rect">cuMemAllocAsync</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" title="Frees memory with stream ordered semantics." shape="rect">cuMemFreeAsync</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gc8bca3c97a78816303b8aa5773b741f2" title="Returns the default mempool of a device." shape="rect">cuDeviceGetDefaultMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gdf186e9559d53a5eb18e572d48c1121b" title="Gets the current mempool for a device." shape="rect">cuDeviceGetMemPool</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" title="Creates a memory pool." shape="rect">cuMemPoolCreate</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1gd45ea7c43e4a1add4b971d06fa72eda4" id="group__CUDA__MALLOC__ASYNC_1gd45ea7c43e4a1add4b971d06fa72eda4" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemPoolGetAttribute (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, CUmemPool_attribute<span>&nbsp;</span><span class="keyword keyword apiItemName">attr</span>, void*<span>&nbsp;</span><span class="keyword keyword apiItemName">value</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Gets attributes of a memory pool. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">pool</span></tt></dt>
+                                 <dd>- The memory pool to get attributes of </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">attr</span></tt></dt>
+                                 <dd>- The attribute to get </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">value</span></tt></dt>
+                                 <dd>- Retrieved value</dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e98feb999f0af99b4a25ab26b3866f4df8" shape="rect">CUDA_ERROR_NOT_INITIALIZED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Supported attributes are:
+                                 <ul class="ul">
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_RELEASE_THRESHOLD: (value type = cuuint64_t) Amount of reserved memory in bytes to hold onto before trying
+                                          to release memory back to the OS. When more than the release threshold bytes of memory are held by the memory pool, the allocator
+                                          will try to release memory back to the OS on the next call to stream, event or context synchronize. (default 0)
+                                       </p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES: (value type = int) Allow <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" title="Allocates memory with stream ordered semantics." shape="rect">cuMemAllocAsync</a> to use memory asynchronously freed in another stream as long as a stream ordering dependency of the allocating stream on
+                                          the free action exists. Cuda events and null stream interactions can create the required stream ordered dependencies. (default
+                                          enabled)
+                                       </p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC: (value type = int) Allow reuse of already completed frees when there is no dependency
+                                          between the free and allocation. (default enabled)
+                                       </p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES: (value type = int) Allow <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" title="Allocates memory with stream ordered semantics." shape="rect">cuMemAllocAsync</a> to insert new stream dependencies in order to establish the stream ordering required to reuse a piece of memory released
+                                          by <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" title="Frees memory with stream ordered semantics." shape="rect">cuMemFreeAsync</a> (default enabled).
+                                       </p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_RESERVED_MEM_CURRENT: (value type = cuuint64_t) Amount of backing memory currently allocated for the mempool</p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH: (value type = cuuint64_t) High watermark of backing memory allocated for the mempool since
+                                          the last time it was reset.
+                                       </p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_USED_MEM_CURRENT: (value type = cuuint64_t) Amount of memory from the pool that is currently in use by the
+                                          application.
+                                       </p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_USED_MEM_HIGH: (value type = cuuint64_t) High watermark of the amount of memory from the pool that was in
+                                          use by the application.
+                                       </p>
+                                    </li>
+                                 </ul>
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" title="Allocates memory with stream ordered semantics." shape="rect">cuMemAllocAsync</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" title="Frees memory with stream ordered semantics." shape="rect">cuMemFreeAsync</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gc8bca3c97a78816303b8aa5773b741f2" title="Returns the default mempool of a device." shape="rect">cuDeviceGetDefaultMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gdf186e9559d53a5eb18e572d48c1121b" title="Gets the current mempool for a device." shape="rect">cuDeviceGetMemPool</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" title="Creates a memory pool." shape="rect">cuMemPoolCreate</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1g02b4f18dd8a1c45b7f302800e90cec5b" id="group__CUDA__MALLOC__ASYNC_1g02b4f18dd8a1c45b7f302800e90cec5b" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemPoolImportFromShareableHandle (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">pool_out</span>, void*<span>&nbsp;</span><span class="keyword keyword apiItemName">handle</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g450a23153d86fce0afe30e25d63caef9" title="" shape="rect">CUmemAllocationHandleType</a><span>&nbsp;</span><span class="keyword keyword apiItemName">handleType</span>, unsigned long long<span>&nbsp;</span><span class="keyword keyword apiItemName">flags</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">imports a memory pool from a shared handle. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">pool_out</span></tt></dt>
+                                 <dd>- Returned memory pool </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">handle</span></tt></dt>
+                                 <dd>- OS handle of the pool to open </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">handleType</span></tt></dt>
+                                 <dd>- The type of handle being imported </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">flags</span></tt></dt>
+                                 <dd>- must be 0</dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e98feb999f0af99b4a25ab26b3866f4df8" shape="rect">CUDA_ERROR_NOT_INITIALIZED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9264c50688ed110e8476b591befe60c02" shape="rect">CUDA_ERROR_OUT_OF_MEMORY</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Specific allocations can be imported from the imported pool with cuMemPoolImportPointer.</p>
+                              <p class="p">
+                                 <div class="note note"><span class="notetitle">Note:</span><p class="p">Imported memory pools do not support creating new allocations. As such imported memory pools may not be used in cuDeviceSetMemPool
+                                       or <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gf1dd6e1e2e8f767a5e0ea63f38ff260b" title="Allocates memory from a specified pool with stream ordered semantics." shape="rect">cuMemAllocFromPoolAsync</a> calls.
+                                    </p>
+                                 </div>
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g79ed285fdfffb76932871fb96fbba8f8" title="Exports a memory pool to the requested handle type." shape="rect">cuMemPoolExportToShareableHandle</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gfe89f0478d26edaa91eb8a2e0349329d" title="Export data to share a memory pool allocation between processes." shape="rect">cuMemPoolExportPointer</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g2620bb972ed5edcce312d3689454acbd" title="Import a memory pool allocation from another process." shape="rect">cuMemPoolImportPointer</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1g2620bb972ed5edcce312d3689454acbd" id="group__CUDA__MALLOC__ASYNC_1g2620bb972ed5edcce312d3689454acbd" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemPoolImportPointer (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g183f7b0d8ad008ea2a5fd552537ace4e" title="" shape="rect">CUdeviceptr</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">ptr_out</span>, <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, <a href="structCUmemPoolPtrExportData__v1.html#structCUmemPoolPtrExportData__v1" title="" shape="rect">CUmemPoolPtrExportData</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">shareData</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Import a memory pool allocation from another process. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">ptr_out</span></tt></dt>
+                                 <dd>- pointer to imported memory </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">pool</span></tt></dt>
+                                 <dd>- pool from which to import </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">shareData</span></tt></dt>
+                                 <dd>- data specifying the memory to import</dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e98feb999f0af99b4a25ab26b3866f4df8" shape="rect">CUDA_ERROR_NOT_INITIALIZED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9264c50688ed110e8476b591befe60c02" shape="rect">CUDA_ERROR_OUT_OF_MEMORY</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Returns in <tt class="ph tt code">ptr_out</tt> a pointer to the imported memory. The imported memory must not be accessed before the allocation operation completes in the
+                                 exporting process. The imported memory must be freed from all importing processes before being freed in the exporting process.
+                                 The pointer may be freed with cuMemFree or cuMemFreeAsync. If cuMemFreeAsync is used, the free must be completed on the importing
+                                 process before the free operation on the exporting process.
+                              </p>
+                              <p class="p">
+                                 <div class="note note"><span class="notetitle">Note:</span><p class="p">The cuMemFreeAsync api may be used in the exporting process before the cuMemFreeAsync operation completes in its stream as
+                                       long as the cuMemFreeAsync in the exporting process specifies a stream with a stream dependency on the importing process's
+                                       cuMemFreeAsync.
+                                    </p>
+                                 </div>
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g79ed285fdfffb76932871fb96fbba8f8" title="Exports a memory pool to the requested handle type." shape="rect">cuMemPoolExportToShareableHandle</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g02b4f18dd8a1c45b7f302800e90cec5b" title="imports a memory pool from a shared handle." shape="rect">cuMemPoolImportFromShareableHandle</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1gfe89f0478d26edaa91eb8a2e0349329d" title="Export data to share a memory pool allocation between processes." shape="rect">cuMemPoolExportPointer</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1gff3ce33e252443f4b087b94e42913406" id="group__CUDA__MALLOC__ASYNC_1gff3ce33e252443f4b087b94e42913406" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemPoolSetAccess (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, const <a href="structCUmemAccessDesc__v1.html#structCUmemAccessDesc__v1" title="" shape="rect">CUmemAccessDesc</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">map</span>, size_t<span>&nbsp;</span><span class="keyword keyword apiItemName">count</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Controls visibility of pools between devices. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">pool</span></tt></dt>
+                                 <dd>- The pool being modified </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">map</span></tt></dt>
+                                 <dd>- Array of access descriptors. Each descriptor instructs the access to enable for a single gpu. </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">count</span></tt></dt>
+                                 <dd>- Number of descriptors in the map array.</dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e98feb999f0af99b4a25ab26b3866f4df8" shape="rect">CUDA_ERROR_NOT_INITIALIZED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" title="Allocates memory with stream ordered semantics." shape="rect">cuMemAllocAsync</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" title="Frees memory with stream ordered semantics." shape="rect">cuMemFreeAsync</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gc8bca3c97a78816303b8aa5773b741f2" title="Returns the default mempool of a device." shape="rect">cuDeviceGetDefaultMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gdf186e9559d53a5eb18e572d48c1121b" title="Gets the current mempool for a device." shape="rect">cuDeviceGetMemPool</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" title="Creates a memory pool." shape="rect">cuMemPoolCreate</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1g223e786cb217709235a06e41bccaec00" id="group__CUDA__MALLOC__ASYNC_1g223e786cb217709235a06e41bccaec00" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemPoolSetAttribute (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, CUmemPool_attribute<span>&nbsp;</span><span class="keyword keyword apiItemName">attr</span>, void*<span>&nbsp;</span><span class="keyword keyword apiItemName">value</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Sets attributes of a memory pool. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">pool</span></tt></dt>
+                                 <dd>- The memory pool to modify </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">attr</span></tt></dt>
+                                 <dd>- The attribute to modify </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">value</span></tt></dt>
+                                 <dd>- Pointer to the value to assign</dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Supported attributes are:
+                                 <ul class="ul">
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_RELEASE_THRESHOLD: (value type = cuuint64_t) Amount of reserved memory in bytes to hold onto before trying
+                                          to release memory back to the OS. When more than the release threshold bytes of memory are held by the memory pool, the allocator
+                                          will try to release memory back to the OS on the next call to stream, event or context synchronize. (default 0)
+                                       </p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES: (value type = int) Allow <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" title="Allocates memory with stream ordered semantics." shape="rect">cuMemAllocAsync</a> to use memory asynchronously freed in another stream as long as a stream ordering dependency of the allocating stream on
+                                          the free action exists. Cuda events and null stream interactions can create the required stream ordered dependencies. (default
+                                          enabled)
+                                       </p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC: (value type = int) Allow reuse of already completed frees when there is no dependency
+                                          between the free and allocation. (default enabled)
+                                       </p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES: (value type = int) Allow <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" title="Allocates memory with stream ordered semantics." shape="rect">cuMemAllocAsync</a> to insert new stream dependencies in order to establish the stream ordering required to reuse a piece of memory released
+                                          by <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" title="Frees memory with stream ordered semantics." shape="rect">cuMemFreeAsync</a> (default enabled).
+                                       </p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH: (value type = cuuint64_t) Reset the high watermark that tracks the amount of backing memory
+                                          that was allocated for the memory pool. It is illegal to set this attribute to a non-zero value.
+                                       </p>
+                                    </li>
+                                    <li class="li">
+                                       <p class="p">CU_MEMPOOL_ATTR_USED_MEM_HIGH: (value type = cuuint64_t) Reset the high watermark that tracks the amount of used memory that
+                                          was allocated for the memory pool.
+                                       </p>
+                                    </li>
+                                 </ul>
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" title="Allocates memory with stream ordered semantics." shape="rect">cuMemAllocAsync</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" title="Frees memory with stream ordered semantics." shape="rect">cuMemFreeAsync</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gc8bca3c97a78816303b8aa5773b741f2" title="Returns the default mempool of a device." shape="rect">cuDeviceGetDefaultMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gdf186e9559d53a5eb18e572d48c1121b" title="Gets the current mempool for a device." shape="rect">cuDeviceGetMemPool</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" title="Creates a memory pool." shape="rect">cuMemPoolCreate</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                        <dt class="description"><a name="group__CUDA__MALLOC__ASYNC_1g9c7e267e3460945b0ca76c48314bb669" id="group__CUDA__MALLOC__ASYNC_1g9c7e267e3460945b0ca76c48314bb669" shape="rect">
+                              <!-- --></a><span><a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1gc6c391505e117393cc2558fff6bfc2e9" title="" shape="rect">CUresult</a> cuMemPoolTrimTo (  <a href="group__CUDA__TYPES.html#group__CUDA__TYPES_1g3b96b1ef79f0cb312b51169e9f50e722" title="" shape="rect">CUmemoryPool</a><span>&nbsp;</span><span class="keyword keyword apiItemName">pool</span>, size_t<span>&nbsp;</span><span class="keyword keyword apiItemName">minBytesToKeep</span> ) </span></dt>
+                        <dd class="description">
+                           <div class="section">Tries to release memory back to the OS. </div>
+                           <div class="section">
+                              <h6 class="parameter_header">
+                                 Parameters
+                                 
+                              </h6>
+                              <dl class="table-display-params">
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">pool</span></tt></dt>
+                                 <dd>- The memory pool to trim </dd>
+                                 <dt><tt class="code"><span class="keyword keyword apiItemName">minBytesToKeep</span></tt></dt>
+                                 <dd>- If the pool has less than minBytesToKeep reserved, the TrimTo operation is a no-op. Otherwise the pool will be guaranteed
+                                    to have at least minBytesToKeep bytes reserved after the operation. 
+                                 </dd>
+                              </dl>
+                           </div>
+                           <div class="section">
+                              <h6 class="return_header">Returns</h6>
+                              <p class="return"><a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e9a0eed720f8a87cd1c5fd1c453bc7a03d" shape="rect">CUDA_SUCCESS</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e98feb999f0af99b4a25ab26b3866f4df8" shape="rect">CUDA_ERROR_NOT_INITIALIZED</a>, <a class="xref" href="group__CUDA__TYPES.html#group__CUDA__TYPES_1ggc6c391505e117393cc2558fff6bfc2e990696c86fcee1f536a1ec7d25867feeb" shape="rect">CUDA_ERROR_INVALID_VALUE</a></p>
+                           </div>
+                           <div class="section">
+                              <h6 class="description_header">Description</h6>
+                              <p>Releases memory back to the OS until the pool contains fewer than minBytesToKeep reserved bytes, or there is no more memory
+                                 that the allocator can safely release. The allocator cannot release OS allocations that back outstanding asynchronous allocations.
+                                 The OS allocations may happen at different granularity from the user allocations.
+                              </p>
+                              <p class="p">
+                                 <div class="note note"><span class="notetitle">Note:</span><ul class="ul">
+                                       <li class="li">
+                                          <p class="p">: Allocations that have not been freed count as outstanding. </p>
+                                       </li>
+                                       <li class="li">
+                                          <p class="p">: Allocations that have been asynchronously freed but whose completion has not been observed on the host (eg. by a synchronize)
+                                             can count as outstanding.
+                                          </p>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </p>
+                              <p class="p"></p>
+                              <p class="p"></p>
+                              <p class="p apiDesc_subtitle"><strong class="ph b">See also:</strong></p>
+                              <p class="p see_subsection"><a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g13413273e84a641bce1929eae9e6501f" title="Allocates memory with stream ordered semantics." shape="rect">cuMemAllocAsync</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g41acf4131f672a2a75cd93d3241f10cf" title="Frees memory with stream ordered semantics." shape="rect">cuMemFreeAsync</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gc8bca3c97a78816303b8aa5773b741f2" title="Returns the default mempool of a device." shape="rect">cuDeviceGetDefaultMemPool</a>, <a class="xref" href="group__CUDA__DEVICE.html#group__CUDA__DEVICE_1gdf186e9559d53a5eb18e572d48c1121b" title="Gets the current mempool for a device." shape="rect">cuDeviceGetMemPool</a>, <a class="xref" href="group__CUDA__MALLOC__ASYNC.html#group__CUDA__MALLOC__ASYNC_1g8aa4c143dbc20293659cd883232b95f2" title="Creates a memory pool." shape="rect">cuMemPoolCreate</a></p>
+                              <p class="p"></p>
+                           </div>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+               
+               <hr id="contents-end"></hr>
+               
+            </article>
+         </div>
+      </div>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/formatting/common.min.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-write.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-tracker.js"></script>
+      <script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher: "998dc202-a267-4d8e-bce9-14debadb8d92", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script><script type="text/javascript">_satellite.pageBottom();</script></body>
+</html>

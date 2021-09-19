@@ -1,0 +1,431 @@
+.. role:: cpp(code)
+   :language: cpp
+   :class: highlight
+
+.. default-role:: cpp
+.. highlight:: cpp
+
+.. cpp:namespace:: cufftdx
+
+
+.. _first-fft-label:
+
+First FFT  using cuFFTDx
+-------------------------
+
+In the following example, we will calculate an FFT of size 128 using a standalone
+kernel. We start with an empty CUDA kernel:
+
+.. code-block:: cpp
+
+  // Empty kernel to compute an FFT of size 128 using float
+  __global__ void fft_128_float(float2* data) {
+
+  }
+
+First, we have to provide an FFT description to the cuFFTDx library. A cuFFTDx transform description
+is built using C++ constructs that are evaluated at compile time. A correctly-defined FFT must include
+the problem size, the precision used (`float`, `double`, etc.), the type of operation (complex-to-complex,
+real-to-complex, etc.), and its direction (forward, or inverse). We add the following lines:
+
+.. code-block:: cpp
+
+  #include <cufftdx.hpp>
+
+  // Kernel containing a descriptor of an FFT of size 128 using float
+  __global__ void fft_128_float(float2* data) {
+    using namespace cufftdx;
+
+    using FFT = decltype(Size<128>() + Precision<float>() + Type<fft_type::c2c>()
+                       + Direction<fft_direction::forward>());
+  }
+
+In order to encode the FFT properties, cuFFTDx provides operators :ref:`size-operator-label`,
+:ref:`precision-operator-label`, :ref:`type-operator-label`, and :ref:`direction-operator-label`.
+Listed operators can be combined by using the addition operator (`+`).
+
+.. note:
+  To do: mention this is one group of ops
+
+To obtain a fully usable CUDA FFT kernel, we need to provide three additional
+pieces of information. The first one is how many FFTs we would like to compute,
+the second one is how to map the calculations into a CUDA block, and the
+last one is what CUDA architecture we are targeting.
+
+In the EA, we specify how many FFTs we want to compute using the :ref:`fftsperblock-operator-label`.
+It defines how many FFT to do in parallel inside of a single CUDA block. Let us
+add that operator:
+
+.. code-block:: cpp
+
+  #include <cufftdx.hpp>
+
+  // Kernel containing a descriptor of an FFT of size 128 using float
+  // and one FFT per block
+  __global__ void fft_128_float(float2* data) {
+    using namespace cufftdx;
+
+    using FFT = decltype(Size<128>() + Precision<float>() + Type<fft_type::c2c>()
+                       + Direction<fft_direction::forward>() + FFTsPerBlock<1>());
+  }
+
+To map the computing of the FFT to the CUDA block, we use the :ref:`ept-operator-label`.
+This operator determines the number of registers required per thread and the exact implementation
+to be used. We add that operator to the description:
+
+.. code-block:: cpp
+
+  #include <cufftdx.hpp>
+
+  // Kernel containing a descriptor of an FFT of size 128 using float
+  // and one FFT per block with 8 elements per thread
+  __global__ void fft_128_float(float2* data) {
+    using namespace cufftdx;
+
+    using FFT = decltype(Size<128>() + Precision<float>() + Type<fft_type::c2c>()
+                       + Direction<fft_direction::forward>() + FFTsPerBlock<1>()
+                       + ElementsPerThread<8>());
+  }
+
+Finally, we use the :ref:`sm-operator-label` to indicate the target CUDA architecure
+on which we want to build the FFT descriptor.  Each GPU architecture can use different
+parameters. Therefore, the choice of architecture potentially affects the configuration
+to maximize performance. For this example, we target Volta GPUs (`SM<700>()`):
+
+.. code-block:: cpp
+
+  #include <cufftdx.hpp>
+
+  // Kernel containing a descriptor of an FFT of size 128 using float
+  // and one FFT per block with 8 elements per thread
+  __global__ void fft_128_float(float2* data) {
+    using namespace cufftdx;
+
+    using FFT = decltype(Size<128>() + Precision<float>() + Type<fft_type::c2c>()
+                       + Direction<fft_direction::forward>() + FFTsPerBlock<1>()
+                       + ElementsPerThread<8>() + SM<700>());
+  }
+
+Once the FFT description is fully formed, we can finalize it by adding the
+:ref:`block-operator-label`. It indicates that we are asking for the
+collective FFT operation to be performed by a single CUDA block. The operator
+verifies correctness of the description, and it is a type of :ref:`execution-operators-label`,
+(the other being the :ref:`thread-operator-label`).
+
+.. code-block:: cpp
+
+  #include <cufftdx.hpp>
+
+  // Kernel containing a fully-formed descriptor of an
+  // FFT of size 128 using float and one FFT per block
+  // with 8 elements per thread, targeting Volta arch
+  __global__ void fft_128_float(float2* data) {
+    using namespace cufftdx;
+
+    using FFT = decltype(Size<128>() + Precision<float>() + Type<fft_type::c2c>()
+                       + Direction<fft_direction::forward>() + FFTsPerBlock<1>()
+                       + ElementsPerThread<8>() + SM<700>() + Block());
+  }
+
+What next?
+^^^^^^^^^^
+
+FFT descriptions can be instantiated into objects. Forming the object has
+no computational cost, and should be seen as a handle. The FFT descriptor object
+provides a compute method, `execute(...)` that performs the requested FFT.
+
+.. code-block:: cpp
+
+  #include <cufftdx.hpp>
+
+  // Kernel containing a fully-formed descriptor of an FFT and its
+  // execution
+  __global__ void fft_128_float(float2* data) {
+    using namespace cufftdx;
+
+    using FFT = decltype(Size<128>() + Precision<float>() + Type<fft_type::c2c>()
+                       + Direction<fft_direction::forward>() + FFTsPerBlock<1>()
+                       + ElementsPerThread<8>() + SM<700>() + Block());
+
+    // Execute FFT
+    FFT().execute(/*What are the arguments?*/);
+  }
+
+cuFFTDx operations require registers and shared memory to operate. Users can query the FFT descriptor
+for needed resources.
+
+.. code-block:: cpp
+
+  #include <cufftdx.hpp>;
+
+  // Kernel containing a fully-formed descriptor of an FFT and its
+  // execution, where each thread allocates data in registers
+  __global__ void fft_128_float(float2* data) {
+    using namespace cufftdx;
+
+    using FFT = decltype(Size<128>() + Precision<float>() + Type<fft_type::c2c>()
+                        + Direction<fft_direction::forward>() + FFTsPerBlock<1>()
+                        + ElementsPerThread<8>() + SM<700>() + Block())
+
+    using complex_type = typename FFT::value_type;
+
+    complex_type thread_data[FFT::storage_size];
+
+    extern __shared__ complex_type shared_mem[];
+
+    // Execute FFT
+    FFT().execute(thread_data, shared_mem);
+  }
+
+Some FFTs, depending on the selected size, may also require additional global memory workspace,
+which needs to be allocated on host and passed to the kernel. You can check if you have to create workspace
+using `FFT::requires_workspace` trait.
+
+.. code-block:: cpp
+
+  #include <cufftdx.hpp>
+
+  using namespace cufftdx;
+
+  using FFT = decltype(Size<151>() + Precision<double>() + Type<fft_type::c2c>()
+                      + Direction<fft_direction::inverse>() + FFTsPerBlock<2>()
+                      + ElementsPerThread<16>() + SM<700>() + Block());
+
+  // Kernel containing a fully-formed descriptor of an FFT and its
+  // execution, where each thread allocates data in registers
+  __global__ void fft_128_float(float2* data, typename FFT::workspace_type workspace) {
+    using complex_type = typename FFT::value_type;
+
+    complex_type thread_data[FFT::storage_size];
+
+    extern __shared__ complex_type shared_mem[];
+
+    // Execute FFT
+    FFT().execute(thread_data, shared_mem, workspace);
+  }
+
+To launch a kernel we need to know the block size and required amount of shared memory needed to perform the FFT
+operation. Both are fixed and determined by the FFT description.
+
+Since we defined the FFT description in device code, information about the
+block size needs to be propagated to the host. When all parameters are fully specified,
+all GPU architectures use the same block size, so the kernel can be launched in
+the same manner for all architectures.
+
+.. code-block:: cpp
+
+  #include <cufftdx.hpp>
+
+  // Kernel
+  template<class FFT>
+  __launch_bounds__(FFT::max_threads_per_block)
+  __global__ void block_fft_kernel(typename FFT::value_type* data, typename FFT::workspace_type workspace) {
+      using complex_type = typename FFT::value_type;
+
+      complex_type thread_data[FFT::storage_size];
+
+      extern __shared__ complex_type shared_mem[];
+
+      // Execute FFT
+      FFT().execute(thread_data, shared_mem, workspace);
+  }
+
+  // Host function, data is a managed memory pointer
+  void fft_128_float(float2* data) {
+    using namespace cufftdx;
+
+    using FFT = decltype(Size<128>() + Precision<float>() + Type<fft_type::c2c>()
+                       + Direction<fft_direction::forward>() + FFTsPerBlock<1>()
+                       + ElementsPerThread<8>() + SM<700>() + Block());
+
+    using complex_type = typename FFT::value_type;
+
+    cudaError_t error_code = cudaSuccess;
+    auto workspace = make_workspace<FFT>(error_code);
+
+    block_fft_kernel<FFT><<<1, FFT::block_dim, FFT::shared_memory_size>>>((complex_type*)data, workspace);
+  }
+
+If we also add input/output operations to global memory, we obtain a kernel that is
+equivalent to the cuFFT kernel for size 128.
+
+.. code-block:: cpp
+
+  #include <cufftdx.hpp>
+
+  // Kernel
+  template<class FFT>
+  __launch_bounds__(FFT::max_threads_per_block)
+  __global__ void block_fft_kernel(typename FFT::value_type* data, typename FFT::workspace_type workspace) {
+      using namespace cufftdx;
+
+      using complex_type = typename FFT::value_type;
+
+      // Local array and copy data into it
+      complex_type thread_data[FFT::storage_size];
+
+      const int stride = size_of<FFT>::value / FFT::elements_per_thread;
+
+      for (int i = 0; i < FFT::elements_per_thread; ++i){
+        thread_data[i].x = data[threadIdx.x + i * stride].x;
+        thread_data[i].y = data[threadIdx.x + i * stride].y;
+      };
+
+      extern __shared__ complex_type shared_mem[];
+
+      // Execute FFT
+      FFT().execute(thread_data, shared_mem, workspace);
+
+      // Save results
+      for (int i = 0; i < FFT::elements_per_thread; ++i){
+        data[threadIdx.x + i * stride].x = thread_data[i].x;
+        data[threadIdx.x + i * stride].y = thread_data[i].y;
+      };
+  }
+
+  // Host function, data is a managed memory pointer
+  void fft_128_float(float2* data) {
+    using namespace cufftdx;
+
+    using FFT = decltype(Size<128>() + Precision<float>() + Type<fft_type::c2c>()
+                       + Direction<fft_direction::forward>() + FFTsPerBlock<1>()
+                       + ElementsPerThread<8>() + SM<700>() + Block());
+
+    using complex_type = typename FFT::value_type;
+
+    cudaError_t error_code = cudaSuccess;
+    auto workspace = make_workspace<FFT>(error_code);
+
+    block_fft_kernel<FFT><<<1, FFT::block_dim, FFT::shared_memory_size>>>((complex_type*)data, workspace);
+  }
+
+Unlike cuFFT, cuFFTDx does not require moving data back to global memory after
+executing a FFT operation. This is a major performance advantage.
+
+Compilation
+^^^^^^^^^^^
+In order to compile we need only pass location of cuFFTDx library.
+
+.. code-block:: bash
+
+  nvcc -std=c++11 -arch sm_70 -O3 -I<path_to_cuFFTDx_location> my_fft_kernel_128.cu -o my_fft_kernel_128
+
+.. note::
+
+  Since version 0.3.0 cuFFTDx has experimental support for compilation with NVRTC.
+
+Your next ten custom FFT kernels…
+---------------------------------
+
+For real world use cases, it is likely we will need more than a single kernel.
+A single use case, aiming at obtaining the maximum performance on multiple architectures,
+may require a number of different implementations. cuFFTDx was designed
+to handle this burden automatically, while offering users full control over
+the implementation details.
+
+cuFFTDx allows user to defer the definition of certain details of the implementation
+(such as the number of FFT elements computed per thread, or the number of FFTs per block)
+to the library. Let us apply this to our previous kernel:
+
+.. code-block:: cpp
+
+  #include <cufftdx.hpp>
+
+  // Kernel
+  template<class FFT>
+  __launch_bounds__(FFT::max_threads_per_block)
+  __global__ void block_fft_kernel(typename FFT::value_type* data, typename FFT::workspace_type workspace) {
+      using namespace cufftdx;
+
+      using complex_type = typename FFT::value_type;
+
+      // Local array and copy data into it
+      complex_type thread_data[FFT::storage_size];
+
+      const int stride = size_of<FFT>::value / FFT::elements_per_thread;
+
+      for (int i = 0; i < FFT::elements_per_thread; ++i){
+        thread_data[i].x = data[threadIdx.x + i * stride].x;
+        thread_data[i].y = data[threadIdx.x + i * stride].y;
+      };
+
+      extern __shared__ complex_type shared_mem[];
+
+      // Execute FFT
+      FFT().execute(thread_data, shared_mem, workspace);
+
+      // Save results
+      for (int i = 0; i < FFT::elements_per_thread; ++i){
+        data[threadIdx.x + i * stride].x = thread_data[i].x;
+        data[threadIdx.x + i * stride].y = thread_data[i].y;
+      };
+  }
+
+  // Host function, data is managed memory pointer
+  void fft_128_float(float2* data) {
+    using namespace cufftdx;
+
+    // Create a complete descriptor
+    using FFTComplete = decltype(Size<128>() + Precision<float>() + Type<fft_type::c2c>()
+                               + Direction<fft_direction::forward>() + SM<700>());
+
+    if(is_complete_fft<FFTComplete>::value == true) {
+
+      // Retrieve suggested elements per block and FFTs per block and use them
+      // to create a complete descriptor
+      using FFTExecution = decltype(FFTComplete()
+                                  + ElementsPerThread<FFTComplete::elements_per_thread>()
+                                  + FFTsPerBlock<FFTComplete::suggested_ffts_per_block>()
+                                  + Block());
+
+      using complex_type = typename FFTExecution::value_type;
+
+      cudaError_t error_code = cudaSuccess;
+      auto workspace = make_workspace<FFT>(error_code);
+
+      block_fft_kernel<FFTExecution><<<1, FFTExecution::block_dim, FFTExecution::shared_memory_size>>>(
+          (complex_type*)data, workspace
+      );
+    }
+  }
+
+To retrieve the optimal parameters, we require a complete descriptor (as indicated by
+:ref:`isfftcomplete-trait-label`). This is because some of the details are only available
+after the FFT operation has been fully described, and the target architecture has been
+identified. :ref:`sm-operator-label` compiled on the host allows the user to query
+launch parameters for a particular architecture.
+
+
+What happens under the hood?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Expression templates
+  The cuFFTDx API is using a variation of a C++ technique called expression templates.
+  We use expression templates to allow the user to construct compile-time objects that
+  describe the FFT calculation to compute. Compile-time C++ mechanisms allow cuFFTDx to
+  attach optimized FFT routines to the object, and expose them as a compute method
+  that can be called by the user.
+
+Header only
+  cuFFTDx FFT routines are shipped as optimized inline PTX.
+
+Why?
+^^^^
+
+For a library to be useful, it needs to abstract functionality in a future-proof manner.
+By future-proof we mean that an existing user code should not need to be modified
+in the future, and new functionality should consist of simple extensions to the
+existing code. On the CUDA platform, this requires adapting to quickly evolving
+GPU hardware.
+
+cuFFTDx approaches future-proofing in two ways. On one hand, the API is a
+source-level abstraction which decouples the library from ABI changes.
+Along with the PTX code in headers, cuFFTDx is forward-compatible with any CUDA
+toolkit, driver and compiler that supports hardware that cuFFDx was released for.
+PTX can be recompiled by the CUDA compiler to run on future GPU architectures.
+
+On the other hand, the API organization allows preserving operators describing
+what gets computed and how. New features depending on type can either be picked up
+automatically if code defers implementation choices to the library, or require
+adding operators to an existing expression. The diagnostic mode of library (a non-EA
+feature) will provide suggestions on which expressions could be improved.

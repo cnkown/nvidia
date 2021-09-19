@@ -1,0 +1,20 @@
+var pairs =
+{
+"mb1":{"platform":1}
+,"platform":{"configuration":1,"supported":1}
+,"topic":{"contains":1}
+,"contains":{"information":1}
+,"information":{"configuring":1}
+,"configuring":{"micro":1}
+,"micro":{"boot":1}
+,"boot":{"stage":1}
+,"stage":{"mb1":1}
+,"supported":{"nvidia":1}
+,"nvidia":{"jetson":1}
+,"jetson":{"linux":1}
+,"linux":{"driver":1}
+,"driver":{"package":1}
+,"package":{"supports":1}
+,"supports":{"mb1":1}
+}
+;Search.control.loadWordPairs(pairs);

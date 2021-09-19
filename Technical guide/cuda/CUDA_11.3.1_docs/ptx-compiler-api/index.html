@@ -1,0 +1,1660 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+      <meta name="copyright" content="(C) Copyright 2005"></meta>
+      <meta name="DC.rights.owner" content="(C) Copyright 2005"></meta>
+      <meta name="DC.Type" content="concept"></meta>
+      <meta name="DC.Title" content="PTX Compiler APIs"></meta>
+      <meta name="abstract" content="The User guide to PTX Compiler APIs."></meta>
+      <meta name="DC.Coverage" content="PTX Compiler API References"></meta>
+      <meta name="DC.subject" content="PTX Compiler API"></meta>
+      <meta name="keywords" content="PTX Compiler API"></meta>
+      <meta name="DC.Format" content="XHTML"></meta>
+      <meta name="DC.Identifier" content="abstract"></meta>
+      <meta name="description" content=""></meta>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/commonltr.css"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/site.css"></link>
+      <title>PTX Compiler APIs :: CUDA Toolkit Documentation</title>
+      <!--[if lt IE 9]>
+      <script src="../common/formatting/html5shiv-printshiv.min.js"></script>
+      <![endif]-->
+      <script type="text/javascript" charset="utf-8" src="//assets.adobedtm.com/b92787824f2e0e9b68dc2e993f9bd995339fe417/satelliteLib-7ba51e58dc61bcb0e9311aadd02a0108ab24cc6c.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/scripts/tynt/tynt.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.ba-hashchange.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.scrollintoview.min.js"></script>
+      <script type="text/javascript" src="../search/htmlFileList.js"></script>
+      <script type="text/javascript" src="../search/htmlFileInfoList.js"></script>
+      <script type="text/javascript" src="../search/nwSearchFnt.min.js"></script>
+      <script type="text/javascript" src="../search/stemmers/en_stemmer.min.js"></script>
+      <script type="text/javascript" src="../search/index-1.js"></script>
+      <script type="text/javascript" src="../search/index-2.js"></script>
+      <script type="text/javascript" src="../search/index-3.js"></script>
+      <link rel="canonical" href="http://docs.nvidia.com/cuda/ptx-compiler-api/index.html"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/qwcode.highlight.css"></link>
+   </head>
+   <body>
+      
+      <header id="header"><span id="company">NVIDIA</span><span id="site-title">CUDA Toolkit Documentation</span><form id="search" method="get" action="search">
+            <input type="text" name="search-text"></input><fieldset id="search-location">
+               <legend>Search In:</legend>
+               <label><input type="radio" name="search-type" value="site"></input>Entire Site</label>
+               <label><input type="radio" name="search-type" value="document"></input>Just This Document</label></fieldset>
+            <button type="reset">clear search</button>
+            <button id="submit" type="submit">search</button></form>
+      </header>
+      <div id="site-content">
+         <nav id="site-nav">
+            <div class="category closed"><a href="../index.html" title="The root of the site.">CUDA Toolkit 
+                  
+                  
+                  v11.3.1</a></div>
+            <div class="category"><a href="index.html" title="PTX Compiler APIs">PTX Compiler APIs</a></div>
+            <ul>
+               <li>
+                  <div class="section-link"><a href="#introduction">1.&nbsp;Introduction</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#getting-started">2.&nbsp;Getting Started</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#system-requirements">2.1.&nbsp;System Requirements</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#installation">2.2.&nbsp;Installation</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#thread-safety">3.&nbsp;Thread safety</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#modules">4.&nbsp;User Interface</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#group__handle">4.1.&nbsp;PTX-Compiler Handle</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#group__error">4.2.&nbsp;Error codes</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#group__versioning">4.3.&nbsp;API Versioning</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#group__compilation">4.4.&nbsp;Compilation APIs</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#compile-options">5.&nbsp;Compilation options</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#basic-usage">6.&nbsp;Basic Usage</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#sample-example">A.&nbsp;Example: Simple Vector Addition</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#code-simple-vector-addition-c">A.1.&nbsp;Code (simpleVectorAddition.c)</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#build-instruction">A.2.&nbsp;Build Instruction</a></div>
+                     </li>
+                  </ul>
+               </li>
+            </ul>
+         </nav>
+         <div id="resize-nav"></div>
+         <nav id="search-results">
+            <h2>Search Results</h2>
+            <ol></ol>
+         </nav>
+         
+         <div id="contents-container">
+            <div id="breadcrumbs-container">
+               <div id="release-info">PTX Compiler APIs
+                  (<a href="../pdf/PTX_Compiler_API_User_Guide.pdf">PDF</a>)
+                  -
+                   
+                  
+                  
+                  v11.3.1
+                  (<a href="https://developer.nvidia.com/cuda-toolkit-archive">older</a>)
+                  -
+                  Last updated May 20, 2021
+                  -
+                  <a href="mailto:CUDAIssues@nvidia.com?subject=CUDA Toolkit Documentation Feedback: PTX Compiler APIs">Send Feedback</a></div>
+            </div>
+            <article id="contents">
+               <div class="topic nested1" id="abstract"><a name="abstract" shape="rect">
+                     <!-- --></a><h2 class="topictitle2">PTX Compiler APIs</h2>
+                  <div class="body conbody">
+                     <p class="shortdesc">The User guide to PTX Compiler APIs.</p>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="introduction"><a name="introduction" shape="rect">
+                     <!-- --></a><h2 class="topictitle2">1.&nbsp;Introduction</h2>
+                  <div class="body conbody">
+                     <p class="p"> The PTX Compiler APIs are a set of APIs which can be used to compile a PTX program into GPU
+                        assembly code. 
+                     </p>
+                     <p class="p"> The APIs accept PTX programs in character string form and create handles to the compiler
+                        that can be used to obtain the GPU assembly code. The GPU assembly code string generated by
+                        the APIs can be loaded by <samp class="ph codeph">cuModuleLoadData</samp> and <samp class="ph codeph">
+                           cuModuleLoadDataEx</samp>, and linked with other modules by <samp class="ph codeph">cuLinkAddData</samp>
+                        of the CUDA Driver API. 
+                     </p>
+                     <div class="p"> The main use cases for these PTX Compiler APIs are: 
+                        <ul class="ul">
+                           <li class="li">With CUDA driver APIs, compilation and loading are tied together. PTX Compiler APIs
+                              de-couple the two operations. This enables early compilation and caching of the GPU
+                              assembly code. 
+                           </li>
+                           <li class="li">PTX Compiler APIs allow users to use runtime compilation for the latest PTX version that
+                              is supported as part of CUDA Toolkit release. This support may not be available in the PTX
+                              JIT compiler present in the CUDA Driver if the application is running with an older driver
+                              installed in the system. Refer to <a class="xref" href="https://docs.nvidia.com/deploy/cuda-compatibility/index.html" target="_blank" shape="rect">CUDA Compatibility</a> for more details. 
+                           </li>
+                           <li class="li">With PTX Compiler APIs, clients can implement a custom caching mechanism with the
+                              compiled GPU assembly. With CUDA driver, there is no control over caching of the JIT
+                              compilation results. 
+                           </li>
+                           <li class="li">The clients get fine grain control and can specify the compiler <a class="xref" href="index.html#compile-options" shape="rect">options</a> during compilation. 
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="getting-started"><a name="getting-started" shape="rect">
+                     <!-- --></a><h2 class="topictitle2">2.&nbsp;Getting Started</h2>
+                  <div class="topic concept nested1" id="system-requirements"><a name="system-requirements" shape="rect">
+                        <!-- --></a><h3 class="topictitle3">2.1.&nbsp;System Requirements</h3>
+                     <div class="body conbody">
+                        <div class="p">
+                           PTX Compiler library requires the following system configuration:
+                           
+                           <ul class="ul">
+                              <li class="li">POSIX threads support for non-windows platform.</li>
+                              <li class="li">GPU: Any GPU with CUDA Compute Capability 3.5 or higher.</li>
+                              <li class="li">CUDA Toolkit and Driver.</li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="installation"><a name="installation" shape="rect">
+                        <!-- --></a><h3 class="topictitle3">2.2.&nbsp;Installation</h3>
+                     <div class="body conbody">
+                        <div class="p">
+                           PTX Compiler library is part of the CUDA Toolkit release and the components are
+                           organized as follows in the CUDA toolkit installation directory:
+                           
+                           <ul class="ul">
+                              <li class="li">
+                                 On Windows:
+                                 
+                                 <ul class="ul">
+                                    <li class="li"><samp class="ph codeph">include\nvPTXCompiler.h</samp></li>
+                                    <li class="li"><samp class="ph codeph">lib\x64\nvptxcompiler_static.lib</samp></li>
+                                    <li class="li"><samp class="ph codeph">doc\pdf\PTX_Compiler_API_User_Guide.pdf</samp></li>
+                                 </ul>
+                              </li>
+                              <li class="li">
+                                 On Linux:
+                                 
+                                 <ul class="ul">
+                                    <li class="li"><samp class="ph codeph">include/nvPTXCompiler.h</samp></li>
+                                    <li class="li"><samp class="ph codeph">lib64/libnvptxcompiler_static.a</samp></li>
+                                    <li class="li"><samp class="ph codeph">doc/pdf/PTX_Compiler_API_User_Guide.pdf</samp></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="thread-safety"><a name="thread-safety" shape="rect">
+                     <!-- --></a><h2 class="topictitle2">3.&nbsp;Thread safety</h2>
+                  <div class="body conbody">
+                     <p class="p">
+                        All PTX Compiler API functions are thread safe and may be invoked by
+                        multiple threads concurrently. However, due to implementation limitations, compilation is serialized
+                        if multiple threads attempt to compile PTX code concurrently; compilation is done for a single thread
+                        at a time.
+                        
+                     </p>
+                  </div>
+               </div>
+               <div class="topic reference nested0" id="modules"><a name="modules" shape="rect">
+                     <!-- --></a><h2 class="topictitle2">4.&nbsp;User Interface</h2>
+                  <div class="body refbody">
+                     <div class="section">
+                        <p class="p">
+                           This chapter presents the PTX Compiler APIs.
+                           Basic usage of the API is explained in
+                           <a class="xref" href="index.html#basic-usage" shape="rect">Basic Usage</a>.
+                           
+                        </p>
+                     </div>
+                     <div class="section">
+                        <ul class="ul">
+                           <li class="li cpp_specialisation"><a class="xref" href="index.html#group__handle" shape="rect">PTX-Compiler Handle</a></li>
+                           <li class="li cpp_specialisation"><a class="xref" href="index.html#group__error" shape="rect">Error codes</a></li>
+                           <li class="li cpp_specialisation"><a class="xref" href="index.html#group__versioning" shape="rect">API Versioning</a></li>
+                           <li class="li cpp_specialisation"><a class="xref" href="index.html#group__compilation" shape="rect">Compilation APIs</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="topic reference apiRef apiPackage cppModule" id="group__handle"><a name="group__handle" shape="rect">
+                        <!-- --></a><h3 class="topictitle3 cppModule">4.1.&nbsp;PTX-Compiler Handle</h3>
+                     <div class="section">
+                        <p></p>
+                     </div>
+                     <h4 class="fake_sectiontitle member_header">Typedefs</h4>
+                     <dl class="members">
+                        <dt><span class="member_type">typedef nvPTXCompiler * &nbsp;</span><span class="member_name"><a href="#group__handle_1g78e3bba9412ef3e505a9a908089c883e" shape="rect">nvPTXCompilerHandle</a></span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">nvPTXCompilerHandle represents a handle to the PTX Compiler. </span></dd>
+                     </dl>
+                     <div class="description">
+                        <h4 class="sectiontitle">Typedefs</h4>
+                        <dl class="description">
+                           <dt class="description"><a name="group__handle_1g78e3bba9412ef3e505a9a908089c883e" id="group__handle_1g78e3bba9412ef3e505a9a908089c883e" shape="rect">
+                                 <!-- --></a><span>typedef nvPTXCompiler *  nvPTXCompilerHandle</span></dt>
+                           <dd class="description">
+                              <div class="section">
+                                 <p>nvPTXCompilerHandle represents a handle to the PTX Compiler.  To compile a PTX program string, an instance of nvPTXCompiler
+                                    must be created and the handle to it must be obtained using the API <a class="xref" href="index.html#group__compilation_1g86b0c1159bfd34f0fdf632101f30ca26" title="Obtains the handle to an instance of the PTX compiler initialized with the given PTX program ptxCode." shape="rect">nvPTXCompilerCreate()</a>. Then the compilation can be done using the API <a class="xref" href="index.html#group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" title="Compile a PTX program with the given compiler options." shape="rect">nvPTXCompilerCompile()</a>. 
+                                 </p>
+                              </div>
+                           </dd>
+                        </dl>
+                     </div>
+                  </div>
+                  <div class="topic reference apiRef apiPackage cppModule" id="group__error"><a name="group__error" shape="rect">
+                        <!-- --></a><h3 class="topictitle3 cppModule">4.2.&nbsp;Error codes</h3>
+                     <div class="section">
+                        <p></p>
+                     </div>
+                     <h4 class="fake_sectiontitle member_header">Enumerations</h4>
+                     <dl class="members">
+                        <dt><span class="member_type">enum&nbsp;</span><span class="member_name"><a href="#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" shape="rect">nvPTXCompileResult</a></span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. </span></dd>
+                     </dl>
+                     <div class="description">
+                        <h4 class="sectiontitle">Enumerations</h4>
+                        <dl class="description">
+                           <dt class="description"><a name="group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" id="group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" shape="rect">
+                                 <!-- --></a><span>enum nvPTXCompileResult</span></dt>
+                           <dd class="description">
+                              <div class="section">
+                                 <p></p>
+                              </div>
+                              <div class="enum-members">
+                                 <h6 class="enumerator_header">
+                                    Values
+                                    
+                                 </h6>
+                                 <dl class="enumerator">
+                                    <dt><span class="enum-member-name-def">NVPTXCOMPILE_SUCCESS = <span class="ph ph apiData">0</span></span></dt>
+                                    <dd></dd>
+                                    <dt><span class="enum-member-name-def">NVPTXCOMPILE_ERROR_INVALID_COMPILER_HANDLE = <span class="ph ph apiData">1</span></span></dt>
+                                    <dd></dd>
+                                    <dt><span class="enum-member-name-def">NVPTXCOMPILE_ERROR_INVALID_INPUT = <span class="ph ph apiData">2</span></span></dt>
+                                    <dd></dd>
+                                    <dt><span class="enum-member-name-def">NVPTXCOMPILE_ERROR_COMPILATION_FAILURE = <span class="ph ph apiData">3</span></span></dt>
+                                    <dd></dd>
+                                    <dt><span class="enum-member-name-def">NVPTXCOMPILE_ERROR_INTERNAL = <span class="ph ph apiData">4</span></span></dt>
+                                    <dd></dd>
+                                    <dt><span class="enum-member-name-def">NVPTXCOMPILE_ERROR_OUT_OF_MEMORY = <span class="ph ph apiData">5</span></span></dt>
+                                    <dd></dd>
+                                    <dt><span class="enum-member-name-def">NVPTXCOMPILE_ERROR_COMPILER_INVOCATION_INCOMPLETE = <span class="ph ph apiData">6</span></span></dt>
+                                    <dd></dd>
+                                    <dt><span class="enum-member-name-def">NVPTXCOMPILE_ERROR_UNSUPPORTED_PTX_VERSION = <span class="ph ph apiData">7</span></span></dt>
+                                    <dd></dd>
+                                 </dl>
+                              </div>
+                           </dd>
+                        </dl>
+                     </div>
+                  </div>
+                  <div class="topic reference apiRef apiPackage cppModule" id="group__versioning"><a name="group__versioning" shape="rect">
+                        <!-- --></a><h3 class="topictitle3 cppModule">4.3.&nbsp;API Versioning</h3>
+                     <div class="section">
+                        <p>The PTX compiler APIs are versioned so that any new features or API changes can be done by bumping up the API version. </p>
+                     </div>
+                     <h4 class="fake_sectiontitle member_header">Functions</h4>
+                     <dl class="members">
+                        <dt><span class="member_type"><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a>&nbsp;</span><span class="member_name"><a href="#group__versioning_1gdb846da0f180ce336bf1f050ce5b3e6b" shape="rect">nvPTXCompilerGetVersion</a> (  unsigned int*<span>&nbsp;</span><span class="keyword keyword apiItemName">major</span>, unsigned int*<span>&nbsp;</span><span class="keyword keyword apiItemName">minor</span> ) </span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">Queries the current <tt class="ph tt code">major</tt> and <tt class="ph tt code">minor</tt> version of PTX Compiler APIs being used. </span></dd>
+                     </dl>
+                     <div class="description">
+                        <h4 class="sectiontitle">Functions</h4>
+                        <dl class="description">
+                           <dt class="description"><a name="group__versioning_1gdb846da0f180ce336bf1f050ce5b3e6b" id="group__versioning_1gdb846da0f180ce336bf1f050ce5b3e6b" shape="rect">
+                                 <!-- --></a><span><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a> nvPTXCompilerGetVersion (  unsigned int*<span>&nbsp;</span><span class="keyword keyword apiItemName">major</span>, unsigned int*<span>&nbsp;</span><span class="keyword keyword apiItemName">minor</span> ) </span></dt>
+                           <dd class="description">
+                              <div class="section">Queries the current <tt class="ph tt code">major</tt> and <tt class="ph tt code">minor</tt> version of PTX Compiler APIs being used. 
+                              </div>
+                              <div class="section">
+                                 <h6 class="parameter_header">
+                                    Parameters
+                                    
+                                 </h6>
+                                 <dl class="table-display-params">
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">major</span></tt></dt>
+                                    <dd>Major version of the PTX Compiler APIs </dd>
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">minor</span></tt></dt>
+                                    <dd>Minor version of the PTX Compiler APIs </dd>
+                                 </dl>
+                              </div>
+                              <div class="section">
+                                 <h6 class="return_header">Returns</h6>
+                                 <p class="return">
+                                    <ul>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_SUCCESS</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INTERNAL</a></li>
+                                    </ul>
+                                 </p>
+                              </div>
+                              <div class="section">
+                                 <h6 class="description_header">Description</h6>
+                                 <p></p>
+                                 <p class="p">
+                                    <div class="note note"><span class="notetitle">Note:</span><p class="p">The version of PTX Compiler APIs follows the CUDA Toolkit versioning. The PTX ISA version supported by a PTX Compiler API
+                                          version is listed <a class="xref" href="https://docs.nvidia.com/cuda/parallel-thread-execution/#release-notes" target="_blank" shape="rect">here</a>.
+                                       </p>
+                                    </div>
+                                 </p>
+                                 <p class="p"></p>
+                                 <p class="p"></p>
+                              </div>
+                           </dd>
+                        </dl>
+                     </div>
+                  </div>
+                  <div class="topic reference apiRef apiPackage cppModule" id="group__compilation"><a name="group__compilation" shape="rect">
+                        <!-- --></a><h3 class="topictitle3 cppModule">4.4.&nbsp;Compilation APIs</h3>
+                     <div class="section">
+                        <p></p>
+                     </div>
+                     <h4 class="fake_sectiontitle member_header">Functions</h4>
+                     <dl class="members">
+                        <dt><span class="member_type"><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a>&nbsp;</span><span class="member_name"><a href="#group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" shape="rect">nvPTXCompilerCompile</a> (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, int <span>&nbsp;</span><span class="keyword keyword apiItemName">numCompileOptions</span>, const char**<span>&nbsp;</span><span class="keyword keyword apiItemName">compileOptions</span> ) </span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">Compile a PTX program with the given compiler options. </span></dd>
+                        <dt><span class="member_type"><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a>&nbsp;</span><span class="member_name"><a href="#group__compilation_1g86b0c1159bfd34f0fdf632101f30ca26" shape="rect">nvPTXCompilerCreate</a> (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, size_t<span>&nbsp;</span><span class="keyword keyword apiItemName">ptxCodeLen</span>, const char*<span>&nbsp;</span><span class="keyword keyword apiItemName">ptxCode</span> ) </span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">Obtains the handle to an instance of the PTX compiler initialized with the given PTX program <tt class="ph tt code">ptxCode</tt>. </span></dd>
+                        <dt><span class="member_type"><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a>&nbsp;</span><span class="member_name"><a href="#group__compilation_1gbe1fd08fafc16166b553aa1f2ac132f4" shape="rect">nvPTXCompilerDestroy</a> (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span> ) </span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">Destroys and cleans the already created PTX compiler. </span></dd>
+                        <dt><span class="member_type"><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a>&nbsp;</span><span class="member_name"><a href="#group__compilation_1g8f56c9115a219cb518d15ea8e21cd633" shape="rect">nvPTXCompilerGetCompiledProgram</a> (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, void*<span>&nbsp;</span><span class="keyword keyword apiItemName">binaryImage</span> ) </span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">Obtains the image of the compiled program. </span></dd>
+                        <dt><span class="member_type"><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a>&nbsp;</span><span class="member_name"><a href="#group__compilation_1g026bf92499c9c0e362b4b899b1550f6a" shape="rect">nvPTXCompilerGetCompiledProgramSize</a> (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, size_t*<span>&nbsp;</span><span class="keyword keyword apiItemName">binaryImageSize</span> ) </span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">Obtains the size of the image of the compiled program. </span></dd>
+                        <dt><span class="member_type"><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a>&nbsp;</span><span class="member_name"><a href="#group__compilation_1gaf88564e76bf5314a597296ba1397942" shape="rect">nvPTXCompilerGetErrorLog</a> (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, char*<span>&nbsp;</span><span class="keyword keyword apiItemName">errorLog</span> ) </span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">Query the error message that was seen previously for the handle. </span></dd>
+                        <dt><span class="member_type"><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a>&nbsp;</span><span class="member_name"><a href="#group__compilation_1g197d976f96d939b6da998bd10c8b591f" shape="rect">nvPTXCompilerGetErrorLogSize</a> (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, size_t*<span>&nbsp;</span><span class="keyword keyword apiItemName">errorLogSize</span> ) </span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">Query the size of the error message that was seen previously for the handle. </span></dd>
+                        <dt><span class="member_type"><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a>&nbsp;</span><span class="member_name"><a href="#group__compilation_1ge35e6f03a99742a9c008c1a03b6dc35f" shape="rect">nvPTXCompilerGetInfoLog</a> (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, char*<span>&nbsp;</span><span class="keyword keyword apiItemName">infoLog</span> ) </span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">Query the information message that was seen previously for the handle. </span></dd>
+                        <dt><span class="member_type"><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a>&nbsp;</span><span class="member_name"><a href="#group__compilation_1gbff992a534a0d8fde596bfbe8da08449" shape="rect">nvPTXCompilerGetInfoLogSize</a> (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, size_t*<span>&nbsp;</span><span class="keyword keyword apiItemName">infoLogSize</span> ) </span></dt>
+                        <dd class="shortdesc"><span></span><span class="desc">Query the size of the information message that was seen previously for the handle. </span></dd>
+                     </dl>
+                     <div class="description">
+                        <h4 class="sectiontitle">Functions</h4>
+                        <dl class="description">
+                           <dt class="description"><a name="group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" id="group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" shape="rect">
+                                 <!-- --></a><span><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a> nvPTXCompilerCompile (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, int <span>&nbsp;</span><span class="keyword keyword apiItemName">numCompileOptions</span>, const char**<span>&nbsp;</span><span class="keyword keyword apiItemName">compileOptions</span> ) </span></dt>
+                           <dd class="description">
+                              <div class="section">Compile a PTX program with the given compiler options. </div>
+                              <div class="section">
+                                 <h6 class="parameter_header">
+                                    Parameters
+                                    
+                                 </h6>
+                                 <dl class="table-display-params">
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">compiler</span></tt></dt>
+                                    <dd>A handle to PTX compiler initialized with the PTX program which is to be compiled. The compiled program can be accessed using
+                                       the handle 
+                                    </dd>
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">numCompileOptions</span></tt></dt>
+                                    <dd>Length of the array <tt class="ph tt code">compileOptions</tt></dd>
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">compileOptions</span></tt></dt>
+                                    <dd>Compiler options with which compilation should be done. The compiler options string is a null terminated character array.
+                                       A valid list of compiler options is at <a class="xref" href="http://docs.nvidia.com/cuda/ptx-compiler-api/index.html#compile-options" target="_blank" shape="rect">link</a>. 
+                                    </dd>
+                                 </dl>
+                              </div>
+                              <div class="section">
+                                 <h6 class="return_header">Returns</h6>
+                                 <p class="return">
+                                    <ul>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_SUCCESS</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_OUT_OF_MEMORY</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INTERNAL</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INVALID_PROGRAM_HANDLE</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_COMPILATION_FAILURE</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_UNSUPPORTED_PTX_VERSION</a></li>
+                                    </ul>
+                                 </p>
+                              </div>
+                              <div class="section">
+                                 <h6 class="description_header">Description</h6>
+                                 <p></p>
+                                 <p class="p">
+                                    <div class="note note"><span class="notetitle">Note:</span><p class="p">--gpu-name (-arch) is a mandatory option.</p>
+                                    </div>
+                                 </p>
+                                 <p class="p"></p>
+                                 <p class="p"></p>
+                              </div>
+                           </dd>
+                           <dt class="description"><a name="group__compilation_1g86b0c1159bfd34f0fdf632101f30ca26" id="group__compilation_1g86b0c1159bfd34f0fdf632101f30ca26" shape="rect">
+                                 <!-- --></a><span><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a> nvPTXCompilerCreate (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, size_t<span>&nbsp;</span><span class="keyword keyword apiItemName">ptxCodeLen</span>, const char*<span>&nbsp;</span><span class="keyword keyword apiItemName">ptxCode</span> ) </span></dt>
+                           <dd class="description">
+                              <div class="section">Obtains the handle to an instance of the PTX compiler initialized with the given PTX program <tt class="ph tt code">ptxCode</tt>. 
+                              </div>
+                              <div class="section">
+                                 <h6 class="parameter_header">
+                                    Parameters
+                                    
+                                 </h6>
+                                 <dl class="table-display-params">
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">compiler</span></tt></dt>
+                                    <dd>Returns a handle to PTX compiler initialized with the PTX program <tt class="ph tt code">ptxCode</tt></dd>
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">ptxCodeLen</span></tt></dt>
+                                    <dd>Size of the PTX program <tt class="ph tt code">ptxCode</tt> passed as string 
+                                    </dd>
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">ptxCode</span></tt></dt>
+                                    <dd>The PTX program which is to be compiled passed as string.</dd>
+                                 </dl>
+                              </div>
+                              <div class="section">
+                                 <h6 class="return_header">Returns</h6>
+                                 <p class="return">
+                                    <ul>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_SUCCESS</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_OUT_OF_MEMORY</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INTERNAL</a></li>
+                                    </ul>
+                                 </p>
+                              </div>
+                              <div class="section">
+                                 <h6 class="description_header">Description</h6>
+                                 <p></p>
+                                 <p class="p"></p>
+                              </div>
+                           </dd>
+                           <dt class="description"><a name="group__compilation_1gbe1fd08fafc16166b553aa1f2ac132f4" id="group__compilation_1gbe1fd08fafc16166b553aa1f2ac132f4" shape="rect">
+                                 <!-- --></a><span><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a> nvPTXCompilerDestroy (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a>*<span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span> ) </span></dt>
+                           <dd class="description">
+                              <div class="section">Destroys and cleans the already created PTX compiler. </div>
+                              <div class="section">
+                                 <h6 class="parameter_header">
+                                    Parameters
+                                    
+                                 </h6>
+                                 <dl class="table-display-params">
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">compiler</span></tt></dt>
+                                    <dd>A handle to the PTX compiler which is to be destroyed</dd>
+                                 </dl>
+                              </div>
+                              <div class="section">
+                                 <h6 class="return_header">Returns</h6>
+                                 <p class="return">
+                                    <ul>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_SUCCESS</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_OUT_OF_MEMORY</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INTERNAL</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INVALID_PROGRAM_HANDLE</a></li>
+                                    </ul>
+                                 </p>
+                              </div>
+                              <div class="section">
+                                 <h6 class="description_header">Description</h6>
+                                 <p></p>
+                                 <p class="p"></p>
+                              </div>
+                           </dd>
+                           <dt class="description"><a name="group__compilation_1g8f56c9115a219cb518d15ea8e21cd633" id="group__compilation_1g8f56c9115a219cb518d15ea8e21cd633" shape="rect">
+                                 <!-- --></a><span><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a> nvPTXCompilerGetCompiledProgram (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, void*<span>&nbsp;</span><span class="keyword keyword apiItemName">binaryImage</span> ) </span></dt>
+                           <dd class="description">
+                              <div class="section">Obtains the image of the compiled program. </div>
+                              <div class="section">
+                                 <h6 class="parameter_header">
+                                    Parameters
+                                    
+                                 </h6>
+                                 <dl class="table-display-params">
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">compiler</span></tt></dt>
+                                    <dd>A handle to PTX compiler on which <a class="xref" href="index.html#group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" title="Compile a PTX program with the given compiler options." shape="rect">nvPTXCompilerCompile()</a> has been performed. 
+                                    </dd>
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">binaryImage</span></tt></dt>
+                                    <dd>The image of the compiled program. Client should allocate memory for <tt class="ph tt code">binaryImage</tt></dd>
+                                 </dl>
+                              </div>
+                              <div class="section">
+                                 <h6 class="return_header">Returns</h6>
+                                 <p class="return">
+                                    <ul>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_SUCCESS</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INTERNAL</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INVALID_PROGRAM_HANDLE</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_COMPILER_INVOCATION_INCOMPLETE</a></li>
+                                    </ul>
+                                 </p>
+                              </div>
+                              <div class="section">
+                                 <h6 class="description_header">Description</h6>
+                                 <p></p>
+                                 <p class="p"></p>
+                                 <p class="p">
+                                    <div class="note note"><span class="notetitle">Note:</span><p class="p"><a class="xref" href="index.html#group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" title="Compile a PTX program with the given compiler options." shape="rect">nvPTXCompilerCompile()</a> API should be invoked for the handle before calling this API. Otherwise, NVPTXCOMPILE_ERROR_COMPILER_INVOCATION_INCOMPLETE
+                                          is returned. 
+                                       </p>
+                                    </div>
+                                 </p>
+                                 <p class="p"></p>
+                              </div>
+                           </dd>
+                           <dt class="description"><a name="group__compilation_1g026bf92499c9c0e362b4b899b1550f6a" id="group__compilation_1g026bf92499c9c0e362b4b899b1550f6a" shape="rect">
+                                 <!-- --></a><span><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a> nvPTXCompilerGetCompiledProgramSize (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, size_t*<span>&nbsp;</span><span class="keyword keyword apiItemName">binaryImageSize</span> ) </span></dt>
+                           <dd class="description">
+                              <div class="section">Obtains the size of the image of the compiled program. </div>
+                              <div class="section">
+                                 <h6 class="parameter_header">
+                                    Parameters
+                                    
+                                 </h6>
+                                 <dl class="table-display-params">
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">compiler</span></tt></dt>
+                                    <dd>A handle to PTX compiler on which <a class="xref" href="index.html#group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" title="Compile a PTX program with the given compiler options." shape="rect">nvPTXCompilerCompile()</a> has been performed. 
+                                    </dd>
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">binaryImageSize</span></tt></dt>
+                                    <dd>The size of the image of the compiled program</dd>
+                                 </dl>
+                              </div>
+                              <div class="section">
+                                 <h6 class="return_header">Returns</h6>
+                                 <p class="return">
+                                    <ul>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_SUCCESS</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INTERNAL</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INVALID_PROGRAM_HANDLE</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_COMPILER_INVOCATION_INCOMPLETE</a></li>
+                                    </ul>
+                                 </p>
+                              </div>
+                              <div class="section">
+                                 <h6 class="description_header">Description</h6>
+                                 <p></p>
+                                 <p class="p"></p>
+                                 <p class="p">
+                                    <div class="note note"><span class="notetitle">Note:</span><p class="p"><a class="xref" href="index.html#group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" title="Compile a PTX program with the given compiler options." shape="rect">nvPTXCompilerCompile()</a> API should be invoked for the handle before calling this API. Otherwise, NVPTXCOMPILE_ERROR_COMPILER_INVOCATION_INCOMPLETE
+                                          is returned. 
+                                       </p>
+                                    </div>
+                                 </p>
+                                 <p class="p"></p>
+                              </div>
+                           </dd>
+                           <dt class="description"><a name="group__compilation_1gaf88564e76bf5314a597296ba1397942" id="group__compilation_1gaf88564e76bf5314a597296ba1397942" shape="rect">
+                                 <!-- --></a><span><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a> nvPTXCompilerGetErrorLog (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, char*<span>&nbsp;</span><span class="keyword keyword apiItemName">errorLog</span> ) </span></dt>
+                           <dd class="description">
+                              <div class="section">Query the error message that was seen previously for the handle. </div>
+                              <div class="section">
+                                 <h6 class="parameter_header">
+                                    Parameters
+                                    
+                                 </h6>
+                                 <dl class="table-display-params">
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">compiler</span></tt></dt>
+                                    <dd>A handle to PTX compiler on which <a class="xref" href="index.html#group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" title="Compile a PTX program with the given compiler options." shape="rect">nvPTXCompilerCompile()</a> has been performed. 
+                                    </dd>
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">errorLog</span></tt></dt>
+                                    <dd>The error log which was produced in previous call to nvPTXCompilerCompiler(). Clients should allocate memory for <tt class="ph tt code">errorLog</tt></dd>
+                                 </dl>
+                              </div>
+                              <div class="section">
+                                 <h6 class="return_header">Returns</h6>
+                                 <p class="return">
+                                    <ul>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_SUCCESS</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INTERNAL</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INVALID_PROGRAM_HANDLE</a></li>
+                                    </ul>
+                                 </p>
+                              </div>
+                              <div class="section">
+                                 <h6 class="description_header">Description</h6>
+                                 <p></p>
+                                 <p class="p"></p>
+                              </div>
+                           </dd>
+                           <dt class="description"><a name="group__compilation_1g197d976f96d939b6da998bd10c8b591f" id="group__compilation_1g197d976f96d939b6da998bd10c8b591f" shape="rect">
+                                 <!-- --></a><span><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a> nvPTXCompilerGetErrorLogSize (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, size_t*<span>&nbsp;</span><span class="keyword keyword apiItemName">errorLogSize</span> ) </span></dt>
+                           <dd class="description">
+                              <div class="section">Query the size of the error message that was seen previously for the handle. </div>
+                              <div class="section">
+                                 <h6 class="parameter_header">
+                                    Parameters
+                                    
+                                 </h6>
+                                 <dl class="table-display-params">
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">compiler</span></tt></dt>
+                                    <dd>A handle to PTX compiler on which <a class="xref" href="index.html#group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" title="Compile a PTX program with the given compiler options." shape="rect">nvPTXCompilerCompile()</a> has been performed. 
+                                    </dd>
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">errorLogSize</span></tt></dt>
+                                    <dd>The size of the error log in bytes which was produced in previous call to nvPTXCompilerCompiler().</dd>
+                                 </dl>
+                              </div>
+                              <div class="section">
+                                 <h6 class="return_header">Returns</h6>
+                                 <p class="return">
+                                    <ul>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_SUCCESS</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INTERNAL</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INVALID_PROGRAM_HANDLE</a></li>
+                                    </ul>
+                                 </p>
+                              </div>
+                              <div class="section">
+                                 <h6 class="description_header">Description</h6>
+                                 <p></p>
+                                 <p class="p"></p>
+                              </div>
+                           </dd>
+                           <dt class="description"><a name="group__compilation_1ge35e6f03a99742a9c008c1a03b6dc35f" id="group__compilation_1ge35e6f03a99742a9c008c1a03b6dc35f" shape="rect">
+                                 <!-- --></a><span><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a> nvPTXCompilerGetInfoLog (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, char*<span>&nbsp;</span><span class="keyword keyword apiItemName">infoLog</span> ) </span></dt>
+                           <dd class="description">
+                              <div class="section">Query the information message that was seen previously for the handle. </div>
+                              <div class="section">
+                                 <h6 class="parameter_header">
+                                    Parameters
+                                    
+                                 </h6>
+                                 <dl class="table-display-params">
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">compiler</span></tt></dt>
+                                    <dd>A handle to PTX compiler on which <a class="xref" href="index.html#group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" title="Compile a PTX program with the given compiler options." shape="rect">nvPTXCompilerCompile()</a> has been performed. 
+                                    </dd>
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">infoLog</span></tt></dt>
+                                    <dd>The information log which was produced in previous call to nvPTXCompilerCompiler(). Clients should allocate memory for <tt class="ph tt code">infoLog</tt></dd>
+                                 </dl>
+                              </div>
+                              <div class="section">
+                                 <h6 class="return_header">Returns</h6>
+                                 <p class="return">
+                                    <ul>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_SUCCESS</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INTERNAL</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INVALID_PROGRAM_HANDLE</a></li>
+                                    </ul>
+                                 </p>
+                              </div>
+                              <div class="section">
+                                 <h6 class="description_header">Description</h6>
+                                 <p></p>
+                                 <p class="p"></p>
+                              </div>
+                           </dd>
+                           <dt class="description"><a name="group__compilation_1gbff992a534a0d8fde596bfbe8da08449" id="group__compilation_1gbff992a534a0d8fde596bfbe8da08449" shape="rect">
+                                 <!-- --></a><span><a href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result. " shape="rect">nvPTXCompileResult</a> nvPTXCompilerGetInfoLogSize (  <a href="index.html#group__handle_1g78e3bba9412ef3e505a9a908089c883e" title="nvPTXCompilerHandle represents a handle to the PTX Compiler. " shape="rect">nvPTXCompilerHandle</a><span>&nbsp;</span><span class="keyword keyword apiItemName">compiler</span>, size_t*<span>&nbsp;</span><span class="keyword keyword apiItemName">infoLogSize</span> ) </span></dt>
+                           <dd class="description">
+                              <div class="section">Query the size of the information message that was seen previously for the handle. </div>
+                              <div class="section">
+                                 <h6 class="parameter_header">
+                                    Parameters
+                                    
+                                 </h6>
+                                 <dl class="table-display-params">
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">compiler</span></tt></dt>
+                                    <dd>A handle to PTX compiler on which <a class="xref" href="index.html#group__compilation_1g3d08161ba6e6a5fb40814900ce0f2e38" title="Compile a PTX program with the given compiler options." shape="rect">nvPTXCompilerCompile()</a> has been performed. 
+                                    </dd>
+                                    <dt><tt class="code"><span class="keyword keyword apiItemName">infoLogSize</span></tt></dt>
+                                    <dd>The size of the information log in bytes which was produced in previous call to nvPTXCompilerCompiler().</dd>
+                                 </dl>
+                              </div>
+                              <div class="section">
+                                 <h6 class="return_header">Returns</h6>
+                                 <p class="return">
+                                    <ul>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_SUCCESS</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INTERNAL</a></li>
+                                       <li><a class="xref" href="index.html#group__error_1g402c9248a2b7f74f2d56fa8c292f4e01" title="The nvPTXCompiler APIs return the nvPTXCompileResult codes to indicate the call result." shape="rect">NVPTXCOMPILE_ERROR_INVALID_PROGRAM_HANDLE</a></li>
+                                    </ul>
+                                 </p>
+                              </div>
+                              <div class="section">
+                                 <h6 class="description_header">Description</h6>
+                                 <p></p>
+                                 <p class="p"></p>
+                              </div>
+                           </dd>
+                        </dl>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic reference nested0" id="compile-options"><a name="compile-options" shape="rect">
+                     <!-- --></a><h2 class="topictitle2">5.&nbsp;Compilation options</h2>
+                  <div class="body refbody">
+                     <div class="section">
+                        <p class="p">This chapter describes options supported by <samp class="ph codeph">nvPTXCompilerCompile()</samp> API.
+                        </p>
+                        <p class="p">Option names with two preceding dashs (<samp class="ph codeph">--</samp>) are long option names and
+                           option names with one preceding dash (<samp class="ph codeph">-</samp>) are short option names.  Short
+                           option names can be used instead of long option names.  When a compile option takes an
+                           argument, an assignment operator (<samp class="ph codeph">=</samp>) is used to separate the compile
+                           option argument from the compile option name, e.g.,
+                           <samp class="ph codeph">"--gpu-architecture=sm_70"</samp>.  Alternatively, the compile option name and
+                           the argument can be specified in separate strings without an assignment operator, .e.g,
+                           <samp class="ph codeph">"--gpu-architecture"</samp><samp class="ph codeph">"sm_70"</samp>.
+                        </p>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-allow-expensive-optimizations"><a name="compile-options-allow-expensive-optimizations" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--allow-expensive-optimizations</samp> (<samp class="ph codeph">-allow-expensive-optimizations</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Enable (disable) to allow compiler to perform expensive
+                                 optimizations using maximum available resources (memory and
+                                 compile-time).
+                                 </em></p>
+                           <p class="p">
+                              If unspecified, default behavior is to enable this feature
+                              for optimization level &gt;= <samp class="ph codeph">O2</samp>.
+                              
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-compile-as-tools-patch"><a name="compile-options-compile-as-tools-patch" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--compile-as-tools-patch</samp> (<samp class="ph codeph">-astoolspatch</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Compile patch code for CUDA tools.
+                                 </em></p>
+                           <p class="p">Shall not be used in conjunction with
+                              <samp class="ph codeph">-c</samp> or <samp class="ph codeph">-ewp</samp>.
+                              
+                           </p>
+                           <p class="p"> Some PTX ISA features may not be usable in this compilation mode.
+                              
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-compile-only"><a name="compile-options-compile-only" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--compile-only</samp> (<samp class="ph codeph">-c</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Generate relocatable object.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-def-load-cache"><a name="compile-options-def-load-cache" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--def-load-cache</samp> (<samp class="ph codeph">-dlcm</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Default cache modifier on global/generic load.
+                                 </em></p>
+                           <p class="p">
+                              Default value: <samp class="ph codeph">ca</samp>.
+                              
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-def-store-cache"><a name="compile-options-def-store-cache" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--def-store-cache</samp> (<samp class="ph codeph">-dscm</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Default cache modifier on global/generic store.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-device-debug"><a name="compile-options-device-debug" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--device-debug</samp> (<samp class="ph codeph">-g</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Generate debug information for device code.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-device-function-maxrregcount"><a name="compile-options-device-function-maxrregcount" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--device-function-maxrregcount <em class="ph i">N</em>  (-func-maxrregcount)</samp></h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 When compiling with <samp class="ph codeph">-c</samp> option, specify the maximum number of registers
+                                 that device functions can use.
+                                 </em></p>
+                           <p class="p">This option is ignored for whole-program compilation and does not affect registers used
+                              by entry functions. For device functions, this option overrides the value specified by
+                              <samp class="ph codeph">--maxrregcount</samp> option.  If neither
+                              <samp class="ph codeph">--device-function-maxrregcount</samp> nor <samp class="ph codeph">--maxrregcount</samp> is
+                              specified, then no maximum is assumed.
+                           </p>
+                           <p class="p"> Note: Under certain situations, <samp class="ph codeph">static</samp> device functions can safely
+                              inherit a higher register count from the caller entry function. In such cases, ptx
+                              compiler may apply the higher count for compiling the static function.
+                           </p>
+                           <p class="p">Value less than the minimum registers required by ABI will be bumped up by the
+                              compiler to ABI minimum limit.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-disable-optimizer-constants"><a name="compile-options-disable-optimizer-constants" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--disable-optimizer-constants</samp> (<samp class="ph codeph">-disable-optimizer-consts</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Disable use of optimizer constant bank.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-disable-warnings"><a name="compile-options-disable-warnings" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--disable-warnings</samp> (<samp class="ph codeph">-w</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Inhibit all warning messages.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-dont-merge-basic-blocks"><a name="compile-options-dont-merge-basic-blocks" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--dont-merge-basicblocks</samp> (<samp class="ph codeph">-no-bb-merge</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Prevents basic block merging, at a slight perfomance cost.
+                                 </em></p>
+                           <p class="p">Normally ptx compiler attempts to merge consecutive basic blocks as part of its
+                              optimization process. However, for debuggable code this is very confusing. This option
+                              prevents merging consecutive basic blocks.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-entry"><a name="compile-options-entry" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--entry <em class="ph i">entry,...</em></samp> (<samp class="ph codeph">-e</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Specify the entry functions for which code must be generated.
+                                 </em></p>
+                           <p class="p">Entry function names for this option must be specified in the mangled name.</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-extensible-whole-program"><a name="compile-options-extensible-whole-program" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--extensible-whole-program</samp> (<samp class="ph codeph">-ewp</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Generate extensible whole program device code, which allows some calls to not be
+                                 resolved until linking with libcudadevrt.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-fmad"><a name="compile-options-fmad" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--fmad</samp> (<samp class="ph codeph">-fmad</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Enables (disables) the contraction of floating-point multiplies and
+                                 adds/subtracts into floating-point multiply-add operations (FMAD, FFMA,
+                                 or DFMA).
+                                 </em></p>
+                           <p class="p"> Default value:  <samp class="ph codeph">true</samp></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-force-load-cache"><a name="compile-options-force-load-cache" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--force-load-cache</samp> (<samp class="ph codeph">-flcm</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Force specified cache modifier on global/generic load.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-force-store-cache"><a name="compile-options-force-store-cache" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--force-store-cache</samp> (<samp class="ph codeph">-fscm</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Force specified cache modifier on global/generic store.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-generate-line-info"><a name="compile-options-generate-line-info" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--generate-line-info</samp> (<samp class="ph codeph">-lineinfo</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Generate line-number information for device code.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-gpu-name"><a name="compile-options-gpu-name" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--gpu-name <em class="ph i">gpuname</em></samp> (<samp class="ph codeph">-arch</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Specify name of NVIDIA GPU to generate code for.
+                                 </em></p>
+                           <p class="p">
+                              This option also takes virtual compute architectures, in
+                              which case code generation is suppressed.
+                              This can be used for parsing only.
+                              
+                           </p>
+                           <p class="p">
+                              Allowed values for this option:
+                              <samp class="ph codeph">compute_35</samp>,
+                              <samp class="ph codeph">compute_37</samp>,
+                              <samp class="ph codeph">compute_50</samp>,
+                              <samp class="ph codeph">compute_52</samp>,
+                              <samp class="ph codeph">compute_53</samp>,
+                              <samp class="ph codeph">compute_60</samp>,
+                              <samp class="ph codeph">compute_61</samp>,
+                              <samp class="ph codeph">compute_62</samp>,
+                              <samp class="ph codeph">compute_70</samp>,
+                              <samp class="ph codeph">compute_72</samp>,
+                              <samp class="ph codeph">compute_73</samp>,
+                              <samp class="ph codeph">compute_75</samp>,
+                              <samp class="ph codeph">compute_80</samp>,
+                              <samp class="ph codeph">compute_86</samp>,
+                              <samp class="ph codeph">sm_35</samp>,
+                              <samp class="ph codeph">sm_37</samp>,
+                              <samp class="ph codeph">sm_50</samp>,
+                              <samp class="ph codeph">sm_52</samp>,
+                              <samp class="ph codeph">sm_53</samp>,
+                              <samp class="ph codeph">sm_60</samp>,
+                              <samp class="ph codeph">sm_61</samp>,
+                              <samp class="ph codeph">sm_62</samp>,
+                              <samp class="ph codeph">sm_70</samp>,
+                              <samp class="ph codeph">sm_72</samp>,
+                              <samp class="ph codeph">sm_73</samp>,
+                              <samp class="ph codeph">sm_75</samp>,
+                              <samp class="ph codeph">sm_80</samp>,
+                              <samp class="ph codeph">sm_86</samp></p>
+                           <p class="p">Default value: <samp class="ph codeph">sm_52</samp>.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-maxrregcount"><a name="compile-options-maxrregcount" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--maxrregcount <em class="ph i">N</em></samp> (<samp class="ph codeph">-maxrregcount</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Specify the maximum amount of registers that GPU functions can use.
+                                 </em></p>
+                           <p class="p">Until a function- specific limit, a higher value will generally increase the performance
+                              of individual GPU threads that execute this function. However, because thread registers
+                              are allocated from a global register pool on each GPU, a higher value of this option
+                              will also reduce the maximum thread block size, thereby reducing the amount of thread
+                              parallelism. Hence, a good maxrregcount value is the result of a trade-off.
+                           </p>
+                           <p class="p">If
+                              this option is not specified, then no maximum is assumed.  Value less than the minimum
+                              registers required by ABI will be bumped up by the compiler to ABI minimum limit.  User
+                              program may not be able to make use of all registers as some registers are reserved by
+                              compiler.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-opt-level"><a name="compile-options-opt-level" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--opt-level <em class="ph i">N</em></samp> (<samp class="ph codeph">-O</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Specify optimization level.
+                                 </em></p>
+                           <p class="p">
+                              Default value: <samp class="ph codeph">3</samp>.
+                              
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-preserve-relocs"><a name="compile-options-preserve-relocs" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--preserve-relocs</samp> (<samp class="ph codeph">-preserve-relocs</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 This option will make ptx compiler to generate
+                                 relocatable references for variables and preserve
+                                 relocations generated for them in linked executable.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-return-at-end"><a name="compile-options-return-at-end" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--return-at-end</samp> (<samp class="ph codeph">-ret-end</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Prevents optimizing return instruction at end of program
+                                 </em></p>
+                           <p class="p">Normally ptx compiler optimizes return at the end of program.
+                              However, for debuggable code this causes problems setting breakpoint at the
+                              end. This option prevents ptxas from optimizing this last return instruction.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-suppress-stack-size-warning"><a name="compile-options-suppress-stack-size-warning" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--suppress-stack-size-warning</samp> (<samp class="ph codeph">-suppress-stack-size-warning</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Suppress the warning that otherwise is printed when stack size cannot be
+                                 determined.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-verbose"><a name="compile-options-verbose" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--verbose</samp> (<samp class="ph codeph">-v</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Enable verbose mode which prints code generation statistics.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-warn-on-double-precision-use"><a name="compile-options-warn-on-double-precision-use" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--warn-on-double-precision-use</samp> (<samp class="ph codeph">-warn-double-usage</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Warning if double(s) are used in an instruction.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-warn-on-local-memory-usage"><a name="compile-options-warn-on-local-memory-usage" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--warn-on-local-memory-usage</samp> (<samp class="ph codeph">-warn-lmem-usage</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Warning if local memory is used.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-warn-on-spills"><a name="compile-options-warn-on-spills" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--warn-on-spills</samp> (<samp class="ph codeph">-warn-spills</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Warning if registers are spilled to local memory.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="compile-options-warning-as-error"><a name="compile-options-warning-as-error" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"><samp class="ph codeph">--warning-as-error</samp> (<samp class="ph codeph">-Werror</samp>)
+                     </h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <p class="p"><em class="ph i">
+                                 Make all warnings into errors.
+                                 </em></p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="basic-usage"><a name="basic-usage" shape="rect">
+                     <!-- --></a><h2 class="topictitle2">6.&nbsp;Basic Usage</h2>
+                  <div class="body conbody">
+                     <p class="p">This section of the document uses a simple example, <em class="ph i">Vector Addition</em>, shown in <a class="xref" href="index.html#basic-usage__ptx-source-string-for-simple-vector-addition" shape="rect">Figure 1</a> to explain how to use PTX
+                        Compiler APIs to compile this PTX program. For brevity and readability, error checks on the
+                        API return values are not shown. 
+                     </p>
+                     <div class="fig fignone" id="basic-usage__ptx-source-string-for-simple-vector-addition"><a name="basic-usage__ptx-source-string-for-simple-vector-addition" shape="rect">
+                           <!-- --></a><span class="figcap">Figure 1. PTX source string for a simple vector addition </span><pre xml:space="preserve">
+       const char *ptxCode = "                                    \n \
+          .version 7.0                                            \n \
+          .target sm_50                                           \n \
+          .address_size 64                                        \n \
+          .visible .entry simpleVectorAdd(                        \n \
+               .param .u64 simpleVectorAdd_param_0,               \n \
+               .param .u64 simpleVectorAdd_param_1,               \n \
+               .param .u64 simpleVectorAdd_param_2                \n \
+          ) {                                                     \n \
+               .reg .f32   %f&lt;4&gt;;                                 \n \
+               .reg .b32   %r&lt;5&gt;;                                 \n \
+               .reg .b64   %rd&lt;11&gt;;                               \n \
+               ld.param.u64    %rd1, [simpleVectorAdd_param_0];   \n \
+               ld.param.u64    %rd2, [simpleVectorAdd_param_1];   \n \
+               ld.param.u64    %rd3, [simpleVectorAdd_param_2];   \n \
+               cvta.to.global.u64      %rd4, %rd3;                \n \
+               cvta.to.global.u64      %rd5, %rd2;                \n \
+               cvta.to.global.u64      %rd6, %rd1;                \n \
+               mov.u32         %r1, %ctaid.x;                     \n \
+               mov.u32         %r2, %ntid.x;                      \n \
+               mov.u32         %r3, %tid.x;                       \n \
+               mad.lo.s32      %r4, %r2, %r1, %r3;                \n \
+               mul.wide.u32    %rd7, %r4, 4;                      \n \
+               add.s64         %rd8, %rd6, %rd7;                  \n \
+               ld.global.f32   %f1, [%rd8];                       \n \
+               add.s64         %rd9, %rd5, %rd7;                  \n \
+               ld.global.f32   %f2, [%rd9];                       \n \
+               add.f32         %f3, %f1, %f2;                     \n \
+               add.s64         %rd10, %rd4, %rd7;                 \n \
+               st.global.f32   [%rd10], %f3;                      \n \
+               ret;                                               \n \
+          } ";
+         </pre></div>
+                     <p class="p"> The CUDA code corresponding to this PTX program would look like: </p>
+                     <div class="fig fignone" id="basic-usage__cuda-source--for-simple-vector-add"><a name="basic-usage__cuda-source--for-simple-vector-add" shape="rect">
+                           <!-- --></a><span class="figcap">Figure 2.  Equivalent CUDA source for the simple vector addition </span><pre xml:space="preserve">
+        extern "C"
+        __global__ void simpleVectorAdd(float *x, float *y, float *out)
+        {
+            size_t tid = blockIdx.x * blockDim.x + threadIdx.x;
+            out[tid] = x[tid] + y[tid];
+        }
+      </pre></div>
+                     <p class="p">
+                        With this PTX program as a string, we can create the compiler and
+                        obtain a handle to it as shown in
+                        <a class="xref" href="index.html#basic-usage__compiler-creation" shape="rect">Figure 3</a>.
+                        
+                     </p>
+                     <div class="fig fignone" id="basic-usage__compiler-creation"><a name="basic-usage__compiler-creation" shape="rect">
+                           <!-- --></a><span class="figcap">Figure 3. Compiler creation and initialization of a program</span><pre xml:space="preserve">
+      nvPTXCompilerHandle compiler;
+      nvPTXCompilerCreate(&amp;compiler, (size_t)strlen(ptxCode), ptxCode);
+       </pre></div>
+                     <p class="p">
+                        Compilation can now be done by specifying the compile options as shown in
+                        <a class="xref" href="index.html#basic-usage__compilation-of-ptx-program" shape="rect">Figure 4</a>.
+                        
+                     </p>
+                     <div class="fig fignone" id="basic-usage__compilation-of-ptx-program"><a name="basic-usage__compilation-of-ptx-program" shape="rect">
+                           <!-- --></a><span class="figcap">Figure 4. Compilation of the PTX program</span><pre xml:space="preserve">
+      const char* compile_options[] = { "--gpu-name=sm_70",
+                                        "--verbose"
+                                      };
+
+      nvPTXCompilerCompile(compiler, 2, compile_options);
+       </pre></div>
+                     <p class="p">
+                        The compiled GPU assembly code can now be obtained. To obtain this we first
+                        allocate memory for it. And to allocate memory, we need to query the size of
+                        the image of the compiled GPU assembly code which is done as shown in
+                        <a class="xref" href="index.html#basic-usage__query-image-size" shape="rect">Figure 5</a>.
+                        
+                     </p>
+                     <div class="fig fignone" id="basic-usage__query-image-size"><a name="basic-usage__query-image-size" shape="rect">
+                           <!-- --></a><span class="figcap">Figure 5. Query size of the compiled assembly image</span><pre xml:space="preserve">
+        nvPTXCompilerGetCompiledProgramSize(compiler, &amp;elfSize);
+       </pre></div>
+                     <p class="p">
+                        The image of the compiled GPU assembly code can now be queried as shown in 
+                        <a class="xref" href="index.html#basic-usage__query-image" shape="rect">Figure 6</a>. This image can then be executed on
+                        the GPU by passing this image to the CUDA Driver APIs.
+                        
+                     </p>
+                     <div class="fig fignone" id="basic-usage__query-image"><a name="basic-usage__query-image" shape="rect">
+                           <!-- --></a><span class="figcap">Figure 6. Query the compiled assembly image</span><pre xml:space="preserve">
+        elf = (char*) malloc(elfSize);
+        nvPTXCompilerGetCompiledProgram(compiler, (void*)elf);
+       </pre></div>
+                     <p class="p"> When the compiler is not needed anymore, it can be destroyed as shown in <a class="xref" href="index.html#basic-usage__destory-compiler" shape="rect">Figure 7</a>. 
+                     </p>
+                     <div class="fig fignone" id="basic-usage__destory-compiler"><a name="basic-usage__destory-compiler" shape="rect">
+                           <!-- --></a><span class="figcap">Figure 7. Destroy the compiler</span><pre xml:space="preserve">
+        nvPTXCompilerDestroy(&amp;compiler);
+       </pre></div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="sample-example"><a name="sample-example" shape="rect">
+                     <!-- --></a><h2 class="topictitle2">A.&nbsp;Example: Simple Vector Addition</h2>
+                  <div class="topic concept nested1" id="code-simple-vector-addition-c"><a name="code-simple-vector-addition-c" shape="rect">
+                        <!-- --></a><h3 class="topictitle3">Code (simpleVectorAddition.c)</h3>
+                     <div class="body conbody"><pre xml:space="preserve">
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include "cuda.h"
+#include "nvPTXCompiler.h"
+
+#define NUM_THREADS 128
+#define NUM_BLOCKS 32
+#define SIZE NUM_THREADS * NUM_BLOCKS
+
+#define CUDA_SAFE_CALL(x)                                               \
+    do {                                                                \
+        CUresult result = x;                                            \
+        if (result != CUDA_SUCCESS) {                                   \
+            const char *msg;                                            \
+            cuGetErrorName(result, &amp;msg);                               \
+            printf("error: %s failed with error %s\n", #x, msg);        \
+            exit(1);                                                    \
+        }                                                               \
+    } while(0)
+
+#define NVPTXCOMPILER_SAFE_CALL(x)                                       \
+    do {                                                                 \
+        nvPTXCompileResult result = x;                                   \
+        if (result != NVPTXCOMPILE_SUCCESS) {                            \
+            printf("error: %s failed with error code %d\n", #x, result); \
+            exit(1);                                                     \
+        }                                                                \
+    } while(0)
+
+
+const char *ptxCode = "                                      \
+   .version 7.0                                           \n \
+   .target sm_50                                          \n \
+   .address_size 64                                       \n \
+   .visible .entry simpleVectorAdd(                       \n \
+        .param .u64 simpleVectorAdd_param_0,              \n \
+        .param .u64 simpleVectorAdd_param_1,              \n \
+        .param .u64 simpleVectorAdd_param_2               \n \
+   ) {                                                    \n \
+        .reg .f32   %f&lt;4&gt;;                                \n \
+        .reg .b32   %r&lt;5&gt;;                                \n \
+        .reg .b64   %rd&lt;11&gt;;                              \n \
+        ld.param.u64    %rd1, [simpleVectorAdd_param_0];  \n \
+        ld.param.u64    %rd2, [simpleVectorAdd_param_1];  \n \
+        ld.param.u64    %rd3, [simpleVectorAdd_param_2];  \n \
+        cvta.to.global.u64      %rd4, %rd3;               \n \
+        cvta.to.global.u64      %rd5, %rd2;               \n \
+        cvta.to.global.u64      %rd6, %rd1;               \n \
+        mov.u32         %r1, %ctaid.x;                    \n \
+        mov.u32         %r2, %ntid.x;                     \n \
+        mov.u32         %r3, %tid.x;                      \n \
+        mad.lo.s32      %r4, %r2, %r1, %r3;               \n \
+        mul.wide.u32    %rd7, %r4, 4;                     \n \
+        add.s64         %rd8, %rd6, %rd7;                 \n \
+        ld.global.f32   %f1, [%rd8];                      \n \
+        add.s64         %rd9, %rd5, %rd7;                 \n \
+        ld.global.f32   %f2, [%rd9];                      \n \
+        add.f32         %f3, %f1, %f2;                    \n \
+        add.s64         %rd10, %rd4, %rd7;                \n \
+        st.global.f32   [%rd10], %f3;                     \n \
+        ret;                                              \n \
+   } ";
+    </pre><p class="p"></p><pre xml:space="preserve">
+int elfLoadAndKernelLaunch(void* elf, size_t elfSize)
+{
+    CUdevice cuDevice;
+    CUcontext context;
+    CUmodule module;
+    CUfunction kernel;
+    CUdeviceptr dX, dY, dOut;
+    size_t i;
+    size_t bufferSize = SIZE * sizeof(float);
+    float a;
+    float hX[SIZE], hY[SIZE], hOut[SIZE];
+    void* args[3];
+
+    CUDA_SAFE_CALL(cuInit(0));
+    CUDA_SAFE_CALL(cuDeviceGet(&amp;cuDevice, 0));
+
+    CUDA_SAFE_CALL(cuCtxCreate(&amp;context, 0, cuDevice));
+    CUDA_SAFE_CALL(cuModuleLoadDataEx(&amp;module, elf, 0, 0, 0));
+    CUDA_SAFE_CALL(cuModuleGetFunction(&amp;kernel, module, "simpleVectorAdd"));
+
+    // Generate input for execution, and create output buffers.
+    for (i = 0; i &lt; SIZE; ++i) {
+        hX[i] = (float)i;
+        hY[i] = (float)i * 2;
+    }
+    CUDA_SAFE_CALL(cuMemAlloc(&amp;dX,   bufferSize));
+    CUDA_SAFE_CALL(cuMemAlloc(&amp;dY,   bufferSize));
+    CUDA_SAFE_CALL(cuMemAlloc(&amp;dOut, bufferSize));
+
+    CUDA_SAFE_CALL(cuMemcpyHtoD(dX, hX, bufferSize));
+    CUDA_SAFE_CALL(cuMemcpyHtoD(dY, hY, bufferSize));
+
+    args[0] = &amp;dX;
+    args[1] = &amp;dY;
+    args[2] = &amp;dOut;
+
+    CUDA_SAFE_CALL( cuLaunchKernel(kernel,
+                                   NUM_BLOCKS,  1, 1, // grid dim
+                                   NUM_THREADS, 1, 1, // block dim
+                                   0, NULL, // shared mem and stream
+                                   args, 0)); // arguments
+    CUDA_SAFE_CALL(cuCtxSynchronize()); // Retrieve and print output.
+
+    CUDA_SAFE_CALL(cuMemcpyDtoH(hOut, dOut, bufferSize));
+    for (i = 0; i &lt; SIZE; ++i) {
+        printf("Result:[%ld]:%f\n", i, hOut[i]);
+    }
+
+    // Release resources.
+    CUDA_SAFE_CALL(cuMemFree(dX));
+    CUDA_SAFE_CALL(cuMemFree(dY));
+    CUDA_SAFE_CALL(cuMemFree(dOut));
+    CUDA_SAFE_CALL(cuModuleUnload(module));
+    CUDA_SAFE_CALL(cuCtxDestroy(context));
+    return 0;
+}
+    </pre><p class="p"></p><pre xml:space="preserve">
+int main(int _argc, char *_argv[])
+{
+    nvPTXCompilerHandle compiler = NULL;
+    nvPTXCompileResult status;
+
+    size_t elfSize, infoSize, errorSize;
+    char *elf, *infoLog, *errorLog;
+    unsigned int minorVer, majorVer;
+
+    const char* compile_options[] = { "--gpu-name=sm_70",
+                                      "--verbose"
+                                    };
+
+    NVPTXCOMPILER_SAFE_CALL(nvPTXCompilerGetVersion(&amp;majorVer, &amp;minorVer));
+    printf("Current PTX Compiler API Version : %d.%d\n", majorVer, minorVer);
+
+    NVPTXCOMPILER_SAFE_CALL(nvPTXCompilerCreate(&amp;compiler,
+                                                (size_t)strlen(ptxCode),  /* ptxCodeLen */
+                                                ptxCode)                  /* ptxCode */
+                            );
+
+    status = nvPTXCompilerCompile(compiler,
+                                  2,                 /* numCompileOptions */
+                                  compile_options);  /* compileOptions */
+
+    if (status != NVPTXCOMPILE_SUCCESS) {
+        NVPTXCOMPILER_SAFE_CALL(nvPTXCompilerGetErrorLogSize(compiler, &amp;errorSize));
+
+        if (errorSize != 0) {
+            errorLog = (char*)malloc(errorSize+1);
+            NVPTXCOMPILER_SAFE_CALL(nvPTXCompilerGetErrorLog(compiler, errorLog));
+            printf("Error log: %s\n", errorLog);
+            free(errorLog);
+        }
+        exit(1);
+    }
+
+    NVPTXCOMPILER_SAFE_CALL(nvPTXCompilerGetCompiledProgramSize(compiler, &amp;elfSize));
+
+    elf = (char*) malloc(elfSize);
+    NVPTXCOMPILER_SAFE_CALL(nvPTXCompilerGetCompiledProgram(compiler, (void*)elf));
+
+    NVPTXCOMPILER_SAFE_CALL(nvPTXCompilerGetInfoLogSize(compiler, &amp;infoSize));
+
+    if (infoSize != 0) {
+        infoLog = (char*)malloc(infoSize+1);
+        NVPTXCOMPILER_SAFE_CALL(nvPTXCompilerGetInfoLog(compiler, infoLog));
+        printf("Info log: %s\n", infoLog);
+        free(infoLog);
+    }
+
+    NVPTXCOMPILER_SAFE_CALL(nvPTXCompilerDestroy(&amp;compiler));
+
+    // Load the compiled GPU assembly code 'elf'
+    elfLoadAndKernelLaunch(elf, elfSize);
+
+    free(elf);
+    return 0;
+}</pre></div>
+                  </div>
+                  <div class="topic concept nested1" id="build-instruction"><a name="build-instruction" shape="rect">
+                        <!-- --></a><h3 class="topictitle3">A.2.&nbsp;Build Instruction</h3>
+                     <div class="body conbody">
+                        <div class="p">
+                           Assuming the environment variable <samp class="ph codeph">CUDA_PATH</samp> points to
+                           CUDA Toolkit installation directory, build this example as:
+                           
+                           <ul class="ul">
+                              <li class="li">
+                                 Windows:
+                                 <pre class="pre screen" xml:space="preserve">cl.exe simpleVectorAddition.c /FesimpleVectorAddition ^
+          /I "%CUDA_PATH%"\include ^
+          "%CUDA_PATH%"\lib\x64\nvptxcompiler_static.lib
+          "%CUDA_PATH%"\lib\x64\cuda.lib</pre>
+                                 
+                                 OR
+                                 <pre class="pre screen" xml:space="preserve">nvcc simpleVectorAddition.c  -ccbin &lt;PATH_TO_cl.exe&gt;
+          -I $CUDA_PATH/include -L $CUDA_PATH/lib/x64/ -lcuda  nvptxcompiler_static.lib </pre></li>
+                              <li class="li">
+                                 Linux:
+                                 <pre class="pre screen" xml:space="preserve">gcc simpleVectorAddition.c -o simpleVectorAddition \
+             -I $CUDA_PATH/include \
+             -L $CUDA_PATH/lib64 \
+             libnvptxcompiler_static.a -lcuda -lm -lpthread \
+             -Wl,-rpath,$CUDA_PATH/lib64</pre></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="notices-header"><a name="notices-header" shape="rect">
+                     <!-- --></a><h2 class="topictitle2">Notices</h2>
+                  <div class="topic reference nested1" id="notice"><a name="notice" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Notice</h3>
+                           <p class="p" id="notice__notice-para-1"><a name="notice__notice-para-1" shape="rect">
+                                 <!-- --></a>This document is provided for information
+                              purposes only and shall not be regarded as a warranty of a
+                              certain functionality, condition, or quality of a product.
+                              NVIDIA Corporation (“NVIDIA”) makes no representations or
+                              warranties, expressed or implied, as to the accuracy or
+                              completeness of the information contained in this document
+                              and assumes no responsibility for any errors contained
+                              herein. NVIDIA shall have no liability for the consequences
+                              or use of such information or for any infringement of
+                              patents or other rights of third parties that may result
+                              from its use. This document is not a commitment to develop,
+                              release, or deliver any Material (defined below), code, or
+                              functionality.
+                           </p>
+                           <p class="p" id="notice__notice-para-2"><a name="notice__notice-para-2" shape="rect">
+                                 <!-- --></a>NVIDIA reserves the right to make corrections, modifications,
+                              enhancements, improvements, and any other changes to this
+                              document, at any time without notice.
+                           </p>
+                           <p class="p" id="notice__notice-para-3"><a name="notice__notice-para-3" shape="rect">
+                                 <!-- --></a>Customer should obtain the latest relevant information before
+                              placing orders and should verify that such information is
+                              current and complete.
+                           </p>
+                           <p class="p" id="notice__notice-para-4"><a name="notice__notice-para-4" shape="rect">
+                                 <!-- --></a>NVIDIA products are sold subject to the NVIDIA standard terms and
+                              conditions of sale supplied at the time of order
+                              acknowledgement, unless otherwise agreed in an individual
+                              sales agreement signed by authorized representatives of
+                              NVIDIA and customer (“Terms of Sale”). NVIDIA hereby
+                              expressly objects to applying any customer general terms and
+                              conditions with regards to the purchase of the NVIDIA
+                              product referenced in this document. No contractual
+                              obligations are formed either directly or indirectly by this
+                              document.
+                           </p>
+                           <p class="p" id="notice__notice-para-5"><a name="notice__notice-para-5" shape="rect">
+                                 <!-- --></a>NVIDIA products are not designed, authorized, or warranted to be
+                              suitable for use in medical, military, aircraft, space, or
+                              life support equipment, nor in applications where failure or
+                              malfunction of the NVIDIA product can reasonably be expected
+                              to result in personal injury, death, or property or
+                              environmental damage. NVIDIA accepts no liability for
+                              inclusion and/or use of NVIDIA products in such equipment or
+                              applications and therefore such inclusion and/or use is at
+                              customer’s own risk.
+                           </p>
+                           <p class="p" id="notice__notice-para-6"><a name="notice__notice-para-6" shape="rect">
+                                 <!-- --></a>NVIDIA makes no representation or warranty that products based on
+                              this document will be suitable for any specified use.
+                              Testing of all parameters of each product is not necessarily
+                              performed by NVIDIA. It is customer’s sole responsibility to
+                              evaluate and determine the applicability of any information
+                              contained in this document, ensure the product is suitable
+                              and fit for the application planned by customer, and perform
+                              the necessary testing for the application in order to avoid
+                              a default of the application or the product. Weaknesses in
+                              customer’s product designs may affect the quality and
+                              reliability of the NVIDIA product and may result in
+                              additional or different conditions and/or requirements
+                              beyond those contained in this document. NVIDIA accepts no
+                              liability related to any default, damage, costs, or problem
+                              which may be based on or attributable to: (i) the use of the
+                              NVIDIA product in any manner that is contrary to this
+                              document or (ii) customer product designs.
+                           </p>
+                           <p class="p" id="notice__notice-para-7"><a name="notice__notice-para-7" shape="rect">
+                                 <!-- --></a>No license, either expressed or implied, is granted under any NVIDIA
+                              patent right, copyright, or other NVIDIA intellectual
+                              property right under this document. Information published by
+                              NVIDIA regarding third-party products or services does not
+                              constitute a license from NVIDIA to use such products or
+                              services or a warranty or endorsement thereof. Use of such
+                              information may require a license from a third party under
+                              the patents or other intellectual property rights of the
+                              third party, or a license from NVIDIA under the patents or
+                              other intellectual property rights of NVIDIA.
+                           </p>
+                           <p class="p" id="notice__notice-para-8"><a name="notice__notice-para-8" shape="rect">
+                                 <!-- --></a>Reproduction of information in this document is permissible only if
+                              approved in advance by NVIDIA in writing, reproduced without
+                              alteration and in full compliance with all applicable export
+                              laws and regulations, and accompanied by all associated
+                              conditions, limitations, and notices.
+                           </p>
+                           <p class="p" id="notice__notice-para-9"><a name="notice__notice-para-9" shape="rect">
+                                 <!-- --></a>THIS DOCUMENT AND ALL NVIDIA DESIGN SPECIFICATIONS, REFERENCE
+                              BOARDS, FILES, DRAWINGS, DIAGNOSTICS, LISTS, AND OTHER
+                              DOCUMENTS (TOGETHER AND SEPARATELY, “MATERIALS”) ARE BEING
+                              PROVIDED “AS IS.” NVIDIA MAKES NO WARRANTIES, EXPRESSED,
+                              IMPLIED, STATUTORY, OR OTHERWISE WITH RESPECT TO THE
+                              MATERIALS, AND EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF
+                              NONINFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
+                              PARTICULAR PURPOSE. TO THE EXTENT NOT PROHIBITED BY LAW, IN
+                              NO EVENT WILL NVIDIA BE LIABLE FOR ANY DAMAGES, INCLUDING
+                              WITHOUT LIMITATION ANY DIRECT, INDIRECT, SPECIAL,
+                              INCIDENTAL, PUNITIVE, OR CONSEQUENTIAL DAMAGES, HOWEVER
+                              CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING
+                              OUT OF ANY USE OF THIS DOCUMENT, EVEN IF NVIDIA HAS BEEN
+                              ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. Notwithstanding
+                              any damages that customer might incur for any reason
+                              whatsoever, NVIDIA’s aggregate and cumulative liability
+                              towards customer for the products described herein shall be
+                              limited in accordance with the Terms of Sale for the
+                              product.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="vesa"><a name="vesa" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">VESA DisplayPort</h3>
+                           <p class="p">DisplayPort and DisplayPort Compliance Logo, DisplayPort Compliance Logo for
+                              Dual-mode Sources, and DisplayPort Compliance Logo for Active Cables are
+                              trademarks owned by the Video Electronics Standards Association in the United
+                              States and other countries.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="hdmi"><a name="hdmi" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">HDMI</h3>
+                           <p class="p">HDMI, the HDMI logo, and High-Definition Multimedia Interface are trademarks or
+                              registered trademarks of HDMI Licensing LLC.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="opencl"><a name="opencl" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">OpenCL</h3>
+                           <p class="p">OpenCL is a trademark of Apple Inc. used under license to the Khronos Group Inc.</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="trademarks"><a name="trademarks" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Trademarks</h3>
+                           <p class="p">NVIDIA and the NVIDIA logo are trademarks or registered trademarks of NVIDIA Corporation
+                              in the U.S. and other countries.  Other company and product names may be trademarks of
+                              the respective companies with which they are associated.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="copyright-past-to-present"><a name="copyright-past-to-present" shape="rect">
+                        <!-- --></a><h3 class="topictitle3"></h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <h3 class="title sectiontitle">Copyright</h3>
+                           <p class="p">© <span class="ph">2020</span>-<span class="ph">2020</span> NVIDIA
+                              Corporation. All rights reserved.
+                           </p>
+                           <p class="p">This product includes software developed by the Syncro Soft SRL (http://www.sync.ro/).</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <hr id="contents-end"></hr>
+               
+            </article>
+         </div>
+      </div>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/formatting/common.min.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-write.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-tracker.js"></script>
+      <script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher: "998dc202-a267-4d8e-bce9-14debadb8d92", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script><script type="text/javascript">_satellite.pageBottom();</script></body>
+</html>

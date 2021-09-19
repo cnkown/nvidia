@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Execution Methods &mdash; cuFFTDx 0.3.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/cufftdx_override.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Known issues" href="../issues.html" />
+    <link rel="prev" title="Traits" href="traits.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+           
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> cuFFTDx
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #76b900;
+    }
+
+    .wy-side-nav-search a:link, .wy-nav-top a:link {
+      color: #fff;
+    }
+    .wy-side-nav-search a:visited, .wy-nav-top a:visited {
+      color: #fff;
+    }
+    .wy-side-nav-search a:hover, .wy-nav-top a:hover {
+      color: #fff;
+    }
+
+    .wy-menu-vertical a:link, .wy-menu-vertical a:visited {
+      color: #d9d9d9
+    }
+
+    .wy-menu-vertical a:active {
+      background-color: #76b900
+    }
+
+    .wy-side-nav-search>div.version {
+      color: rgba(0, 0, 0, 0.3)
+    }
+
+    /* override table width restrictions */
+    .wy-table-responsive table td, .wy-table-responsive table th {
+        white-space: normal;
+    }
+
+    .wy-table-responsive {
+        margin-bottom: 24px;
+        max-width: 100%;
+        overflow: visible;
+    }
+  </style>
+  
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Documentation home</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">First FFT  using cuFFTDx</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html#what-next">What next?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html#compilation">Compilation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html#your-next-ten-custom-fft-kernels">Your next ten custom FFT kernels…</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html#what-happens-under-the-hood">What happens under the hood?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html#why">Why?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Achieving high performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../performance.html#general-advice">General advice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../performance.html#global-memory">Global memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../performance.html#kernel-fusion">Kernel fusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../performance.html#advanced">Advanced</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../performance.html#further-reading">Further reading</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../performance.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements_func.html">Requirements and Functionality</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../requirements_func.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements_func.html#supported-functionality">Supported Functionality</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="operators.html">Operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#description-operators">Description Operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="operators.html#size-operator">Size Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="operators.html#direction-operator">Direction Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="operators.html#type-operator">Type Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="operators.html#precision-operator">Precision Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="operators.html#stride-operator">Stride Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="operators.html#sm-operator">SM Operator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#execution-operators">Execution Operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="operators.html#thread-operator">Thread Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="operators.html#block-operator">Block Operator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="operators.html#block-configuration-operators">Block Configuration Operators</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="traits.html">Traits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="traits.html#description-traits">Description Traits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="traits.html#size-trait">Size Trait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="traits.html#type-trait">Type Trait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="traits.html#direction-trait">Direction Trait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="traits.html#precision-trait">Precision Trait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="traits.html#stride-trait">Stride Trait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="traits.html#is-fft-trait">Is FFT? Trait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="traits.html#is-fft-execution-trait">Is FFT Execution? Trait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="traits.html#is-fft-complete-trait">Is FFT-complete? Trait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="traits.html#is-fft-complete-execution-trait">Is FFT-complete Execution? Trait</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="traits.html#execution-traits">Execution Traits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="traits.html#thread-traits">Thread Traits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="traits.html#block-traits">Block Traits</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Execution Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#thread-execute-method">Thread Execute Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#block-execute-method">Block Execute Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-workspace-function">Make Workspace Function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Known issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../issues.html#warnings">Warnings</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">cuFFTDx</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">API reference</a> &raquo;</li>
+        
+      <li>Execution Methods</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/methods.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="execution-methods">
+<span id="execution-methods-label"></span><h1>Execution Methods<a class="headerlink" href="#execution-methods" title="Permalink to this headline">¶</a></h1>
+<p>These methods are used to run the FFT operation.</p>
+<p>A code example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cufftdx.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="n">FFT</span> <span class="o">=</span> <span class="k">decltype</span><span class="p">(</span> <span class="n">cufftdx</span><span class="o">::</span><span class="n">Size</span><span class="o">&lt;</span><span class="mi">128</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">+</span> <span class="n">cufftdx</span><span class="o">::</span><span class="n">Type</span><span class="o">&lt;</span><span class="n">fft_type</span><span class="o">::</span><span class="n">c2c</span><span class="o">&gt;</span><span class="p">()</span>
+                    <span class="o">+</span> <span class="n">cufftdx</span><span class="o">::</span><span class="n">Direction</span><span class="o">&lt;</span><span class="n">fft_direction</span><span class="o">::</span><span class="n">forward</span><span class="o">&gt;</span><span class="p">()</span>
+                    <span class="o">+</span> <span class="n">cufftdx</span><span class="o">::</span><span class="n">Precision</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">+</span> <span class="n">cufftdx</span><span class="o">::</span><span class="n">Block</span><span class="p">()</span> <span class="p">);</span>
+
+<span class="k">using</span> <span class="n">complex_type</span> <span class="o">=</span> <span class="k">typename</span> <span class="n">FFT</span><span class="o">::</span><span class="n">value_type</span><span class="p">;</span>
+
+<span class="c1">// Shared memory pointer</span>
+<span class="k">extern</span> <span class="n">__shared__</span> <span class="n">complex_type</span> <span class="n">shared_mem</span><span class="p">[];</span>
+
+<span class="c1">// Register data</span>
+<span class="n">complex_type</span> <span class="n">thread_data</span><span class="p">[</span><span class="n">FFT</span><span class="o">::</span><span class="n">storage_size</span><span class="p">];</span>
+
+<span class="c1">// Load data into registers (thread_data)</span>
+<span class="c1">// ...</span>
+
+<span class="n">FFT</span><span class="p">().</span><span class="n">execute</span><span class="p">(</span><span class="n">thread_data</span><span class="p">,</span> <span class="n">shared_mem</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="thread-execute-method">
+<span id="thread-execute-method-label"></span><h2>Thread Execute Method<a class="headerlink" href="#thread-execute-method" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">FFT</span><span class="p">().</span><span class="n">execute</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="o">*</span> <span class="n">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Runs the FFT operation defined by the FFT descriptor. <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">T</span></span></code> can be any type (such as <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">float2</span></span></code> or <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">double2</span></span></code>),
+as long as its alignment and element size are the same as those of <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">FFT</span></span><span class="o"><span class="pre">::</span></span><span class="n"><span class="pre">value_type</span></span></code>
+(see <a class="reference internal" href="traits.html#valuetype-thread-trait-label"><span class="std std-ref">Value Type Trait</span></a>).</p>
+<p>This method is available if the descriptor has been constructed using the <a class="reference internal" href="operators.html#thread-operator-label"><span class="std std-ref">Thread Operator</span></a> and <a class="reference internal" href="traits.html#isfftcompleteexecution-trait-label"><span class="std std-ref">Is FFT-complete Execution? Trait</span></a> is <code class="code highlight cpp docutils literal notranslate"><span class="nb"><span class="pre">true</span></span></code>.</p>
+</div>
+<div class="section" id="block-execute-method">
+<span id="block-execute-method-label"></span><h2>Block Execute Method<a class="headerlink" href="#block-execute-method" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// #1</span>
+<span class="kt">void</span> <span class="n">FFT</span><span class="p">().</span><span class="n">execute</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="o">*</span> <span class="n">input</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">shared_memory</span><span class="p">,</span> <span class="n">FFT</span><span class="o">::</span><span class="n">workspace_type</span><span class="o">&amp;</span> <span class="n">workspace</span><span class="p">)</span>
+
+<span class="c1">// #2: Overload for FFTs which don&#39;t require workspace</span>
+<span class="kt">void</span> <span class="n">FFT</span><span class="p">().</span><span class="n">execute</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="o">*</span> <span class="n">input</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">shared_memory</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Runs the FFT operation defined by the FFT descriptor. <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">T</span></span></code> can be any type (such as <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">float2</span></span></code> or <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">double2</span></span></code>),
+as long as its alignment and element size are the same as those of <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">FFT</span></span><span class="o"><span class="pre">::</span></span><span class="n"><span class="pre">value_type</span></span></code>
+(see <a class="reference internal" href="traits.html#valuetype-block-trait-label"><span class="std std-ref">Value Type Trait</span></a>).</p>
+<p>When <a class="reference internal" href="traits.html#requiresworkspace-block-trait-label"><span class="std std-ref">Requires Workspace Trait</span></a> is <code class="code highlight cpp docutils literal notranslate"><span class="nb"><span class="pre">false</span></span></code>, overload #2 can be used. Otherwise, user has to use
+#1 overload and pass reference to a workspace.</p>
+<p>This method is available if the descriptor has been constructed using the <a class="reference internal" href="operators.html#block-operator-label"><span class="std std-ref">Block Operator</span></a>
+and <a class="reference internal" href="traits.html#isfftcompleteexecution-trait-label"><span class="std std-ref">Is FFT-complete Execution? Trait</span></a> is <code class="code highlight cpp docutils literal notranslate"><span class="nb"><span class="pre">true</span></span></code>.</p>
+</div>
+<div class="section" id="make-workspace-function">
+<span id="make-workspace-method-label"></span><h2>Make Workspace Function<a class="headerlink" href="#make-workspace-function" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">FFT</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">cufftdx</span><span class="o">::</span><span class="n">make_workspace</span><span class="o">&lt;</span><span class="n">FFT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cudaError_t</span><span class="o">&amp;</span> <span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">cufftdx</span></span><span class="o"><span class="pre">::</span></span><span class="n"><span class="pre">make_workspace</span></span><span class="o"><span class="pre">&lt;</span></span><span class="n"><span class="pre">FFT</span></span><span class="o"><span class="pre">&gt;</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">cudaError_t</span></span><span class="o"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span></code> is a helper function for creating workspace required for block <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">execute</span></span><span class="p"><span class="pre">(..)</span></span></code> method
+when <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">FFT</span></span><span class="o"><span class="pre">::</span></span><span class="n"><span class="pre">requires_workspace</span></span></code> (<a class="reference internal" href="traits.html#requiresworkspace-block-trait-label"><span class="std std-ref">Requires Workspace Trait</span></a>) is <code class="code highlight cpp docutils literal notranslate"><span class="nb"><span class="pre">true</span></span></code>. <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">FFT</span></span></code> is type of FFT descriptor.
+If after calling the function <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">error</span></span></code> is not <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">cudaSuccess</span></span></code> the workspace was not created correctly and is invalid.</p>
+<ul class="simple">
+<li><p>If <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">FFT</span></span><span class="o"><span class="pre">::</span></span><span class="n"><span class="pre">requires_workspace</span></span></code> (<a class="reference internal" href="traits.html#requiresworkspace-block-trait-label"><span class="std std-ref">Requires Workspace Trait</span></a>) trait is <code class="code highlight cpp docutils literal notranslate"><span class="nb"><span class="pre">false</span></span></code>, user doesn’t have to create workspace.</p></li>
+<li><p>Workspace can be created for FFT with <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">FFT</span></span><span class="o"><span class="pre">::</span></span><span class="n"><span class="pre">requires_workspace</span></span></code> equal to false: such workspace is an empty workspace with no global memory allocation.</p></li>
+<li><p>Workspace object is valid only for FFT it was created for.</p></li>
+<li><p>Workspace object can allocate global memory, however never more than <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">FFT</span></span><span class="o"><span class="pre">::</span></span><span class="n"><span class="pre">workspace_size</span></span></code> (<a class="reference internal" href="traits.html#workspacesize-block-trait-label"><span class="std std-ref">Workspace Size Trait</span></a>),
+and it’s responsible for freeing it.</p></li>
+<li><p>Allocated global memory is freed upon destruction of the last copy of created workspace object.</p></li>
+<li><p>Workspace object can be implicitly casted to <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">FFT</span></span><span class="o"><span class="pre">::</span></span><span class="n"><span class="pre">workspace_type</span></span></code>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<blockquote>
+<div><p>Workspace is not required for FFTs of following sizes:</p>
+<ul class="simple">
+<li><p>Powers of 2 up to 4096</p></li>
+<li><p>Powers of 3 up to 2187</p></li>
+<li><p>Powers of 5 up to 3125</p></li>
+<li><p>Powers of 6 up to 1296</p></li>
+<li><p>Powers of 7 up to 2401</p></li>
+<li><p>Powers of 10 up to 1000</p></li>
+<li><p>Powers of 11 up to 1331</p></li>
+<li><p>Powers of 12 up to 1728</p></li>
+</ul>
+<dl class="simple">
+<dt>In the future versions of cuFFTDx:</dt><dd><ul class="simple">
+<li><p>Workspace requirement may be removed for other configurations.</p></li>
+<li><p>FFT configurations that do not require workspace will continue to do so.</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">FFT</span></span><span class="o"><span class="pre">::</span></span><span class="n"><span class="pre">workspace_type</span></span></code> (<a class="reference internal" href="traits.html#workspacetype-block-trait-label"><span class="std std-ref">Workspace Type Trait</span></a>) object doesn’t track lifetime of underlying memory, and
+is only valid within a lifetime of workspace object it was casted from.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Type returned by <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">cufftdx</span></span><span class="o"><span class="pre">::</span></span><span class="n"><span class="pre">make_workspace</span></span><span class="o"><span class="pre">&lt;</span></span><span class="n"><span class="pre">FFT</span></span><span class="o"><span class="pre">&gt;</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">cudaError_t</span></span><span class="o"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span></code> can be different for different FFT descriptions,
+and is not same as <code class="code highlight cpp docutils literal notranslate"><span class="n"><span class="pre">FFT</span></span><span class="o"><span class="pre">::</span></span><span class="n"><span class="pre">workspace_type</span></span></code> (<a class="reference internal" href="traits.html#workspacetype-block-trait-label"><span class="std std-ref">Workspace Type Trait</span></a>). User should use <code class="code highlight cpp docutils literal notranslate"><span class="k"><span class="pre">auto</span></span></code> when
+creating a workspace object. Example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Kernel</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">FFT</span><span class="o">&gt;</span>
+<span class="n">__launch_bounds__</span><span class="p">(</span><span class="n">FFT</span><span class="o">::</span><span class="n">max_threads_per_block</span><span class="p">)</span>
+<span class="n">__global__</span> <span class="kt">void</span> <span class="n">block_fft_kernel</span><span class="p">(</span><span class="k">typename</span> <span class="n">FFT</span><span class="o">::</span><span class="n">value_type</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="k">typename</span> <span class="n">FFT</span><span class="o">::</span><span class="n">workspace_type</span> <span class="n">workspace</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// Execute FFT</span>
+    <span class="n">FFT</span><span class="p">().</span><span class="n">execute</span><span class="p">(</span><span class="n">thread_data</span><span class="p">,</span> <span class="n">shared_mem</span><span class="p">,</span> <span class="n">workspace</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Create workspace</span>
+<span class="n">cudaError_t</span> <span class="n">error</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">workspace</span> <span class="o">=</span> <span class="n">cufftdx</span><span class="o">::</span><span class="n">make_workspace</span><span class="o">&lt;</span><span class="n">FFT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="c1">// Run kernel with FFT</span>
+<span class="n">block_fft_kernel</span><span class="o">&lt;</span><span class="n">FFT</span><span class="o">&gt;&lt;&lt;&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="n">FFT</span><span class="o">::</span><span class="n">block_dim</span><span class="p">,</span> <span class="n">FFT</span><span class="o">::</span><span class="n">shared_memory_size</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">workspace</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../issues.html" class="btn btn-neutral float-right" title="Known issues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="traits.html" class="btn btn-neutral float-left" title="Traits" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, NVIDIA Corporation
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+  a:link, a:visited {
+    color: #76b900;
+  }
+
+  a:hover {
+    color: #8c0;
+  }
+
+  .rst-content dl:not(.docutils) dt {
+    background: rgba(118, 185, 0, 0.1);
+    color: rgba(59,93,0,1);
+    border-top: solid 3px rgba(59,93,0,1);
+  }
+  </style>
+  
+
+</body>
+</html>

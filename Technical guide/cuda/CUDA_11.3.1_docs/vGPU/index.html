@@ -1,0 +1,372 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+      <meta name="copyright" content="(C) Copyright 2005"></meta>
+      <meta name="DC.rights.owner" content="(C) Copyright 2005"></meta>
+      <meta name="DC.Type" content="concept"></meta>
+      <meta name="DC.Title" content="vGPUs and CUDA"></meta>
+      <meta name="abstract" content="vGPUs that support CUDA"></meta>
+      <meta name="description" content="vGPUs that support CUDA"></meta>
+      <meta name="DC.Coverage" content="Miscellaneous"></meta>
+      <meta name="DC.subject" content="vGPU"></meta>
+      <meta name="keywords" content="vGPU"></meta>
+      <meta name="DC.Format" content="XHTML"></meta>
+      <meta name="DC.Identifier" content="abstract"></meta>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/commonltr.css"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/site.css"></link>
+      <title>vGPU :: CUDA Toolkit Documentation</title>
+      <!--[if lt IE 9]>
+      <script src="../common/formatting/html5shiv-printshiv.min.js"></script>
+      <![endif]-->
+      <script type="text/javascript" charset="utf-8" src="//assets.adobedtm.com/b92787824f2e0e9b68dc2e993f9bd995339fe417/satelliteLib-7ba51e58dc61bcb0e9311aadd02a0108ab24cc6c.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/scripts/tynt/tynt.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.ba-hashchange.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.scrollintoview.min.js"></script>
+      <script type="text/javascript" src="../search/htmlFileList.js"></script>
+      <script type="text/javascript" src="../search/htmlFileInfoList.js"></script>
+      <script type="text/javascript" src="../search/nwSearchFnt.min.js"></script>
+      <script type="text/javascript" src="../search/stemmers/en_stemmer.min.js"></script>
+      <script type="text/javascript" src="../search/index-1.js"></script>
+      <script type="text/javascript" src="../search/index-2.js"></script>
+      <script type="text/javascript" src="../search/index-3.js"></script>
+      <link rel="canonical" href="http://docs.nvidia.com/cuda/vGPU/index.html"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/qwcode.highlight.css"></link>
+   </head>
+   <body>
+      
+      <header id="header"><span id="company">NVIDIA</span><span id="site-title">CUDA Toolkit Documentation</span><form id="search" method="get" action="search">
+            <input type="text" name="search-text"></input><fieldset id="search-location">
+               <legend>Search In:</legend>
+               <label><input type="radio" name="search-type" value="site"></input>Entire Site</label>
+               <label><input type="radio" name="search-type" value="document"></input>Just This Document</label></fieldset>
+            <button type="reset">clear search</button>
+            <button id="submit" type="submit">search</button></form>
+      </header>
+      <div id="site-content">
+         <nav id="site-nav">
+            <div class="category closed"><a href="../index.html" title="The root of the site.">CUDA Toolkit 
+                  
+                  
+                  v11.3.1</a></div>
+            <div class="category"><a href="index.html" title="vGPU">vGPU</a></div>
+            <ul>
+               <li>
+                  <div class="section-link"><a href="#overview">1.&nbsp;Overview</a></div>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#content">2.&nbsp;vGPU</a></div>
+               </li>
+            </ul>
+         </nav>
+         <div id="resize-nav"></div>
+         <nav id="search-results">
+            <h2>Search Results</h2>
+            <ol></ol>
+         </nav>
+         
+         <div id="contents-container">
+            <div id="breadcrumbs-container">
+               <div id="release-info">vGPU
+                  (<a href="../pdf/vGPU.pdf">PDF</a>)
+                  -
+                   
+                  
+                  
+                  v11.3.1
+                  (<a href="https://developer.nvidia.com/cuda-toolkit-archive">older</a>)
+                  -
+                  Last updated May 20, 2021
+                  -
+                  <a href="mailto:CUDAIssues@nvidia.com?subject=CUDA Toolkit Documentation Feedback: vGPU">Send Feedback</a></div>
+            </div>
+            <article id="contents">
+               <div class="topic nested0" id="abstract"><a name="abstract" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#abstract" name="abstract" shape="rect">vGPUs and CUDA</a></h2>
+                  <div class="body conbody">
+                     <p class="shortdesc">vGPUs that support CUDA</p>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="overview"><a name="overview" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#overview" name="overview" shape="rect">1.&nbsp;Overview</a></h2>
+                  <div class="body conbody">
+                     <p class="p">This page describes the support for CUDA on NVIDIA® virtual GPU software.</p>
+                     <p class="p">For more information on NVIDIA virtual GPU software, visit <a class="xref" href="https://docs.nvidia.com/grid/index.html" target="_blank" shape="rect">https://docs.nvidia.com/grid/index.html</a>.
+                     </p>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="content"><a name="content" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#content" name="content" shape="rect">2.&nbsp;vGPU</a></h2>
+                  <div class="body conbody">
+                     <p class="p">The following vGPU releases support CUDA: </p>
+                     <div class="p">
+                        <div class="tablenoborder">
+                           <table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+                              <tbody class="tbody">
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1"><strong class="ph b">CUDA Toolkit Version</strong></td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1"><strong class="ph b">vGPU Software Releases</strong></td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 11.3 Update 1 (11.3.1)</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">Not supported</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 11.3</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">Not supported</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 11.2 Update 1 (11.2.1)</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">Not supported</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 11.2</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/grid/12.0/grid-vgpu-user-guide/index.html#cuda-open-cl-support-vgpu" target="_blank" shape="rect">12.x releases</a></td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 11.1 Update 1 (11.1.1)</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">Not supported</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 11.1</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">Not supported</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 11.0</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/grid/11.0/grid-vgpu-user-guide/index.html#cuda-open-cl-support-vgpu" target="_blank" shape="rect">11.x releases</a></td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 10.2</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/grid/10.0/grid-vgpu-user-guide/index.html#cuda-open-cl-support-vgpu" target="_blank" shape="rect">10.x releases</a></td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 10.1 Update 2 (10.1.243)</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">Not supported</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 10.1 Update 1</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/grid/9.0/grid-vgpu-user-guide/index.html#cuda-open-cl-support-vgpu" target="_blank" shape="rect">9.x releases</a></td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 10.1 general release (10.1.105)</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/grid/8.0/grid-vgpu-user-guide/index.html#cuda-open-cl-support-vgpu" target="_blank" shape="rect">8.x releases</a></td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 10.0.130</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/grid/7.0/grid-vgpu-user-guide/index.html#cuda-open-cl-support-vgpu" target="_blank" shape="rect">7.x releases</a></td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 9.2 (9.2.148 Update 1)</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">Not supported</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 9.2 (9.2.88)</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">Not supported</td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 9.1 (9.1.85)</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/grid/6.0/grid-vgpu-user-guide/index.html#cuda-open-cl-support-vgpu" target="_blank" shape="rect">6.x releases</a></td>
+                                 </tr>
+                                 <tr class="row">
+                                    <td class="entry" valign="top" rowspan="1" colspan="1">CUDA 9.0 (9.0.176)</td>
+                                    <td class="entry" valign="top" rowspan="1" colspan="1"><a class="xref" href="https://docs.nvidia.com/grid/5.0/grid-vgpu-user-guide/index.html#cuda-open-cl-support-vgpu" target="_blank" shape="rect">5.x releases</a></td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <p class="p">Some CUDA features might not be supported by your version of NVIDIA virtual GPU software.
+                        For details, follow the link in the table to the documentation for your version.
+                     </p>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="notices-header"><a name="notices-header" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#notices-header" name="notices-header" shape="rect">Notices</a></h2>
+                  <div class="topic reference nested1" id="notice"><a name="notice" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#notice" name="notice" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Notice</h3>
+                           <p class="p" id="notice__notice-para-1"><a name="notice__notice-para-1" shape="rect">
+                                 <!-- --></a>This document is provided for information
+                              purposes only and shall not be regarded as a warranty of a
+                              certain functionality, condition, or quality of a product.
+                              NVIDIA Corporation (“NVIDIA”) makes no representations or
+                              warranties, expressed or implied, as to the accuracy or
+                              completeness of the information contained in this document
+                              and assumes no responsibility for any errors contained
+                              herein. NVIDIA shall have no liability for the consequences
+                              or use of such information or for any infringement of
+                              patents or other rights of third parties that may result
+                              from its use. This document is not a commitment to develop,
+                              release, or deliver any Material (defined below), code, or
+                              functionality.
+                           </p>
+                           <p class="p" id="notice__notice-para-2"><a name="notice__notice-para-2" shape="rect">
+                                 <!-- --></a>NVIDIA reserves the right to make corrections, modifications,
+                              enhancements, improvements, and any other changes to this
+                              document, at any time without notice.
+                           </p>
+                           <p class="p" id="notice__notice-para-3"><a name="notice__notice-para-3" shape="rect">
+                                 <!-- --></a>Customer should obtain the latest relevant information before
+                              placing orders and should verify that such information is
+                              current and complete.
+                           </p>
+                           <p class="p" id="notice__notice-para-4"><a name="notice__notice-para-4" shape="rect">
+                                 <!-- --></a>NVIDIA products are sold subject to the NVIDIA standard terms and
+                              conditions of sale supplied at the time of order
+                              acknowledgement, unless otherwise agreed in an individual
+                              sales agreement signed by authorized representatives of
+                              NVIDIA and customer (“Terms of Sale”). NVIDIA hereby
+                              expressly objects to applying any customer general terms and
+                              conditions with regards to the purchase of the NVIDIA
+                              product referenced in this document. No contractual
+                              obligations are formed either directly or indirectly by this
+                              document.
+                           </p>
+                           <p class="p" id="notice__notice-para-5"><a name="notice__notice-para-5" shape="rect">
+                                 <!-- --></a>NVIDIA products are not designed, authorized, or warranted to be
+                              suitable for use in medical, military, aircraft, space, or
+                              life support equipment, nor in applications where failure or
+                              malfunction of the NVIDIA product can reasonably be expected
+                              to result in personal injury, death, or property or
+                              environmental damage. NVIDIA accepts no liability for
+                              inclusion and/or use of NVIDIA products in such equipment or
+                              applications and therefore such inclusion and/or use is at
+                              customer’s own risk.
+                           </p>
+                           <p class="p" id="notice__notice-para-6"><a name="notice__notice-para-6" shape="rect">
+                                 <!-- --></a>NVIDIA makes no representation or warranty that products based on
+                              this document will be suitable for any specified use.
+                              Testing of all parameters of each product is not necessarily
+                              performed by NVIDIA. It is customer’s sole responsibility to
+                              evaluate and determine the applicability of any information
+                              contained in this document, ensure the product is suitable
+                              and fit for the application planned by customer, and perform
+                              the necessary testing for the application in order to avoid
+                              a default of the application or the product. Weaknesses in
+                              customer’s product designs may affect the quality and
+                              reliability of the NVIDIA product and may result in
+                              additional or different conditions and/or requirements
+                              beyond those contained in this document. NVIDIA accepts no
+                              liability related to any default, damage, costs, or problem
+                              which may be based on or attributable to: (i) the use of the
+                              NVIDIA product in any manner that is contrary to this
+                              document or (ii) customer product designs.
+                           </p>
+                           <p class="p" id="notice__notice-para-7"><a name="notice__notice-para-7" shape="rect">
+                                 <!-- --></a>No license, either expressed or implied, is granted under any NVIDIA
+                              patent right, copyright, or other NVIDIA intellectual
+                              property right under this document. Information published by
+                              NVIDIA regarding third-party products or services does not
+                              constitute a license from NVIDIA to use such products or
+                              services or a warranty or endorsement thereof. Use of such
+                              information may require a license from a third party under
+                              the patents or other intellectual property rights of the
+                              third party, or a license from NVIDIA under the patents or
+                              other intellectual property rights of NVIDIA.
+                           </p>
+                           <p class="p" id="notice__notice-para-8"><a name="notice__notice-para-8" shape="rect">
+                                 <!-- --></a>Reproduction of information in this document is permissible only if
+                              approved in advance by NVIDIA in writing, reproduced without
+                              alteration and in full compliance with all applicable export
+                              laws and regulations, and accompanied by all associated
+                              conditions, limitations, and notices.
+                           </p>
+                           <p class="p" id="notice__notice-para-9"><a name="notice__notice-para-9" shape="rect">
+                                 <!-- --></a>THIS DOCUMENT AND ALL NVIDIA DESIGN SPECIFICATIONS, REFERENCE
+                              BOARDS, FILES, DRAWINGS, DIAGNOSTICS, LISTS, AND OTHER
+                              DOCUMENTS (TOGETHER AND SEPARATELY, “MATERIALS”) ARE BEING
+                              PROVIDED “AS IS.” NVIDIA MAKES NO WARRANTIES, EXPRESSED,
+                              IMPLIED, STATUTORY, OR OTHERWISE WITH RESPECT TO THE
+                              MATERIALS, AND EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF
+                              NONINFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
+                              PARTICULAR PURPOSE. TO THE EXTENT NOT PROHIBITED BY LAW, IN
+                              NO EVENT WILL NVIDIA BE LIABLE FOR ANY DAMAGES, INCLUDING
+                              WITHOUT LIMITATION ANY DIRECT, INDIRECT, SPECIAL,
+                              INCIDENTAL, PUNITIVE, OR CONSEQUENTIAL DAMAGES, HOWEVER
+                              CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING
+                              OUT OF ANY USE OF THIS DOCUMENT, EVEN IF NVIDIA HAS BEEN
+                              ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. Notwithstanding
+                              any damages that customer might incur for any reason
+                              whatsoever, NVIDIA’s aggregate and cumulative liability
+                              towards customer for the products described herein shall be
+                              limited in accordance with the Terms of Sale for the
+                              product.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="vesa"><a name="vesa" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#vesa" name="vesa" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">VESA DisplayPort</h3>
+                           <p class="p">DisplayPort and DisplayPort Compliance Logo, DisplayPort Compliance Logo for
+                              Dual-mode Sources, and DisplayPort Compliance Logo for Active Cables are
+                              trademarks owned by the Video Electronics Standards Association in the United
+                              States and other countries.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="hdmi"><a name="hdmi" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#hdmi" name="hdmi" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">HDMI</h3>
+                           <p class="p">HDMI, the HDMI logo, and High-Definition Multimedia Interface are trademarks or
+                              registered trademarks of HDMI Licensing LLC.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="opencl"><a name="opencl" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#opencl" name="opencl" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">OpenCL</h3>
+                           <p class="p">OpenCL is a trademark of Apple Inc. used under license to the Khronos Group Inc.</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="trademarks"><a name="trademarks" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#trademarks" name="trademarks" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Trademarks</h3>
+                           <p class="p">NVIDIA and the NVIDIA logo are trademarks or registered trademarks of NVIDIA Corporation
+                              in the U.S. and other countries.  Other company and product names may be trademarks of
+                              the respective companies with which they are associated.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="copyright-past-to-present"><a name="copyright-past-to-present" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#copyright-past-to-present" name="copyright-past-to-present" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <h3 class="title sectiontitle">Copyright</h3>
+                           <p class="p">© <span class="ph">2018</span>-<span class="ph">2021</span> NVIDIA
+                              Corporation. All rights reserved.
+                           </p>
+                           <p class="p">This product includes software developed by the Syncro Soft SRL (http://www.sync.ro/).</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <hr id="contents-end"></hr>
+               
+            </article>
+         </div>
+      </div>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/formatting/common.min.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-write.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-tracker.js"></script>
+      <script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher: "998dc202-a267-4d8e-bce9-14debadb8d92", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script><script type="text/javascript">_satellite.pageBottom();</script></body>
+</html>

@@ -1,0 +1,1090 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+      <meta name="copyright" content="(C) Copyright 2005"></meta>
+      <meta name="DC.rights.owner" content="(C) Copyright 2005"></meta>
+      <meta name="DC.Type" content="concept"></meta>
+      <meta name="DC.Title" content="NVIDIA CUDA Toolkit Release Notes"></meta>
+      <meta name="abstract" content="The Release Notes for the CUDA Toolkit."></meta>
+      <meta name="description" content="The Release Notes for the CUDA Toolkit."></meta>
+      <meta name="DC.Coverage" content="Release Notes"></meta>
+      <meta name="DC.subject" content="CUDA Tegra Toolkit, CUDA Toolkit Development, CUDA Toolkit libraries, CUDA Toolkit release, CUDA Toolkit installation, CUDA Toolkit issues, CUDA Toolkit core files, CUDA Toolkit resolved issues, CUDA Toolkit known issues, CUDA Toolkit documentation"></meta>
+      <meta name="keywords" content="CUDA Tegra Toolkit, CUDA Toolkit Development, CUDA Toolkit libraries, CUDA Toolkit release, CUDA Toolkit installation, CUDA Toolkit issues, CUDA Toolkit core files, CUDA Toolkit resolved issues, CUDA Toolkit known issues, CUDA Toolkit documentation"></meta>
+      <meta name="DC.Format" content="XHTML"></meta>
+      <meta name="DC.Identifier" content="abstract"></meta>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/commonltr.css"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/site.css"></link>
+      <title>Release Notes :: CUDA Toolkit Documentation</title>
+      <!--[if lt IE 9]>
+      <script src="../common/formatting/html5shiv-printshiv.min.js"></script>
+      <![endif]-->
+      <script type="text/javascript" charset="utf-8" src="//assets.adobedtm.com/b92787824f2e0e9b68dc2e993f9bd995339fe417/satelliteLib-7ba51e58dc61bcb0e9311aadd02a0108ab24cc6c.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/scripts/tynt/tynt.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.ba-hashchange.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.scrollintoview.min.js"></script>
+      <script type="text/javascript" src="../search/htmlFileList.js"></script>
+      <script type="text/javascript" src="../search/htmlFileInfoList.js"></script>
+      <script type="text/javascript" src="../search/nwSearchFnt.min.js"></script>
+      <script type="text/javascript" src="../search/stemmers/en_stemmer.min.js"></script>
+      <script type="text/javascript" src="../search/index-1.js"></script>
+      <script type="text/javascript" src="../search/index-2.js"></script>
+      <script type="text/javascript" src="../search/index-3.js"></script>
+      <link rel="canonical" href="http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/qwcode.highlight.css"></link>
+   </head>
+   <body>
+      
+      <header id="header"><span id="company">NVIDIA</span><span id="site-title">CUDA Toolkit Documentation</span><form id="search" method="get" action="search">
+            <input type="text" name="search-text"></input><fieldset id="search-location">
+               <legend>Search In:</legend>
+               <label><input type="radio" name="search-type" value="site"></input>Entire Site</label>
+               <label><input type="radio" name="search-type" value="document"></input>Just This Document</label></fieldset>
+            <button type="reset">clear search</button>
+            <button id="submit" type="submit">search</button></form>
+      </header>
+      <div id="site-content">
+         <nav id="site-nav">
+            <div class="category closed"><a href="../index.html" title="The root of the site.">CUDA Toolkit 
+                  
+                  
+                  v11.3.1</a></div>
+            <div class="category"><a href="index.html" title="Release Notes">Release Notes</a></div>
+            <ul>
+               <li>
+                  <div class="section-link"><a href="#title-new-features">1.&nbsp;CUDA 11.3 Release Notes</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#cuda-major-component-versions">1.1.&nbsp;CUDA Toolkit Major Component Versions</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#cuda-whats-new-in-upd-2">1.2.&nbsp;What's New in CUDA 11.3.1</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#cuda-general-new-features">1.3.&nbsp;General CUDA</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#title-new-cuda-tools">1.4.&nbsp;CUDA Tools</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#cuda-compiler-new-features">1.4.1.&nbsp;CUDA Compilers</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#nsight-ee-new-features">1.4.2.&nbsp;Nsight Eclipse Plugin</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#title-new-cuda-libraries">1.5.&nbsp;CUDA Libraries</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#cufft-new-features">1.5.1.&nbsp;cuFFT Library</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cusparse-new-features">1.5.2.&nbsp;cuSPARSE Library</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#npp-new-features">1.5.3.&nbsp;NVIDIA Performance Primitives (NPP)</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#deprecated-features">1.6.&nbsp;Deprecated Features</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#title-resolved-issues">1.7.&nbsp;Resolved Issues</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#cuda-general-resolved-issues">1.7.1.&nbsp;General CUDA</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#curand-resolved-issues">1.7.2.&nbsp;cuRAND Library</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#math-resolved-issues">1.7.3.&nbsp;CUDA Math API</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#title-known-issues">1.8.&nbsp;Known Issues</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#cublas-known-issues">1.8.1.&nbsp;cuBLAS Library</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cufft-known-issues">1.8.2.&nbsp;cuFFT Library</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cusolver-known-issues">1.8.3.&nbsp;cuSOLVER Library</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+               </li>
+            </ul>
+         </nav>
+         <div id="resize-nav"></div>
+         <nav id="search-results">
+            <h2>Search Results</h2>
+            <ol></ol>
+         </nav>
+         
+         <div id="contents-container">
+            <div id="breadcrumbs-container">
+               <div id="release-info">Release Notes
+                  (<a href="../pdf/CUDA_Toolkit_Release_Notes.pdf">PDF</a>)
+                  -
+                   
+                  
+                  
+                  v11.3.1
+                  (<a href="https://developer.nvidia.com/cuda-toolkit-archive">older</a>)
+                  -
+                  Last updated May 20, 2021
+                  -
+                  <a href="mailto:CUDAIssues@nvidia.com?subject=CUDA Toolkit Documentation Feedback: Release Notes">Send Feedback</a></div>
+            </div>
+            <article id="contents">
+               <div class="topic nested0" id="abstract"><a name="abstract" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#abstract" name="abstract" shape="rect">NVIDIA CUDA Toolkit Release Notes</a></h2>
+                  <div class="body conbody">
+                     <p class="shortdesc">The Release Notes for the CUDA Toolkit.</p>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="title-new-features"><a name="title-new-features" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#title-new-features" name="title-new-features" shape="rect">1.&nbsp;CUDA 11.3 Release Notes</a></h2>
+                  <div class="body conbody">
+                     <p class="p">The release notes for the CUDA Toolkit can be found online at <a class="xref" href="http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html" target="_blank" shape="rect">http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html</a>. 
+                        
+                     </p>
+                  </div>
+                  <div class="topic concept nested1" id="cuda-major-component-versions"><a name="cuda-major-component-versions" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-major-component-versions" name="cuda-major-component-versions" shape="rect">1.1.&nbsp;CUDA Toolkit Major Component Versions</a></h3>
+                     <div class="body conbody">
+                        <dl class="dl">
+                           <dt class="dt dlterm">CUDA Components</dt>
+                           <dd class="dd">
+                              <p class="p">Starting with CUDA 11, the various components in the toolkit are versioned independently.</p>
+                              <p class="p">For CUDA <span class="keyword">11</span>.<span class="keyword">3</span>, 
+                                 					the table below indicates the versions:
+                              </p>
+                           </dd>
+                           <dd class="dd">
+                              <div class="tablenoborder"><a name="cuda-major-component-versions__table-cuda-toolkit-component-versions" shape="rect">
+                                    <!-- --></a><table cellpadding="4" cellspacing="0" summary="" id="cuda-major-component-versions__table-cuda-toolkit-component-versions" class="table" frame="border" border="1" rules="all">
+                                    <caption><span class="tablecap">Table 1. CUDA 11.3 Component Versions</span></caption>
+                                    <thead class="thead" align="left">
+                                       <tr class="row">
+                                          <th class="entry" align="center" valign="top" id="d225e132" rowspan="1" colspan="1">Component Name</th>
+                                          <th class="entry" align="center" valign="top" id="d225e135" rowspan="1" colspan="1">Version Information</th>
+                                          <th class="entry" align="center" valign="top" id="d225e138" rowspan="1" colspan="1">Supported Architectures</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA Runtime (cudart)</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">cuobjdump</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.58</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUPTI</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.111</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA cuxxfilt (demangler)</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.58</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA Demo Suite</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.58</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA GDB</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA Memcheck</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA NVCC</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA nvdisasm</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.58</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA NVML Headers</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.58</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA nvprof</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.111</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA nvprune</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.58</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA NVRTC</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA NVTX</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA NVVP</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.111</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA Samples</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.58</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA Compute Sanitizer API</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.111</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA cuBLAS</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.5.1.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA cuFFT</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">10.4.2.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA cuRAND</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">10.2.4.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA cuSOLVER</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.1.2.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA cuSPARSE</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.6.0.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA NPP</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.3.3.95</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">CUDA nvJPEG</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">11.5.0.109</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">Nsight Compute</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">2021.1.1.5</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64 (CLI only)</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">Nsight Windows NVTX</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">1.21018621</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">Nsight Systems</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">2021.1.3.14</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64 (CLI only)</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">Nsight Visual Studio Edition (VSE)</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">2021.1.1.21111</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64 (Windows)</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">NVIDIA Linux Driver</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">465.19.01</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64, POWER, Arm64</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e132" rowspan="1" colspan="1">NVIDIA Windows Driver</td>
+                                          <td class="entry" valign="top" headers="d225e135" rowspan="1" colspan="1">465.89</td>
+                                          <td class="entry" valign="top" headers="d225e138" rowspan="1" colspan="1">x86_64 (Windows)</td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </dd>
+                           <dt class="dt dlterm">CUDA Driver</dt>
+                           <dd class="dd">
+                              <p class="p">Running a CUDA application requires the system with at least one CUDA capable GPU
+                                 						and a driver that is compatible with the CUDA Toolkit. See <a class="xref" href="index.html#cuda-major-component-versions__table-cuda-toolkit-driver-versions" shape="rect">Table 3</a>. For more
+                                 						information various GPU products that are CUDA capable, visit <a class="xref" href="https://developer.nvidia.com/cuda-gpus" target="_blank" shape="rect">https://developer.nvidia.com/cuda-gpus</a>.
+                              </p>
+                              <p class="p">Each release of the CUDA Toolkit requires a minimum version of the CUDA driver.
+                                 						The CUDA driver is backward compatible, meaning that applications compiled against
+                                 						a particular version of the CUDA will continue to work on subsequent (later)
+                                 						driver releases. 
+                              </p>
+                              <p class="p">More information on compatibility can be found at <a class="xref" href="https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#cuda-runtime-and-driver-api-version" target="_blank" shape="rect">https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#cuda-runtime-and-driver-api-version</a>. 
+                              </p>
+                              <p class="p"><strong class="ph b">Note</strong>: Starting with CUDA 11.0, the toolkit components are individually
+                                 						versioned, and the toolkit itself is versioned as shown in the table
+                                 						below.
+                              </p>
+                              <p dir="ltr" class="p" id="cuda-major-component-versions__docs-internal-guid-ccedff5c-7fff-7b49-99f3-006a746133f3"><a name="cuda-major-component-versions__docs-internal-guid-ccedff5c-7fff-7b49-99f3-006a746133f3" shape="rect">
+                                    <!-- --></a>The minimum required
+                                 						driver version for CUDA enhanced compatibility is shown below. CUDA Enhanced
+                                 						Compatibility is described in detail in <a class="xref" href="https://docs.nvidia.com/deploy/cuda-compatibility/index.html" target="_blank" shape="rect">https://docs.nvidia.com/deploy/cuda-compatibility/index.html</a></p>
+                              <div class="p">
+                                 <div class="tablenoborder">
+                                    <table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+                                       <caption><span class="tablecap">Table 2. CUDA Toolkit and Minimum Required Driver Version for CUDA
+                                             								Enhanced Compatibility</span></caption>
+                                       <thead class="thead" align="left">
+                                          <tr class="row">
+                                             <th class="entry" rowspan="2" align="center" valign="top" id="d225e570" colspan="1">CUDA Toolkit</th>
+                                             <th class="entry" colspan="2" align="center" valign="top" id="d225e573" rowspan="1">Minimum
+                                                											Required Driver Version for CUDA Enhanced
+                                                											Compatibility
+                                             </th>
+                                          </tr>
+                                          <tr class="row">
+                                             <th class="entry" align="center" valign="top" id="d225e579" rowspan="1" colspan="1">Linux x86_64 Driver Version</th>
+                                             <th class="entry" align="center" valign="top" id="d225e582" rowspan="1" colspan="1">Windows x86_64 Driver Version</th>
+                                          </tr>
+                                       </thead>
+                                       <tbody class="tbody">
+                                          <tr class="row">
+                                             <td class="entry" valign="top" headers="d225e570 d225e579" rowspan="1" colspan="1">CUDA 11.0 to CUDA 11.3.1 Update 1</td>
+                                             <td class="entry" valign="top" headers="d225e573 d225e582" rowspan="1" colspan="1">&gt;=450.80.02</td>
+                                             <td class="entry" valign="top" headers="d225e573" rowspan="1" colspan="1">&gt;=456.38</td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                              </div>
+                           </dd>
+                           <dd class="dd">
+                              <p class="p">The version of the development NVIDIA GPU Driver packaged in each CUDA
+                                 						Toolkit release is shown below.
+                              </p>
+                              <div class="tablenoborder"><a name="cuda-major-component-versions__table-cuda-toolkit-driver-versions" shape="rect">
+                                    <!-- --></a><table cellpadding="4" cellspacing="0" summary="" id="cuda-major-component-versions__table-cuda-toolkit-driver-versions" class="table" frame="border" border="1" rules="all">
+                                    <caption><span class="tablecap">Table 3. CUDA Toolkit and Corresponding Driver Versions</span></caption>
+                                    <thead class="thead" align="left">
+                                       <tr class="row">
+                                          <th class="entry" rowspan="2" align="center" valign="top" id="d225e628" colspan="1">CUDA Toolkit</th>
+                                          <th class="entry" colspan="2" align="center" valign="top" id="d225e631" rowspan="1">Toolkit Driver
+                                             										Version
+                                          </th>
+                                       </tr>
+                                       <tr class="row">
+                                          <th class="entry" align="center" valign="top" id="d225e637" rowspan="1" colspan="1">Linux x86_64 Driver Version</th>
+                                          <th class="entry" align="center" valign="top" id="d225e640" rowspan="1" colspan="1">Windows x86_64 Driver Version</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 11.3.1 Update 1</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;=465.19.01</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;=465.89</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 11.3.0 GA</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;=465.19.01</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;=465.89</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 11.2.2 Update 2</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;=460.32.03</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;=461.33</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 11.2.1 Update 1</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;=460.32.03</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;=461.09</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 11.2.0 GA</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;=460.27.03</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;=460.82</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 11.1.1 Update 1</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;=455.32</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;=456.81</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 11.1 GA</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;=455.23</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;=456.38</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 11.0.3 Update 1</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 450.51.06</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 451.82</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 11.0.2 GA</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 450.51.05</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 451.48</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 11.0.1 RC</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 450.36.06</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 451.22</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 10.2.89</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 440.33</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 441.22</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 10.1 (10.1.105 general release, and updates)</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 418.39</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 418.96</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 10.0.130</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 410.48</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 411.31</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 9.2 (9.2.148 Update 1)</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 396.37</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 398.26</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 9.2 (9.2.88)</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 396.26</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 397.44</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 9.1 (9.1.85)</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 390.46</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 391.29</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 9.0 (9.0.76)</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 384.81</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 385.54</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 8.0 (8.0.61 GA2)</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 375.26</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 376.51</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 8.0 (8.0.44)</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 367.48</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 369.30</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 7.5 (7.5.16)</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 352.31</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 353.66</td>
+                                       </tr>
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d225e628 d225e637" rowspan="1" colspan="1">CUDA 7.0 (7.0.28)</td>
+                                          <td class="entry" valign="top" headers="d225e631 d225e640" rowspan="1" colspan="1">&gt;= 346.46</td>
+                                          <td class="entry" valign="top" headers="d225e631" rowspan="1" colspan="1">&gt;= 347.62</td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </dd>
+                           <dd class="dd">
+                              <p class="p">* Using a Minimum Required Version that is <strong class="ph b">different</strong> from Toolkit
+                                 						Driver Version could be allowed in compatibility mode -- please read the
+                                 						CUDA Compatibility Guide for details.
+                              </p>
+                              <p class="p">For convenience, the NVIDIA driver is installed as part of the CUDA Toolkit
+                                 						installation. Note that this driver is for development purposes and is not
+                                 						recommended for use in production with Tesla GPUs. 
+                              </p>
+                              <p class="p">For running CUDA applications in production with Tesla GPUs, it is recommended to
+                                 						download the latest driver for Tesla GPUs from the NVIDIA driver downloads site at
+                                 							<a class="xref" href="http://www.nvidia.com/drivers" target="_blank" shape="rect">http://www.nvidia.com/drivers</a>.
+                                 					
+                              </p>
+                           </dd>
+                           <dd class="dd">
+                              <p class="p">During the installation of the CUDA Toolkit, the installation of the NVIDIA driver may be
+                                 						skipped on Windows (when using the interactive or silent installation) or on
+                                 						Linux (by using meta packages). 
+                              </p>
+                              <p class="p">For more information on customizing the install process on Windows, see <a class="xref" href="http://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#install-cuda-software" target="_blank" shape="rect">http://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#install-cuda-software</a>. 
+                              </p>
+                              <p class="p">For meta packages on Linux, see <a class="xref" href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#package-manager-metas" target="_blank" shape="rect">https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#package-manager-metas</a></p>
+                           </dd>
+                        </dl>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="cuda-whats-new-in-upd-2"><a name="cuda-whats-new-in-upd-2" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-whats-new-in-upd-2" name="cuda-whats-new-in-upd-2" shape="rect">1.2.&nbsp;What's New in CUDA 11.3.1</a></h3>
+                     <div class="body conbody">
+                        <p class="p">This section summarizes the changes in CUDA 11.3.1 (11.3 Update 1) since the 11.3.0
+                           			release.
+                        </p>
+                        <div class="p"><strong class="ph b">General CUDA</strong><ul class="ul">
+                              <li class="li">Support for Ubuntu 16.04 is deprecated. CUDA will drop support for Ubuntu 16.04
+                                 					in CUDA 11.4<em class="ph i"></em></li>
+                           </ul>
+                        </div>
+                        <p class="p"><strong class="ph b">cuBLAS</strong></p>
+                        <ul class="ul">
+                           <li class="li">New Features:
+                              <ul class="ul">
+                                 <li class="li">Some new kernels have been added for improved performance but have the limitation that only
+                                    						host pointers are supported for scalars (for example, alpha and beta
+                                    						parameters). This limitation is expected to be resolved in a future release. 
+                                 </li>
+                                 <li class="li">New epilogues have been added to support fusion in ML training. This includes: 
+                                    <ul class="ul">
+                                       <li class="li">ReLuBias and GeluBias epilogues that produce an auxiliary output
+                                          								which is used on backward propagation to compute the corresponding
+                                          								gradients.
+                                       </li>
+                                       <li class="li">DReLuBGrad and DGeluBGrad epilogues that compute the backpropagation
+                                          								of the corresponding activation function on matrix C, and produce
+                                          								bias gradient as a separate output. These epilogues require
+                                          								auxiliary input mentioned in the bullet above.  
+                                       </li>
+                                    </ul>
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class="li">Deprecations:
+                              <ul class="ul">
+                                 <li class="li">Linking with static cublas and cublasLt libraries on Linux now requires using gcc-5.2 and
+                                    						compatible or higher due to C++11 requirements in these libraries. 
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class="li">Known Issues:
+                              <ul class="ul">
+                                 <li class="li">To be able to access the fastest possible kernels through
+                                    							<samp class="ph codeph">cublasLtMatmulAlgoGetHeuristic()</samp> you need to set
+                                    						CUBLASLT_MATMUL_PREF_POINTER_MODE_MASK in search preferences to
+                                    						CUBLASLT_POINTER_MODE_MASK_HOST or CUBLASLT_POINTER_MODE_MASK_NO_FILTERING.
+                                    						By default, heuristics query assumes the pointer mode may change later and
+                                    						only returns algo configurations that support both _HOST and _DEVICE modes.
+                                    						Without this, newly added kernels will be excluded and it will likely lead
+                                    						to a performance penalty on some problem sizes.
+                                 </li>
+                              </ul>
+                           </li>
+                        </ul>
+                        <div class="p"><strong class="ph b">cuSPARSE</strong><ul class="ul">
+                              <li class="li">New Features:
+                                 <ul class="ul">
+                                    <li class="li">Introduced a new routine for sparse matrix - sparse matrix
+                                       							multiplication (<samp class="ph codeph">cusparseSpGEMMreuse</samp>) where the output
+                                       							matrix structure is reused for multiple computation. The new routine
+                                       							supports CSR storage format and mixed-precision computation. 
+                                    </li>
+                                    <li class="li">Sparse triangular solver adds support for COO format. </li>
+                                    <li class="li">Introduced a new routine for sparse triangular solver with multiple
+                                       							right-hand sides <samp class="ph codeph">cusparseSpSM()</samp>. 
+                                    </li>
+                                    <li class="li"><samp class="ph codeph">cusparseDenseToSparse()</samp> routine adds the conversion
+                                       							from dense matrix (row-major/column-major) to Blocked-ELL format. 
+                                    </li>
+                                    <li class="li">Blocke-ELL format now support empty blocks </li>
+                                    <li class="li">Better performance for Blocked-ELL SpMM with block size &gt; 64, double
+                                       							data type, and alignments smaller than 128-byte on NVIDIA Ampere sm80. 
+                                    </li>
+                                    <li class="li">All cuSPARSE APIs are now asynchronous on platforms that support stream
+                                       							ordered memory allocators <a class="xref" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#stream-ordered-querying-memory-support" target="_blank" shape="rect"><u class="ph u">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#stream-ordered-querying-memory-support</u></a>. 
+                                    </li>
+                                    <li class="li">Improved NTVX trace with distinction between light calls and kernel
+                                       							routines 
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li class="li">Resolved Issues:
+                                 <ul class="ul">
+                                    <li class="li"><samp class="ph codeph">cusparseCnnz_compress</samp> produced wrong results when the number
+                                       							of rows are greater than 128 * resident CTAs. 
+                                       								
+                                    </li>
+                                    <li class="li"><samp class="ph codeph">cusparseSnnz</samp> produced wrong results for some particular sparsity pattern.
+                                       							
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li class="li">Deprecations:
+                                 <ul class="ul">
+                                    <li class="li"><samp class="ph codeph">cusparseXcsrsm2_zeroPivot</samp>,
+                                       								<samp class="ph codeph">cusparseXcsrsm2_solve</samp>,
+                                       								<samp class="ph codeph">cusparseXcsrsm2_analysis</samp>, and
+                                       								<samp class="ph codeph">cusparseScsrsm2_bufferSizeExt</samp> have been deprecated
+                                       							in favor of <samp class="ph codeph">cusparseSpSM</samp> Generic APIs
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="cuda-general-new-features"><a name="cuda-general-new-features" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#cuda-general-new-features" name="cuda-general-new-features" shape="rect">1.3.&nbsp;General CUDA</a></h3>
+                     <div class="body conbody">
+                        <ul class="ul">
+                           <li class="li">Stream ordered memory allocator enhancements. See <a class="xref" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#stream-ordered-memory-allocator" target="_blank" shape="rect">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#stream-ordered-memory-allocator</a> for more information.
+                           </li>
+                           <li class="li">CUDA Graph Enhancements:
+                              <ul class="ul">
+                                 <li class="li">Enhancements to make stream capture more flexible: Functionality to provide read-write
+                                    						access to the graph and the dependency information of a capturing stream,
+                                    						while the capture is in progress. See
+                                    							<samp class="ph codeph">cudaStreamGetCaptureInfo_v2()</samp> and
+                                    							<samp class="ph codeph">cudaStreamUpdateCaptureDependencies()</samp>.
+                                 </li>
+                                 <li class="li">User object lifetime assistance: Functionality to assist user code in lifetime management
+                                    						for user-allocated resources referenced in graphs. Useful when graphs and
+                                    						their derivatives and asynchronous executions have an unknown/unbounded
+                                    						lifetime not under control of the code that created the resource, such as
+                                    						libraries under stream capture. See <samp class="ph codeph">cudaUserObjectCreate()</samp>
+                                    						and <samp class="ph codeph">cudaGraphRetainUserObject()</samp>, or <a class="xref" href="http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#cuda-user-objects" target="_blank" shape="rect">http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#cuda-user-objects</a>.
+                                 </li>
+                                 <li class="li">Graph Debug: New API to produce a DOT graph output from a given CUDA
+                                    						Graph.
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class="li">New Stream Priorities
+                              <ul class="ul">
+                                 <li class="li">The CUDA Driver API <samp class="ph codeph">cuCtxGetStreamPriorityRange()</samp> now exposes a total of 6
+                                    						stream priorities, up from the 3 exposed in prior releases.
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class="li">Expose driver symbols in runtime API
+                              <ul class="ul">
+                                 <li class="li">New CUDA Driver API <samp class="ph codeph">cuGetProcAddress()</samp> and CUDA Runtime API
+                                    							<samp class="ph codeph">cudaDriverGetEntryPoint()</samp> to query the memory addresses
+                                    						for CUDA Driver API functions.
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class="li">Support for virtual aliasing across kernel boundaries.</li>
+                           <li class="li">Added support for Ubuntu 20.04.2 on x86_64 and Arm sbsa platforms.</li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="title-new-cuda-tools"><a name="title-new-cuda-tools" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#title-new-cuda-tools" name="title-new-cuda-tools" shape="rect">1.4.&nbsp;CUDA Tools</a></h3>
+                     <div class="topic concept nested2" id="cuda-compiler-new-features"><a name="cuda-compiler-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cuda-compiler-new-features" name="cuda-compiler-new-features" shape="rect">1.4.1.&nbsp;CUDA Compilers</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">Cu++flt demangler tool</li>
+                              <li class="li">NVRTC versioning changes</li>
+                              <li class="li">Preview support for <samp class="ph codeph">alloca()</samp>. 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="nsight-ee-new-features"><a name="nsight-ee-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#nsight-ee-new-features" name="nsight-ee-new-features" shape="rect">1.4.2.&nbsp;Nsight Eclipse Plugin</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">Eclipse versions 4.10 to 4.14 are currently supported in CUDA 11.3.</li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="title-new-cuda-libraries"><a name="title-new-cuda-libraries" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#title-new-cuda-libraries" name="title-new-cuda-libraries" shape="rect">1.5.&nbsp;CUDA Libraries</a></h3>
+                     <div class="topic concept nested2" id="cufft-new-features"><a name="cufft-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cufft-new-features" name="cufft-new-features" shape="rect">1.5.1.&nbsp;cuFFT Library</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">cuFFT shared libraries are now linked statically against
+                                 libstdc++ on Linux platforms.
+                                 
+                              </li>
+                              <li class="li">Improved performance of certain sizes (multiples of large
+                                 powers of 3, powers of 11) in SM86.
+                                 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cusparse-new-features"><a name="cusparse-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cusparse-new-features" name="cusparse-new-features" shape="rect">1.5.2.&nbsp;cuSPARSE Library</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">Added new routine <samp class="ph codeph">cusparesSpSV</samp> for sparse triangular solver with
+                                 better performance. The new Generic API supports: 
+                                 <ul class="ul">
+                                    <li class="li">CSR storage format</li>
+                                    <li class="li">Non-transpose, transpose, and transpose-conjugate operations</li>
+                                    <li class="li">Upper, lower fill mode</li>
+                                    <li class="li">Unit, non-unit diagonal type</li>
+                                    <li class="li">32-bit and 64-bit indices</li>
+                                    <li class="li">Uniform data type computation</li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="npp-new-features"><a name="npp-new-features" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#npp-new-features" name="npp-new-features" shape="rect">1.5.3.&nbsp;NVIDIA Performance Primitives (NPP)</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">Added <samp class="ph codeph">nppiDistanceTransformPBA</samp> functions. 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="deprecated-features"><a name="deprecated-features" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#deprecated-features" name="deprecated-features" shape="rect">1.6.&nbsp;Deprecated Features</a></h3>
+                     <div class="body conbody">
+                        <div class="p">The following features are deprecated in the current release of the CUDA software. The features
+                           			still work in the current release, but their documentation may have been removed, and
+                           			they will become officially unsupported in a future release. We recommend that
+                           			developers employ alternative solutions to these features in their software. 
+                           			
+                           			
+                           			
+                           <dl class="dl">
+                              <dt class="dt dlterm">CUDA Libraries</dt>
+                              <dd class="dd">
+                                 <ul class="ul">
+                                    <li class="li">cuSPARSE: <samp class="ph codeph">cusparseScsrsv2_analysis</samp>,
+                                       									<samp class="ph codeph">cusparseScsrsv2_solve</samp>,
+                                       									<samp class="ph codeph">cusparseXcsrsv2_zeroPivot</samp>, and <samp class="ph codeph">
+                                          									cusparseScsrsv2_bufferSize</samp> have been deprecated in
+                                       								favor of<samp class="ph codeph"> cusparseSpSV</samp>.
+                                    </li>
+                                 </ul>
+                              </dd>
+                              <dt class="dt dlterm">Tools</dt>
+                              <dd class="dd">
+                                 <ul class="ul">
+                                    <li class="li">Nsight Eclipse Plugin: Docker support is deprecated in Eclipse 4.14
+                                       								and earlier versions as of CUDA 11.3, and Docker support will be
+                                       								dropped for Eclipse 4.14 and earlier in a future CUDA Toolkit
+                                       								release.
+                                    </li>
+                                 </ul>
+                              </dd>
+                           </dl>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="title-resolved-issues"><a name="title-resolved-issues" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#title-resolved-issues" name="title-resolved-issues" shape="rect">1.7.&nbsp;Resolved Issues</a></h3>
+                     <div class="topic concept nested2" id="cuda-general-resolved-issues"><a name="cuda-general-resolved-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cuda-general-resolved-issues" name="cuda-general-resolved-issues" shape="rect">1.7.1.&nbsp;General CUDA</a></h3>
+                        <div class="body conbody"><a name="cuda-general-resolved-issues__ul_khh_xlg_dfb" shape="rect">
+                              <!-- --></a><ul class="ul" id="cuda-general-resolved-issues__ul_khh_xlg_dfb">
+                              <li dir="ltr" class="li">
+                                 <p dir="ltr" class="p">Historically, the CUDA driver has serialized most APIs operating on the
+                                    same CUDA context between CPU threads. In CUDA 11.3, this has been relaxed for
+                                    kernel launches such that the driver serialization may be reduced when multiple
+                                    CPU threads are launching CUDA kernels into distinct streams within the same
+                                    context.
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="curand-resolved-issues"><a name="curand-resolved-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#curand-resolved-issues" name="curand-resolved-issues" shape="rect">1.7.2.&nbsp;cuRAND Library</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">Fixed inconsistency between random numbers generated by GPU and host generators when
+                                 CURAND_ORDERING_PSEUDO_LEGACY ordering is selected for certain generator types.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="math-resolved-issues"><a name="math-resolved-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#math-resolved-issues" name="math-resolved-issues" shape="rect">1.7.3.&nbsp;CUDA Math API</a></h3>
+                        <div class="body conbody">
+                           <div class="p">
+                              <ul class="ul">
+                                 <li class="li">Previous releases of CUDA were potentially delivering incorrect results in some
+                                    Linux distributions for the following host Math APIs: <samp class="ph codeph">sinpi</samp>,
+                                    <samp class="ph codeph">cospi</samp>, <samp class="ph codeph">sincospi</samp>, <samp class="ph codeph">sinpif</samp>,
+                                    <samp class="ph codeph">cospif</samp>, <samp class="ph codeph">sincospif</samp>.  If passed huge inputs
+                                    like 7.3748776e+15 or 8258177.5 the results were not equal to 0 or 1. These have
+                                    been corrected with this release. 
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="title-known-issues"><a name="title-known-issues" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#title-known-issues" name="title-known-issues" shape="rect">1.8.&nbsp;Known Issues</a></h3>
+                     <div class="topic concept nested2" id="cublas-known-issues"><a name="cublas-known-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cublas-known-issues" name="cublas-known-issues" shape="rect">1.8.1.&nbsp;cuBLAS Library</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">The planar complex matrix descriptor for batched matmul has inconsistent
+                                 interpretation of batch offset. 
+                                 
+                              </li>
+                              <li class="li">Mixed precision operations with reduction scheme
+                                 CUBLASLT_REDUCTION_SCHEME_OUTPUT_TYPE (might be automatically selected based on
+                                 problem size by <samp class="ph codeph">cublasSgemmEx()</samp> or <samp class="ph codeph">cublasGemmEx()</samp>
+                                 too, unless <samp class="ph codeph">CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION </samp>math
+                                 mode bit is set) not only stores intermediate results in output type but also
+                                 accumulates them internally in the same precision, which may result in lower than
+                                 expected accuracy. Please use <samp class="ph codeph">CUBLASLT_MATMUL_PREF_REDUCTION_SCHEME_MASK
+                                    </samp>or <samp class="ph codeph">CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION </samp>if
+                                 this results in numerical precision issues in your application. 
+                                 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cufft-known-issues"><a name="cufft-known-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cufft-known-issues" name="cufft-known-issues" shape="rect">1.8.2.&nbsp;cuFFT Library</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">cuFFT planning and plan estimation functions may not restore
+                                 correct context affecting CUDA driver API applications.
+                                 
+                              </li>
+                              <li class="li">Plans with strides, primes larger than 127 in FFT size
+                                 decomposition and total size of transform including strides bigger than
+                                 32GB produce incorrect results.
+                                 
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cusolver-known-issues"><a name="cusolver-known-issues" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cusolver-known-issues" name="cusolver-known-issues" shape="rect">1.8.3.&nbsp;cuSOLVER Library</a></h3>
+                        <div class="body conbody">
+                           <ul class="ul">
+                              <li class="li">For values N&lt;=16, <samp class="ph codeph">cusolverDn[S|D|C|Z]syevjBatched</samp> hits out-of-bound
+                                 				access and may deliver the wrong result. The workaround is to pad the matrix A with
+                                 				a diagonal matrix D such that the dimension of [A 0 ; 0 D] is bigger than 16. The
+                                 				diagonal entry D(j,j) must be bigger than maximum eigenvalue of A, for example,
+                                 				norm(A, ‘fro’). After the syevj, W(0:n-1) contains the eigenvalues and
+                                 				A(0:n-1,0:n-1) contains the eigenvectors. 
+                                 			
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="notices-header"><a name="notices-header" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#notices-header" name="notices-header" shape="rect">Notices</a></h2>
+                  <div class="topic reference nested1" id="notice"><a name="notice" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#notice" name="notice" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Notice</h3>
+                           <p class="p" id="notice__notice-para-1"><a name="notice__notice-para-1" shape="rect">
+                                 <!-- --></a>This document is provided for information
+                              purposes only and shall not be regarded as a warranty of a
+                              certain functionality, condition, or quality of a product.
+                              NVIDIA Corporation (“NVIDIA”) makes no representations or
+                              warranties, expressed or implied, as to the accuracy or
+                              completeness of the information contained in this document
+                              and assumes no responsibility for any errors contained
+                              herein. NVIDIA shall have no liability for the consequences
+                              or use of such information or for any infringement of
+                              patents or other rights of third parties that may result
+                              from its use. This document is not a commitment to develop,
+                              release, or deliver any Material (defined below), code, or
+                              functionality.
+                           </p>
+                           <p class="p" id="notice__notice-para-2"><a name="notice__notice-para-2" shape="rect">
+                                 <!-- --></a>NVIDIA reserves the right to make corrections, modifications,
+                              enhancements, improvements, and any other changes to this
+                              document, at any time without notice.
+                           </p>
+                           <p class="p" id="notice__notice-para-3"><a name="notice__notice-para-3" shape="rect">
+                                 <!-- --></a>Customer should obtain the latest relevant information before
+                              placing orders and should verify that such information is
+                              current and complete.
+                           </p>
+                           <p class="p" id="notice__notice-para-4"><a name="notice__notice-para-4" shape="rect">
+                                 <!-- --></a>NVIDIA products are sold subject to the NVIDIA standard terms and
+                              conditions of sale supplied at the time of order
+                              acknowledgement, unless otherwise agreed in an individual
+                              sales agreement signed by authorized representatives of
+                              NVIDIA and customer (“Terms of Sale”). NVIDIA hereby
+                              expressly objects to applying any customer general terms and
+                              conditions with regards to the purchase of the NVIDIA
+                              product referenced in this document. No contractual
+                              obligations are formed either directly or indirectly by this
+                              document.
+                           </p>
+                           <p class="p" id="notice__notice-para-5"><a name="notice__notice-para-5" shape="rect">
+                                 <!-- --></a>NVIDIA products are not designed, authorized, or warranted to be
+                              suitable for use in medical, military, aircraft, space, or
+                              life support equipment, nor in applications where failure or
+                              malfunction of the NVIDIA product can reasonably be expected
+                              to result in personal injury, death, or property or
+                              environmental damage. NVIDIA accepts no liability for
+                              inclusion and/or use of NVIDIA products in such equipment or
+                              applications and therefore such inclusion and/or use is at
+                              customer’s own risk.
+                           </p>
+                           <p class="p" id="notice__notice-para-6"><a name="notice__notice-para-6" shape="rect">
+                                 <!-- --></a>NVIDIA makes no representation or warranty that products based on
+                              this document will be suitable for any specified use.
+                              Testing of all parameters of each product is not necessarily
+                              performed by NVIDIA. It is customer’s sole responsibility to
+                              evaluate and determine the applicability of any information
+                              contained in this document, ensure the product is suitable
+                              and fit for the application planned by customer, and perform
+                              the necessary testing for the application in order to avoid
+                              a default of the application or the product. Weaknesses in
+                              customer’s product designs may affect the quality and
+                              reliability of the NVIDIA product and may result in
+                              additional or different conditions and/or requirements
+                              beyond those contained in this document. NVIDIA accepts no
+                              liability related to any default, damage, costs, or problem
+                              which may be based on or attributable to: (i) the use of the
+                              NVIDIA product in any manner that is contrary to this
+                              document or (ii) customer product designs.
+                           </p>
+                           <p class="p" id="notice__notice-para-7"><a name="notice__notice-para-7" shape="rect">
+                                 <!-- --></a>No license, either expressed or implied, is granted under any NVIDIA
+                              patent right, copyright, or other NVIDIA intellectual
+                              property right under this document. Information published by
+                              NVIDIA regarding third-party products or services does not
+                              constitute a license from NVIDIA to use such products or
+                              services or a warranty or endorsement thereof. Use of such
+                              information may require a license from a third party under
+                              the patents or other intellectual property rights of the
+                              third party, or a license from NVIDIA under the patents or
+                              other intellectual property rights of NVIDIA.
+                           </p>
+                           <p class="p" id="notice__notice-para-8"><a name="notice__notice-para-8" shape="rect">
+                                 <!-- --></a>Reproduction of information in this document is permissible only if
+                              approved in advance by NVIDIA in writing, reproduced without
+                              alteration and in full compliance with all applicable export
+                              laws and regulations, and accompanied by all associated
+                              conditions, limitations, and notices.
+                           </p>
+                           <p class="p" id="notice__notice-para-9"><a name="notice__notice-para-9" shape="rect">
+                                 <!-- --></a>THIS DOCUMENT AND ALL NVIDIA DESIGN SPECIFICATIONS, REFERENCE
+                              BOARDS, FILES, DRAWINGS, DIAGNOSTICS, LISTS, AND OTHER
+                              DOCUMENTS (TOGETHER AND SEPARATELY, “MATERIALS”) ARE BEING
+                              PROVIDED “AS IS.” NVIDIA MAKES NO WARRANTIES, EXPRESSED,
+                              IMPLIED, STATUTORY, OR OTHERWISE WITH RESPECT TO THE
+                              MATERIALS, AND EXPRESSLY DISCLAIMS ALL IMPLIED WARRANTIES OF
+                              NONINFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
+                              PARTICULAR PURPOSE. TO THE EXTENT NOT PROHIBITED BY LAW, IN
+                              NO EVENT WILL NVIDIA BE LIABLE FOR ANY DAMAGES, INCLUDING
+                              WITHOUT LIMITATION ANY DIRECT, INDIRECT, SPECIAL,
+                              INCIDENTAL, PUNITIVE, OR CONSEQUENTIAL DAMAGES, HOWEVER
+                              CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING
+                              OUT OF ANY USE OF THIS DOCUMENT, EVEN IF NVIDIA HAS BEEN
+                              ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. Notwithstanding
+                              any damages that customer might incur for any reason
+                              whatsoever, NVIDIA’s aggregate and cumulative liability
+                              towards customer for the products described herein shall be
+                              limited in accordance with the Terms of Sale for the
+                              product.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="vesa"><a name="vesa" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#vesa" name="vesa" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">VESA DisplayPort</h3>
+                           <p class="p">DisplayPort and DisplayPort Compliance Logo, DisplayPort Compliance Logo for
+                              Dual-mode Sources, and DisplayPort Compliance Logo for Active Cables are
+                              trademarks owned by the Video Electronics Standards Association in the United
+                              States and other countries.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="hdmi"><a name="hdmi" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#hdmi" name="hdmi" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">HDMI</h3>
+                           <p class="p">HDMI, the HDMI logo, and High-Definition Multimedia Interface are trademarks or
+                              registered trademarks of HDMI Licensing LLC.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="opencl"><a name="opencl" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#opencl" name="opencl" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">OpenCL</h3>
+                           <p class="p">OpenCL is a trademark of Apple Inc. used under license to the Khronos Group Inc.</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="trademarks"><a name="trademarks" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#trademarks" name="trademarks" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Trademarks</h3>
+                           <p class="p">NVIDIA and the NVIDIA logo are trademarks or registered trademarks of NVIDIA Corporation
+                              in the U.S. and other countries.  Other company and product names may be trademarks of
+                              the respective companies with which they are associated.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="copyright-past-to-present"><a name="copyright-past-to-present" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#copyright-past-to-present" name="copyright-past-to-present" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section">
+                           <h3 class="title sectiontitle">Copyright</h3>
+                           <p class="p">© <span class="ph">2007</span>-<span class="ph">2021</span> NVIDIA
+                              Corporation. All rights reserved.
+                           </p>
+                           <p class="p">This product includes software developed by the Syncro Soft SRL (http://www.sync.ro/).</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <hr id="contents-end"></hr>
+               
+            </article>
+         </div>
+      </div>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/formatting/common.min.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-write.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-tracker.js"></script>
+      <script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher: "998dc202-a267-4d8e-bce9-14debadb8d92", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script><script type="text/javascript">_satellite.pageBottom();</script></body>
+</html>

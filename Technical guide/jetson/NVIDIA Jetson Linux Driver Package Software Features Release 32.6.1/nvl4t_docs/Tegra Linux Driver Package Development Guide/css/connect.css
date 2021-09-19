@@ -1,0 +1,670 @@
+@charset "UTF-8";
+/*~~~~~ COLORS ~~~~~*/
+/*~~~~~~~~~~~~~~~~~~*/
+/* custom colors                               */
+/*                                             */
+/* define custom values here for easy tracking */
+/* NVIDIA customization as dark green. */
+/* Pale grey in the toolbar icons and text, except where we override it */
+/* NVIDIA cusotmization as lime green, used in hover. */
+/* Charcoal grey used in the TOC font, previously #444142. */
+/* Really pale grey used only as the miniTOC background color. */
+/* This is the charcoal color in the header and footer background, previously #444142. */
+/* This is blue. I replaced references with $nvidia_dark_green. */
+/* NOTE: Gradients as background colors are supported through linear/radial-gradient property values.*/
+/*       It is suggested to put the gradient value only where it is needed, as it will cause errors  */
+/*       if it is used in the darken() or lighten() functions.                                       */
+/*       If a gradient value is set for a $_layout_color property, you must remove all darken() and  */
+/*       lighten() calls that derive from the gradient, or there will be no color output where those */
+/*       properties are used.                                                                        */
+/*                                                                                                   */
+/*       Usage documentation for Gradients: https://www.w3schools.com/css/css3_gradients.asp         */
+/* layout colors: set these for a quick application to the output.                                   */
+/*                                                                                                   */
+/* this is set to NVIDIA dark green */
+/* used for the TOC text color */
+/* Defaults for structure items */
+/*                              */
+/* Mini TOC */
+/*          */
+/* this is NVIDIA dark green */
+/* this is NVIDIA lime green */
+/* Related Topics */
+/*                */
+/* Search Result Highlight */
+/*                         */
+/* Monochromatic version of NVIDIA Green */
+/* colors for specific items */
+/*                           */
+/* toolbar */
+/* menu (nav & toc/index) */
+/* page */
+/* disqus */
+/* search */
+/* header */
+/* NVIDIA color change to get white text in header */
+/* footer */
+/* NVIDIA color change to get white text in footer */
+/* back-to-top button */
+/* progress bar */
+/* modal (cookies disabled message) */
+/*
+ * lightbox
+*/
+/* unsupported browser */
+/* no javascript warning */
+/*~~~~~ FONTS ~~~~~*/
+/*~~~~~~~~~~~~~~~~~*/
+/*
+ * toolbar
+*/
+/*
+ * menu (nav & toc/index)
+*/
+/*
+ * page
+*/
+/*
+ * mini toc
+*/
+/*
+ * related topics
+*/
+/*
+ * search
+*/
+/*
+ * header
+*/
+/* NVIDIA */
+/*
+ * footer
+*/
+/*
+ * lightbox
+*/
+/*
+ * unsupported browser
+*/
+/*
+ * modal (cookies disabled message)
+*/
+/*~~~~~ SIZING ~~~~~*/
+/*~~~~~~~~~~~~~~~~~~*/
+/*
+ * generation variables
+ * these are modified by the generation process according to Target Settings
+*/
+/*
+ * generic values
+ * NVIDIA: customized logo height.
+*/
+/*
+ * header
+ * NVIDIA: customized header height.
+*/
+/*
+ * footer
+ * NVIDIA custmized footer height, previously 200px.
+ * NVIDIA customized footer padding, previously 10px.
+*/
+/*
+ * menu
+*/
+/*
+ * toolbar
+ *
+ * $toolbar-height should be equal or greater than all other
+ * values or the layout will produce unexpected results
+*/
+/* NVIDIA customization from the Corporate Grey, previously 62px */
+/*
+ * toolbar - logo section (Menu Button & Logo)
+*/
+/* NVIDIA kathy modified from 300px */
+/*
+ * toolbar - search section (Search Scope Selector, Search Input, & Search Button)
+*/
+/* NVIDIA customization */
+/*
+ * toolbar - button section (Previous Button, Next Button, Home Button)
+*/
+/* We want the toolbar width to be $toolbar_button_previous_width + $toolbar_button_next_width + $toolbar_button_home_width + 520px */
+/*
+ * was this helpful buttons & message
+*/
+/*
+ * page
+*/
+/*
+ * mini toc
+*/
+/*
+ * related topics
+*/
+/*
+ * search
+*/
+/*
+ * lightbox
+*/
+/*
+ * unsupported browser
+*/
+/*
+ * calculated sizes
+ *
+ * the values in the below section are calculated & dependent upon multiple above values.
+*/
+/*
+ * toolbar
+*/
+/*
+ * menu
+*/
+/*
+ * page
+*/
+/*~~~~~ ICONS ~~~~~*/
+/*~~~~~~~~~~~~~~~~~*/
+/*
+  This file contains the character codes applied to the icons in the output.
+
+  Usage: Find the character code of the icon to be used in the font-awesome cheatsheet.
+         The 4-character code is next to it's respective icon.
+         (ex: f002 for search)
+         Apply to variable value in quotes and a leading backslash
+         (ex: "\f002")
+
+  font-awesome cheatsheet: https://fontawesome.com/v4.7.0/cheatsheet/
+
+  The cheatsheet can also be found in the ePublisher Installation Directory at:
+
+  <Install Location>/WebWorks/ePublisher/<version>/Helpers/font-awesome/Font Awesome Cheatsheet.html
+*/
+/* toolbar */
+/* menu */
+/* page */
+/* header */
+/* footer */
+/* search */
+/* modal (cookies disabled message) */
+html, body {
+  margin: 0px;
+  padding: 0px; }
+
+body * {
+  box-sizing: border-box; }
+
+.preload * {
+  transition: none !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important; }
+
+/* initial layout state to prevent jerky */
+/* loading presentation                  */
+.layout_initial #header_div {
+  visibility: hidden; }
+
+.layout_initial #toolbar_div {
+  visibility: hidden; }
+
+.layout_initial #container_div {
+  visibility: hidden; }
+
+div#progress {
+  margin: 0px 0px 0px 0px;
+  padding: 24px 20% 24px 20%; }
+
+div#presentation_div {
+  margin: 0px;
+  padding: 0px;
+  visibility: hidden; }
+
+.unknown_page {
+  /* State tracking class */ }
+
+.scrolling_supported {
+  /* Behavior configuration class */ }
+
+/* Three combinations here for responsive design...  */
+/* .layout_wide - Desktop mode                       */
+/* .layout_narrow - mobile landscape mode            */
+/* .layout_narrow.layout_tall - mobile portrait mode */
+/* template */
+#layout_div {
+  /* layout_tall & layout_narrow specific items */
+  /* portrait mobile view                       */
+  /*                                            */
+  /* layout_narrow specific items */
+  /* -landscape mobile view-      */
+  /*                              */
+  /* layout_wide specific items */
+  /* -desktop view-             */
+  /*                            */ }
+
+/* Header */
+#layout_div #header_div {
+  font-size: 0;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  width: 100vw;
+  height: 70px;
+  z-index: 10; }
+
+#layout_div.layout_narrow.layout_tall .ww_skin_header_company_info {
+  display: none; }
+
+#layout_div.layout_narrow .ww_skin_header_company_info {
+  display: table-cell;
+  width: 100%; }
+
+#layout_div.layout_wide .ww_skin_header_company_info {
+  display: table-cell;
+  width: 100%; }
+
+/* Toolbar */
+#layout_div #toolbar_div {
+  font-size: 0;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100vw;
+  height: 42px;
+  z-index: 10; }
+
+#layout_div.layout_narrow.layout_tall #toolbar_div .ww_skin_toolbar_cluster_search {
+  width: auto; }
+
+#layout_div.layout_narrow.layout_tall #toolbar_div #search_input_container {
+  display: none; }
+
+#layout_div.layout_narrow.layout_tall #toolbar_div #search_scope_container {
+  display: none; }
+
+#layout_div.layout_narrow.layout_tall #presentation_div.search_enabled .ww_skin_toolbar_logo_container, #layout_div.layout_narrow.layout_tall #presentation_div.search_enabled .ww_skin_toolbar_cluster_right {
+  display: none; }
+
+#layout_div.layout_narrow.layout_tall #presentation_div.search_enabled .ww_skin_toolbar_cluster_search {
+  width: 99%; }
+
+#layout_div.layout_narrow.layout_tall #presentation_div.search_enabled #search_input_container {
+  display: table-cell; }
+
+#layout_div.layout_narrow.layout_tall #presentation_div.search_enabled #search_scope_container {
+  display: table-cell; }
+
+#layout_div.layout_narrow #toolbar_div .ww_skin_toolbar_cluster_search {
+  width: calc(100vw / 2); }
+
+#layout_div.layout_narrow #toolbar_div .ww_skin_toolbar_logo_container_empty {
+  display: none; }
+
+#layout_div.layout_wide #toolbar_div .ww_skin_toolbar_logo_spacer {
+  width: 40px; }
+
+#layout_div.layout_wide #toolbar_div .ww_skin_toolbar_cluster_search {
+  width: 99%; }
+
+#layout_div.layout_wide #toolbar_div .ww_skin_toolbar_button_spacer {
+  width: 600px; }
+
+/* Toolbar - Logo Behavior for small screens */
+@media only screen and (max-width: 680px) {
+  .ww_skin_toolbar_logo_spacer {
+    width: calc(100vw - (40px + 600px));
+    display: table-cell; }
+  .ww_skin_menu_button_container {
+    display: table-cell; }
+  .ww_skin_toolbar_logo_container {
+    width: calc(100vw - (40px + 40px + 600px));
+    padding: 0px;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center; }
+  img.ww_skin_toolbar_logo {
+    max-width: 95%;
+    max-height: 95%;
+    width: auto;
+    height: auto;
+    display: block; } }
+
+@media only screen and (max-width: 720px) {
+  .ww_skin_toolbar_logo_spacer {
+    width: 40px; }
+  .ww_skin_toolbar_logo_container {
+    display: none; } }
+
+/* Toolbar - Menu Toggle Button */
+#presentation_div.menu_open #menu_toggle_show {
+  display: none; }
+
+#presentation_div.menu_open #menu_toggle_hide {
+  display: table; }
+
+#presentation_div.menu_closed #menu_toggle_show {
+  display: table; }
+
+#presentation_div.menu_closed #menu_toggle_hide {
+  display: none; }
+
+/* Initial Menu State For Toggle Buttons */
+#layout_div.layout_narrow #presentation_div.menu_inital #menu_toggle_show {
+  display: table; }
+
+#layout_div.layout_narrow #presentation_div.menu_inital #menu_toggle_hide {
+  display: none; }
+
+#layout_div.layout_wide {
+  /* written from Target Setting */ }
+
+/* Toolbar - Search Scope Selector */
+#search_scope_container.selector_options_open #search_scope_options {
+  display: inline-block; }
+
+#search_scope_container.selector_options_closed #search_scope_options {
+  display: none; }
+
+/* Container (for Menu, Page, Footer) */
+#layout_div #container_div {
+  font-size: 0;
+  position: absolute;
+  top: 112px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; }
+  #layout_div #container_div > * {
+    -webkit-transform: translate3d(0, 0, 0); }
+
+/* Menu */
+/* Menu - outer frame */
+#layout_div #menu_frame {
+  position: fixed;
+  display: inline-block;
+  width: 300px;
+  min-height: calc(100vh - 70px - 42px - 40px - (8px + 8px));
+  top: 112px;
+  left: 0px;
+  z-index: 9; }
+
+#layout_div.layout_narrow.layout_tall #menu_frame {
+  height: calc(100vh - 70px - 42px); }
+
+#layout_div.layout_narrow #menu_frame {
+  height: calc(100vh - 70px - 42px); }
+
+/* Menu - Transition Styles */
+#presentation_div.menu_open #menu_frame {
+  left: 0px;
+  transition: left 0.3s;
+  -webkit-transition: left 0.3s;
+  -o-transition: left 0.3s; }
+
+#presentation_div.menu_closed #menu_frame {
+  left: -300px;
+  transition: left 0.3s;
+  -webkit-transition: left 0.3s;
+  -o-transition: left 0.3s; }
+
+/* Menu - Menu Backdrop */
+#layout_div #menu_backdrop {
+  position: fixed;
+  left: 0;
+  top: 112px;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  display: inline-block;
+  background-color: transparent; }
+
+#layout_div.layout_wide #menu_backdrop {
+  display: none; }
+
+#layout_div.layout_narrow #presentation_div.menu_open #menu_backdrop {
+  z-index: 8;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s linear;
+  -moz-transition: background-color 0.3s linear;
+  -o-transition: background-color 0.3s linear; }
+
+#layout_div.layout_narrow #presentation_div.menu_closed #menu_backdrop {
+  background-color: transparent;
+  transition: background-color 0.3s linear;
+  -moz-transition: background-color 0.3s linear;
+  -o-transition: background-color 0.3s linear;
+  z-index: -1; }
+
+/* Menu - TOC */
+#layout_div #toc_content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 0px; }
+
+#layout_div #index_content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 0px; }
+
+/* Page, Search */
+#layout_div #page_div, #layout_div #search_div {
+  vertical-align: top;
+  min-height: calc(100vh - 70px - 42px);
+  width: 100%;
+  padding: 0px; }
+
+#layout_div.layout_narrow.layout_tall #page_div, #layout_div.layout_narrow.layout_tall #search_div {
+  margin-left: 0px; }
+
+#layout_div.layout_narrow #page_div, #layout_div.layout_narrow #search_div {
+  width: 100%;
+  margin-left: 0px; }
+
+#layout_div.layout_wide #page_div, #layout_div.layout_wide #search_div {
+  width: calc(100% - 300px);
+  margin-left: 300px; }
+
+/* Search-related settings                 */
+/* Hide the page when search is enabled,   */
+/* Hide the search when search is disabled */
+#presentation_div #search_div {
+  display: none; }
+
+#presentation_div #page_div {
+  display: inline-block; }
+
+#presentation_div.search_enabled .ww_skin_search_button i:before {
+  content: ""; }
+
+#presentation_div.search_enabled #page_div {
+  display: none; }
+
+#presentation_div.search_enabled #search_div {
+  display: inline-block; }
+
+/* Page - Transition Styles */
+#layout_div.layout_wide #presentation_div.menu_open #page_div, #layout_div.layout_wide #presentation_div.menu_open #search_div {
+  margin-left: 300px;
+  transition: margin-left 0.3s, width 0.3s;
+  -webkit-transition: margin-left 0.3s, width 0.3s;
+  -o-transition: margin-left 0.3s, width 0.3s; }
+
+#layout_div.layout_wide #presentation_div.menu_closed #page_div, #layout_div.layout_wide #presentation_div.menu_closed #search_div {
+  margin-left: 0px;
+  width: 100%;
+  transition: margin-left 0.3s, width 0.3s;
+  -webkit-transition: margin-left 0.3s, width 0.3s;
+  -o-transition: margin-left 0.3s, width 0.3s; }
+
+iframe#page_iframe {
+  border: none;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 70px - 42px); }
+
+body.scrolling_supported div#layout_div.layout_wide div#container_div, body.scrolling_supported div#layout_div.layout_narrow div#container_div.unknown_page {
+  bottom: 0px; }
+
+div#panels {
+  display: none; }
+
+div#toc_title {
+  display: none; }
+
+div#index_title {
+  display: none; }
+
+#layout_div #search_iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  margin: 0px;
+  padding: 0px; }
+
+#layout_div.layout_narrow {
+  width: 100vw; }
+
+div#parcels {
+  display: block; }
+
+div.back_to_top {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 1s ease;
+  -moz-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
+  -ms-transition: opacity 1s ease;
+  transition: opacity 1s ease;
+  background-color: linear-gradient(to bottom, #A7A9AC 0%, #717376 50%, #59595B 50%, #444142 100%);
+  float: none;
+  position: fixed;
+  padding: 0;
+  right: 18px;
+  bottom: 8px; }
+
+div#layout_div.layout_wide div.back_to_top {
+  right: 50px;
+  bottom: 18px; }
+
+div#layout_div.layout_narrow div.back_to_top {
+  right: 18px;
+  bottom: 8px; }
+
+div#layout_div.layout_narrow.layout_tall div.back_to_top {
+  right: 36px;
+  bottom: 8px; }
+
+div.back_to_top.back_to_top_show {
+  visibility: visible;
+  opacity: 1; }
+
+div.back_to_top > a {
+  display: inline-block;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #B9BCC9;
+  margin: 6px;
+  width: 0;
+  height: 0; }
+  div.back_to_top > a:hover {
+    border-bottom: 10px solid #7f859d;
+    background-color: linear-gradient(to bottom, #A7A9AC 0%, #717376 50%, #59595B 50%, #444142 100%); }
+
+/* Modal Background */
+.modal_background {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto; }
+
+/* Modal Content */
+.modal_content {
+  position: relative;
+  margin: auto;
+  margin-top: 42px;
+  margin-bottom: 42px;
+  padding: 0;
+  overflow: auto;
+  width: 30%;
+  min-width: 250px;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s; }
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0; }
+  to {
+    top: 0;
+    opacity: 1; } }
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0; }
+  to {
+    top: 0;
+    opacity: 1; } }
+
+/* Modal Close Button */
+#modal_close {
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px; }
+
+#close_div {
+  display: inline-block;
+  width: 100%; }
+
+.modal_header {
+  margin-top: 30px; }
+  .modal_header i {
+    margin-top: 40px; }
+
+.modal_body {
+  padding-right: 70px;
+  padding-left: 70px;
+  word-wrap: break-word; }
+
+.modal_footer {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px; }
+
+#retry_btn {
+  padding: 15px 0px;
+  width: 100%;
+  height: 100%; }
+
+.info_text_title {
+  margin-top: 30px; }
+
+#unsupported_browser_container {
+  display: none; }
+
+/* No JavaScript */
+#noscript_padding {
+  padding-top: 1.9em; }
+
+#noscript_warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 101;
+  text-align: center;
+  padding: 5px 0 5px 0; }

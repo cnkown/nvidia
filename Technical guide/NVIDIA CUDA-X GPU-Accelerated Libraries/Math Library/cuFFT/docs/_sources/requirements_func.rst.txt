@@ -1,0 +1,86 @@
+
+.. role:: cpp(code)
+   :language: cpp
+   :class: highlight
+
+.. default-role:: cpp
+.. highlight:: cpp
+
+.. _requirements-label:
+
+Requirements and Functionality
+==============================
+
+------------------------------------------------------------------------------------------
+
+Requirements
+------------
+
+The cuFFTDx library is a CUDA C++ header only library. Therefore, the list of required software to use the library is relatively small.
+Users will need:
+  * CUDA (version 10.1 Update 2 or greater).
+  * A CUDA-supported C++11 compiler.
+  * Host compiler requirements:
+     * If gcc is used, it must be 5.0 or newer.
+     * Compiling on Windows with MSVC is not supported yet.
+     * Experimental support for nvrtc
+  * (Optionally) CMake (version 3.14 or greater).
+
+Early Access version of cuFFTDx has been tested using Ubuntu `16.04`, gcc `5.5`, and nvcc CUDA Toolkit 11.0.
+
+.. _functionality-label:
+
+Supported Functionality
+-----------------------
+
+This is an Early Access (EA) version of cuFFTDx. The current functionality of the library is a subset
+of the capabilities cuFFTDx will have on release.
+
+Supported functions include:
+  * Create block descriptors that run collective FFT operations (with one or more threads collaborating to compute one or more FFTs) in a single CUDA block. See :ref:`block-operator-label`.
+  * Create thread descriptors that run a single FFT operation per thread. This function might require more expertise with cuFFTDx in order to obtain correct results with higher performance. See :ref:`thread-operator-label`.
+  * Bi-directional information flow, from the user to the descriptor via :ref:`operators-label` and from the descriptor to the user via :ref:`traits-label`.
+  * Target specific GPU architectures using the :ref:`sm-operator-label`. This enables users to configure the descriptor with suggested parameters to target performance.
+
+cuFFTDx supports all sizes, however, not every combination of size, precision, elements per thread, and FFTs per block
+is correct and available. The following table summarizes the available combinations:
+
++----------------------+-----------+-----------------------------+---------------------------+
+|         Type         | Precision |         Thread Sizes        |        Block Sizes        |
+|                      |           |                             +--------------+------------+
+|                      |           |                             | Architecture | Size Range |
++----------------------+-----------+-----------------------------+--------------+------------+
+| * Complex-to-complex | half      | All sizes in range: [2; 32] | 60;61;62;75  | [2; 4096]  |
+| * Real-to-complex    |           |                             +--------------+------------+
+| * Complex-to-real    |           |                             | 70           | [2; 16384] |
+|                      |           |                             +--------------+------------+
+|                      |           |                             | 80           | [2; 32768] |
+|                      +-----------+-----------------------------+--------------+------------+
+|                      | float     | All sizes in range: [2; 32] | 60;61;62;75  | [2; 4096]  |
+|                      |           |                             +--------------+------------+
+|                      |           |                             | 70           | [2; 16384] |
+|                      |           |                             +--------------+------------+
+|                      |           |                             | 80           | [2; 32768] |
+|                      +-----------+-----------------------------+--------------+------------+
+|                      | double    | All sizes in range: [2; 16] | 60;61;62;75  | [2; 2048]  |
+|                      |           |                             +--------------+------------+
+|                      |           |                             | 70           | [2; 8192]  |
+|                      |           |                             +--------------+------------+
+|                      |           |                             | 80           | [2; 8192]  |
++----------------------+-----------+-----------------------------+--------------+------------+
+
+.. note::
+  cuFFTDx 0.3.0 added preliminary support for all sizes in range of [0; max size/2]. Most sizes will require you to create additional workspace with global memory allocation. See :ref:`make-workspace-method-label`
+  for more details about workspace. You can check if a given FFT requires with `FFT::requires_workspace`
+  (:ref:`requiresworkspace-block-trait-label`) trait.
+ 
+.. include:: api/empty_workspace_list.rst
+
+Functionality not yet supported include:
+  * Input/output stored in shared memory or global memory. For now, only registers are supported, so data must be loaded/stored to and from registers.
+  * The :ref:`stride-operator-label`, which allows users to set a stride between FFT elements.
+  * The :ref:`blockdim-operator-label`, which enables fine-grain customization of the CUDA block dimensions.
+  * The :ref:`minblocks-block-trait-label`, which suggests a number of blocks per multiprocessor for kernel launches.
+
+.. note::
+  **As with any alpha release, stability of API is not guaranteed.**

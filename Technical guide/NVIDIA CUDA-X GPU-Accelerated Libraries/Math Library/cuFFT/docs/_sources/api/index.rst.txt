@@ -1,0 +1,15 @@
+
+.. _api-reference-label:
+
+API reference
+=============
+
+Welcome to the cuFFTDx API documentation. Here you can find a description of the main
+components of the cufftDx library, with usage examples.
+
+.. toctree::
+   :maxdepth: 2
+
+   operators
+   traits
+   methods

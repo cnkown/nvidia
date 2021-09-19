@@ -1,0 +1,114 @@
+/*~~~~~ SIZING ~~~~~*/
+/*~~~~~~~~~~~~~~~~~~*/
+/*
+ * generation variables
+ * these are modified by the generation process according to Target Settings
+*/
+/*
+ * generic values
+ * NVIDIA: customized logo height.
+*/
+/*
+ * header
+ * NVIDIA: customized header height.
+*/
+/*
+ * footer
+ * NVIDIA custmized footer height, previously 200px.
+ * NVIDIA customized footer padding, previously 10px.
+*/
+/*
+ * menu
+*/
+/*
+ * toolbar
+ *
+ * $toolbar-height should be equal or greater than all other
+ * values or the layout will produce unexpected results
+*/
+/* NVIDIA customization from the Corporate Grey, previously 62px */
+/*
+ * toolbar - logo section (Menu Button & Logo)
+*/
+/* NVIDIA kathy modified from 300px */
+/*
+ * toolbar - search section (Search Scope Selector, Search Input, & Search Button)
+*/
+/* NVIDIA customization */
+/*
+ * toolbar - button section (Previous Button, Next Button, Home Button)
+*/
+/* We want the toolbar width to be $toolbar_button_previous_width + $toolbar_button_next_width + $toolbar_button_home_width + 520px */
+/*
+ * was this helpful buttons & message
+*/
+/*
+ * page
+*/
+/*
+ * mini toc
+*/
+/*
+ * related topics
+*/
+/*
+ * search
+*/
+/*
+ * lightbox
+*/
+/*
+ * unsupported browser
+*/
+/*
+ * calculated sizes
+ *
+ * the values in the below section are calculated & dependent upon multiple above values.
+*/
+/*
+ * toolbar
+*/
+/*
+ * menu
+*/
+/*
+ * page
+*/
+@media only screen and (min-width: 900px) {
+  #layout_div.layout_initial #presentation_div.menu_initial #menu_frame {
+    left: 0; }
+  #layout_div.layout_initial #presentation_div.menu_initial #page_div, #layout_div.layout_initial #presentation_div.menu_initial #search_div {
+    margin-left: 300px;
+    width: calc(100vw - 300px); } }
+
+@media only screen and (max-width: 900px) {
+  #layout_div.layout_initial #presentation_div.menu_initial #menu_frame {
+    left: -300px; }
+  #layout_div.layout_initial #presentation_div.menu_initial #menu_backdrop {
+    display: none; } }
+
+/* Toggle Buttons - Initial State */
+#layout_div.layout_narrow #presentation_div.menu_initial #menu_toggle_show {
+  display: table; }
+
+#layout_div.layout_narrow #presentation_div.menu_initial #menu_toggle_hide {
+  display: none; }
+
+#layout_div.layout_wide #presentation_div.menu_initial #menu_toggle_show {
+  display: none; }
+
+#layout_div.layout_wide #presentation_div.menu_initial #menu_toggle_hide {
+  display: table; }
+
+/* Menu - Initial State */
+#layout_div.layout_narrow #presentation_div.menu_initial #menu_frame {
+  left: -300px; }
+
+#layout_div.layout_narrow #presentation_div.menu_initial #menu_backdrop {
+  display: none; }
+
+#layout_div.layout_wide #presentation_div.menu_initial #menu_frame {
+  left: 0; }
+
+#layout_div.layout_wide #presentation_div.menu_initial #page_div {
+  margin-left: 300px; }
