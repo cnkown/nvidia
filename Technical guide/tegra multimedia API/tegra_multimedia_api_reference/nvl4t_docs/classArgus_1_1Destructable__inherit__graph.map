@@ -1,0 +1,9 @@
+<map id="Argus::Destructable" name="Argus::Destructable">
+<area shape="rect" href="$classArgus_1_1CameraProvider.html" title="Argus::CameraProvider" alt="" coords="221,5,376,32"/>
+<area shape="rect" href="$classArgus_1_1CaptureMetadataContainer.html" title="An object that holds a CaptureMetadata instance and is used to read the capture metadata from a consu..." alt="" coords="191,56,407,83"/>
+<area shape="rect" href="$classArgus_1_1CaptureSession.html" title="Argus::CaptureSession" alt="" coords="221,107,376,133"/>
+<area shape="rect" href="$classArgus_1_1EventQueue.html" title="Argus::EventQueue" alt="" coords="232,157,365,184"/>
+<area shape="rect" href="$classArgus_1_1OutputStream.html" title="Argus::OutputStream" alt="" coords="227,208,371,235"/>
+<area shape="rect" href="$classArgus_1_1OutputStreamSettings.html" title="Argus::OutputStreamSettings" alt="" coords="203,259,395,285"/>
+<area shape="rect" href="$classArgus_1_1Request.html" title="Argus::Request" alt="" coords="243,309,355,336"/>
+</map>

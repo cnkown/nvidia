@@ -1,0 +1,8 @@
+<map id="v4l2_ctrl_videodec_outputbuf_metadata_" name="v4l2_ctrl_videodec_outputbuf_metadata_">
+<area shape="rect" href="$structv4l2__ctrl__videodec__statusmetadata__.html" title="Holds the decoder error status metadata for the frame. " alt="" coords="571,5,696,48"/>
+<area shape="rect" href="$structv4l2__ctrl__hevcdec__bufmetadata__.html" title="Holds H.265 specific decoder metadata for the frame. " alt="" coords="529,72,737,99"/>
+<area shape="rect" href="$structv4l2__ctrl__videodec__dpbinfometadata__.html" title="Holds the decoder DPB info metadata. " alt="" coords="304,91,435,133"/>
+<area shape="rect" href="$structv4l2__ctrl__h264dec__bufmetadata__.html" title="Holds H.264 specific decoder metadata for the frame. " alt="" coords="529,123,737,149"/>
+<area shape="rect" href="$structv4l2__ctrl__videodec__currentframe__metadata__.html" title="Holds the the frame specific metadata for the current frame. " alt="" coords="5,57,173,100"/>
+<area shape="rect" href="$structv4l2__ctrl__videodec__refframe__metadata__.html" title="Holds the the frame specific metadata for a reference frame. " alt="" coords="19,124,160,167"/>
+</map>

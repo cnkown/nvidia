@@ -1,0 +1,50 @@
+<map id="Argus::NonCopyable" name="Argus::NonCopyable">
+<area shape="rect" href="$classArgus_1_1Interface.html" title="The top&#45;level interface class. " alt="" coords="219,1055,331,1081"/>
+<area shape="rect" href="$classArgus_1_1InterfaceProvider.html" title="The base interface for a class that provides libargus Interfaces. " alt="" coords="196,2144,353,2171"/>
+<area shape="rect" href="$classArgus_1_1UniqueObj.html" title="Template helper emulating C++11 rvalue semantics. " alt="" coords="197,2195,352,2221"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IBayerAverageMap.html" title="Interface to Bayer average map metadata. " alt="" coords="412,5,612,32"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IBayerAverageMapSettings.html" title="Interface to Bayer average map settings. " alt="" coords="425,56,599,99"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IBayerSharpnessMap.html" title="Interface to Bayer sharpness map metadata. " alt="" coords="404,123,620,149"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IBayerSharpnessMapSettings.html" title="Interface to Bayer sharpness map settings. " alt="" coords="417,173,607,216"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IDebugCaptureSession.html" title="Interface used to dump CaptureSession runtime information. " alt="" coords="424,240,600,283"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IDeFogSettings.html" title="Interface to de&#45;fog settings. " alt="" coords="423,307,601,333"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IFaceDetectCaps.html" title="Interface to expose the face detection capabilities of a CaptureSession. " alt="" coords="416,357,608,384"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IFaceDetectMetadata.html" title="Interface to overall face detection results metadata. " alt="" coords="404,408,620,435"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IFaceDetectResult.html" title="Interface to the properties of a single face detection result. " alt="" coords="413,459,611,485"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IFaceDetectSettings.html" title="Interface to face detection settings. " alt="" coords="408,509,616,536"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IInternalFrameCount.html" title="Interface used to query the internal frame count for a request. " alt="" coords="425,560,599,603"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1IPwlWdrSensorMode.html" title="Interface to the properties of a PWL WDR device. " alt="" coords="407,627,617,653"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1ISensorPrivateMetadata.html" title="Interface used to access sensor private metadata. " alt="" coords="425,677,599,720"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1ISensorPrivateMetadataCaps.html" title="Interface used to query the availability and size in bytes of sensor private metadata. " alt="" coords="425,744,599,787"/>
+<area shape="rect" href="$classArgus_1_1Ext_1_1ISensorPrivateMetadataRequest.html" title="Interface used enable the output of sensor private metadata for a request. " alt="" coords="425,811,599,853"/>
+<area shape="rect" href="$classArgus_1_1IAutoControlSettings.html" title="Interface to the auto control settings (provided by IRequest::getAutoControlSettings()). " alt="" coords="421,877,603,904"/>
+<area shape="rect" href="$classArgus_1_1IBayerHistogram.html" title="Interface to Bayer histogram metadata (provided by ICaptureMetadata::getBayerHistogram()). " alt="" coords="432,928,592,955"/>
+<area shape="rect" href="$classArgus_1_1ICameraProperties.html" title="Interface to the core CameraDevice properties. " alt="" coords="427,979,597,1005"/>
+<area shape="rect" href="$classArgus_1_1ICameraProvider.html" title="Interface to the core CameraProvider methods. " alt="" coords="433,1029,591,1056"/>
+<area shape="rect" href="$classArgus_1_1ICaptureMetadata.html" title="Interface to the core capture metadata. " alt="" coords="429,1080,595,1107"/>
+<area shape="rect" href="$classArgus_1_1ICaptureSession.html" title="Interface to the core CaptureSession methods. " alt="" coords="433,1131,591,1157"/>
+<area shape="rect" href="$classArgus_1_1IDenoiseMetadata.html" title="Interface to denoise metadata. " alt="" coords="428,1181,596,1208"/>
+<area shape="rect" href="$classArgus_1_1IDenoiseSettings.html" title="Interface to denoise settings. " alt="" coords="432,1232,592,1259"/>
+<area shape="rect" href="$classArgus_1_1IEdgeEnhanceMetadata.html" title="Interface to edge enhancement metadata. " alt="" coords="412,1283,612,1309"/>
+<area shape="rect" href="$classArgus_1_1IEdgeEnhanceSettings.html" title="Interface to edge enhancement settings. " alt="" coords="415,1333,609,1360"/>
+<area shape="rect" href="$classArgus_1_1IEvent.html" title="Interface to the common Event properties. " alt="" coords="463,1384,561,1411"/>
+<area shape="rect" href="$classArgus_1_1IEventCaptureComplete.html" title="Interface exposed by Events having type EVENT_TYPE_CAPTURE_COMPLETE. " alt="" coords="413,1435,611,1461"/>
+<area shape="rect" href="$classArgus_1_1IEventError.html" title="Interface exposed by Events having type EVENT_TYPE_ERROR. " alt="" coords="449,1485,575,1512"/>
+<area shape="rect" href="$classArgus_1_1IEventProvider.html" title="Interface for an object which generates Events (such as CaptureSession). " alt="" coords="440,1536,584,1563"/>
+<area shape="rect" href="$classArgus_1_1IEventQueue.html" title="Interface to the core EventQueue methods. " alt="" coords="444,1587,580,1613"/>
+<area shape="rect" href="$classArgus_1_1IOutputStreamSettings.html" title="Interface that exposes the settings common to all OutputStream types. " alt="" coords="415,1637,609,1664"/>
+<area shape="rect" href="$classArgus_1_1IRequest.html" title="Interface to the core Request settings. " alt="" coords="455,1688,569,1715"/>
+<area shape="rect" href="$classArgus_1_1IRGBHistogram.html" title="Interface to RGB histogram metadata (provided by ICaptureMetadata::getRGBHistogram()). " alt="" coords="436,1739,588,1765"/>
+<area shape="rect" href="$classArgus_1_1ISensorMode.html" title="Interface to the core properties of a SensorMode. " alt="" coords="443,1789,581,1816"/>
+<area shape="rect" href="$classArgus_1_1ISourceSettings.html" title="Interface to the source settings (provided by IRequest::getSourceSettings()). " alt="" coords="435,1840,589,1867"/>
+<area shape="rect" href="$classArgus_1_1IStreamCaptureMetadata.html" title="Interface to per&#45;stream metadata (provided by ICaptureMetadata::getStreamMetadata()). " alt="" coords="408,1891,616,1917"/>
+<area shape="rect" href="$classArgus_1_1IStreamSettings.html" title="Interface to per&#45;stream settings (provided by IRequest::getStreamSettings()). " alt="" coords="435,1941,589,1968"/>
+<area shape="rect" href="$classArgus_1_1CameraDevice.html" title="Argus::CameraDevice" alt="" coords="439,1992,585,2019"/>
+<area shape="rect" href="$classArgus_1_1CameraProvider.html" title="Argus::CameraProvider" alt="" coords="435,2043,589,2069"/>
+<area shape="rect" href="$classArgus_1_1CaptureMetadata.html" title="Argus::CaptureMetadata" alt="" coords="431,2093,593,2120"/>
+<area shape="rect" href="$classArgus_1_1CaptureMetadataContainer.html" title="An object that holds a CaptureMetadata instance and is used to read the capture metadata from a consu..." alt="" coords="404,2144,620,2171"/>
+<area shape="rect" href="$classArgus_1_1CaptureSession.html" title="Argus::CaptureSession" alt="" coords="435,2195,589,2221"/>
+<area shape="rect" href="$classArgus_1_1Event.html" title="Argus::Event" alt="" coords="464,2245,560,2272"/>
+<area shape="rect" href="$classArgus_1_1EventQueue.html" title="Argus::EventQueue" alt="" coords="445,2296,579,2323"/>
+<area shape="rect" href="$classArgus_1_1OutputStream.html" title="Argus::OutputStream" alt="" coords="440,2347,584,2373"/>
+</map>

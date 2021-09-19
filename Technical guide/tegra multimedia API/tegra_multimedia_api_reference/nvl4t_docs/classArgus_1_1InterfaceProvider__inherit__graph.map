@@ -1,0 +1,14 @@
+<map id="Argus::InterfaceProvider" name="Argus::InterfaceProvider">
+<area shape="rect" href="$classArgus_1_1CameraDevice.html" title="Argus::CameraDevice" alt="" coords="439,5,585,32"/>
+<area shape="rect" href="$classArgus_1_1CameraProvider.html" title="Argus::CameraProvider" alt="" coords="435,56,589,83"/>
+<area shape="rect" href="$classArgus_1_1CaptureMetadata.html" title="Argus::CaptureMetadata" alt="" coords="431,107,593,133"/>
+<area shape="rect" href="$classArgus_1_1CaptureMetadataContainer.html" title="An object that holds a CaptureMetadata instance and is used to read the capture metadata from a consu..." alt="" coords="404,157,620,184"/>
+<area shape="rect" href="$classArgus_1_1CaptureSession.html" title="Argus::CaptureSession" alt="" coords="435,208,589,235"/>
+<area shape="rect" href="$classArgus_1_1Event.html" title="Argus::Event" alt="" coords="464,259,560,285"/>
+<area shape="rect" href="$classArgus_1_1EventQueue.html" title="Argus::EventQueue" alt="" coords="445,309,579,336"/>
+<area shape="rect" href="$classArgus_1_1OutputStream.html" title="Argus::OutputStream" alt="" coords="440,360,584,387"/>
+<area shape="rect" href="$classArgus_1_1OutputStreamSettings.html" title="Argus::OutputStreamSettings" alt="" coords="416,411,608,437"/>
+<area shape="rect" href="$classArgus_1_1Request.html" title="Argus::Request" alt="" coords="456,461,568,488"/>
+<area shape="rect" href="$classArgus_1_1SensorMode.html" title="Argus::SensorMode" alt="" coords="444,512,580,539"/>
+<area shape="rect" href="$classArgus_1_1NonCopyable.html" title="Utility class for libargus interfaces. " alt="" coords="7,259,145,285"/>
+</map>

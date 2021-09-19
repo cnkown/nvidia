@@ -1,0 +1,4 @@
+<map id="NvVideoEncoder" name="NvVideoEncoder">
+<area shape="rect" href="$classNvV4l2Element.html" title="Defines a helper class for V4L2 based components. " alt="" coords="8,80,117,107"/>
+<area shape="rect" href="$classNvElement.html" title="Every element has a unique name that can be used for identifying the element in debug logs..." alt="" coords="21,5,104,32"/>
+</map>

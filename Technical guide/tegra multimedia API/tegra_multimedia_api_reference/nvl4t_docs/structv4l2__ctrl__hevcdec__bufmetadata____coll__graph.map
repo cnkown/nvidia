@@ -1,0 +1,5 @@
+<map id="v4l2_ctrl_hevcdec_bufmetadata_" name="v4l2_ctrl_hevcdec_bufmetadata_">
+<area shape="rect" href="$structv4l2__ctrl__videodec__dpbinfometadata__.html" title="Holds the decoder DPB info metadata. " alt="" coords="113,112,244,155"/>
+<area shape="rect" href="$structv4l2__ctrl__videodec__currentframe__metadata__.html" title="Holds the the frame specific metadata for the current frame. " alt="" coords="5,5,173,48"/>
+<area shape="rect" href="$structv4l2__ctrl__videodec__refframe__metadata__.html" title="Holds the the frame specific metadata for a reference frame. " alt="" coords="197,5,339,48"/>
+</map>

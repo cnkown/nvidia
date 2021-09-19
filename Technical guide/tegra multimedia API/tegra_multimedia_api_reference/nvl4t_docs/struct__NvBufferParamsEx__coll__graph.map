@@ -1,0 +1,6 @@
+<map id="_NvBufferParamsEx" name="_NvBufferParamsEx">
+<area shape="rect" href="$struct__NvBufferChromaSubSamplingParams.html" title="Holds Chroma Subsampling parameters. " alt="" coords="5,112,203,155"/>
+<area shape="rect" href="$struct__NvBufferParams.html" title="Holds parameters for a hardware buffer. " alt="" coords="227,120,347,147"/>
+<area shape="rect" href="$struct__NvBufferSyncObjRec.html" title="buffer sync point object. " alt="" coords="371,120,517,147"/>
+<area shape="rect" href="$struct__NvBufferSyncObjParams.html" title="Holds parameters for buffer sync point object. " alt="" coords="359,5,529,32"/>
+</map>

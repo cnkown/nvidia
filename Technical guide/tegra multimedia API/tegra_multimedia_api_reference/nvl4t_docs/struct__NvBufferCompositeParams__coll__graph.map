@@ -1,0 +1,4 @@
+<map id="_NvBufferCompositeParams" name="_NvBufferCompositeParams">
+<area shape="rect" href="$structNvBufferCompositeBackground.html" title="Holds composition background r,g,b colors. " alt="" coords="5,5,205,32"/>
+<area shape="rect" href="$structNvBufferRect.html" title="Holds coordinates for a rectangle. " alt="" coords="229,5,325,32"/>
+</map>

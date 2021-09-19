@@ -1,0 +1,5 @@
+<map id="Argus::NamedUUID" name="Argus::NamedUUID">
+<area shape="rect" href="$classArgus_1_1EventType.html" title="A unique identifier for a particular type of Event. " alt="" coords="5,155,128,181"/>
+<area shape="rect" href="$classArgus_1_1InterfaceID.html" title="A unique identifier for a libargus Interface. " alt="" coords="152,155,275,181"/>
+<area shape="rect" href="$structArgus_1_1UUID.html" title="A universally unique identifier. " alt="" coords="93,5,187,32"/>
+</map>

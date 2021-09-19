@@ -1,0 +1,18 @@
+<map id="Argus::Tuple&lt; N, T &gt;" name="Argus::Tuple&lt; N, T &gt;">
+<area shape="rect" href="$classArgus_1_1Tuple.html" title="Argus::Tuple\&lt; COORDINATE\l_2D_COUNT, T \&gt;" alt="" coords="412,7,601,49"/>
+<area shape="rect" href="$classArgus_1_1Tuple.html" title="Argus::Tuple\&lt; 4, uint32_t \&gt;" alt="" coords="633,73,812,100"/>
+<area shape="rect" href="$classArgus_1_1Tuple.html" title="Argus::Tuple\&lt; 2, uint32_t \&gt;" alt="" coords="633,375,812,401"/>
+<area shape="rect" href="$classArgus_1_1Tuple.html" title="Argus::Tuple\&lt; RGB_CHANNEL\l_COUNT, T \&gt;" alt="" coords="405,175,608,217"/>
+<area shape="rect" href="$classArgus_1_1Tuple.html" title="Argus::Tuple\&lt; 4, T \&gt;" alt="" coords="437,124,576,151"/>
+<area shape="rect" href="$classArgus_1_1Tuple.html" title="Argus::Tuple\&lt; BAYER\l_CHANNEL_COUNT, T \&gt;" alt="" coords="423,296,591,339"/>
+<area shape="rect" href="$classArgus_1_1Tuple.html" title="Argus::Tuple\&lt; 2, T \&gt;" alt="" coords="437,241,576,268"/>
+<area shape="rect" href="$classArgus_1_1Point2D.html" title="Point2D template class. " alt="" coords="848,15,987,41"/>
+<area shape="rect" href="$classArgus_1_1Rectangle.html" title="Argus::Rectangle\&lt; uint32_t \&gt;" alt="" coords="1120,96,1312,123"/>
+<area shape="rect" href="$classArgus_1_1AcRegion.html" title="Defines an autocontrol region of interest (in pixel space). " alt="" coords="1363,96,1483,123"/>
+<area shape="rect" href="$classArgus_1_1Size2D.html" title="Argus::Size2D\&lt; uint32_t \&gt;" alt="" coords="1128,328,1304,355"/>
+<area shape="rect" href="$classArgus_1_1RGBTuple.html" title="RGBTuple template class. " alt="" coords="841,175,993,201"/>
+<area shape="rect" href="$classArgus_1_1Rectangle.html" title="Rectangle template class. " alt="" coords="841,124,993,151"/>
+<area shape="rect" href="$classArgus_1_1BayerTuple.html" title="BayerTuple template class. " alt="" coords="837,327,997,353"/>
+<area shape="rect" href="$classArgus_1_1Range.html" title="Range template class. " alt="" coords="852,276,983,303"/>
+<area shape="rect" href="$classArgus_1_1Size2D.html" title="Size2D template class. " alt="" coords="849,225,985,252"/>
+</map>

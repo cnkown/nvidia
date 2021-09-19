@@ -1,0 +1,9 @@
+<map id="v4l2_ctrl_videoenc_input_metadata_" name="v4l2_ctrl_videoenc_input_metadata_">
+<area shape="rect" href="$structv4l2__enc__frame__ReconCRC__params__.html" title="Holds the encoder frame Reconstructed CRC parameters. " alt="" coords="283,5,464,48"/>
+<area shape="rect" href="$structv4l2__enc__frame__ROI__params__.html" title="Holds the encoder frame ROI parameters to be used with V4L2_CID_MPEG_VIDEOENC_ROI_PARAMS IOCTL..." alt="" coords="304,72,443,115"/>
+<area shape="rect" href="$structv4l2__enc__ROI__param__.html" title="Holds the encoder quality parameters for a single ROI region. " alt="" coords="7,80,156,107"/>
+<area shape="rect" href="$structv4l2__enc__frame__ext__rate__ctrl__params__.html" title="Holds the encoder frame external rate control parameters to be used with V4L2_CID_MPEG_VIDEOENC_INPUT..." alt="" coords="305,139,441,181"/>
+<area shape="rect" href="$structv4l2__enc__frame__ext__rps__ctrl__params__.html" title="Holds the encoder frame external rps control parameters to be used with V4L2_CID_MPEG_VIDEOENC_INPUT_..." alt="" coords="305,205,441,248"/>
+<area shape="rect" href="$struct__v4l2__enc__frame__prop.html" title="Holds the encoder frame property. " alt="" coords="7,213,156,240"/>
+<area shape="rect" href="$structv4l2__enc__gdr__params__.html" title="Holds the encoder GDR parameters to be used with V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA IOCTL..." alt="" coords="297,272,449,299"/>
+</map>
