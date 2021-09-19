@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+    	
+    <storageModule moduleId="org.eclipse.cdt.core.settings">
+        		
+        <cconfiguration id="com.nvidia.cuda.toolchain.linuxToolchain.83941193">
+            			
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.nvidia.cuda.toolchain.linuxToolchain.83941193" moduleId="org.eclipse.cdt.core.settings" name="Default">
+                				
+                <externalSettings/>
+                				
+                <extensions>
+                    					
+                    <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+                    					
+                    <extension id="com.nvidia.cuda.toolchain.nvccErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+                    					
+                    <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+                    				
+                </extensions>
+                			
+            </storageModule>
+            			
+            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+                				
+                <configuration buildProperties="" id="com.nvidia.cuda.toolchain.linuxToolchain.83941193" name="Default" parent="org.eclipse.cdt.build.core.emptycfg">
+                    					
+                    <folderInfo id="com.nvidia.cuda.toolchain.linuxToolchain.83941193.811104601" name="/" resourcePath="">
+                        						
+                        <toolChain id="com.nvidia.cuda.toolchain.linuxToolchain.199983619" name="CUDA Linux toolchain" superClass="com.nvidia.cuda.toolchain.linuxToolchain">
+                            							
+                            <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.nvidia.cuda.toolchain.targetLinuxPlatform.466864579" isAbstract="false" osList="linux" superClass="com.nvidia.cuda.toolchain.targetLinuxPlatform"/>
+                            							
+                            <builder id="com.nvidia.cuda.toolchain.builder.831497178" managedBuildOn="false" name="CUDA Toolkit Builder.Default" superClass="com.nvidia.cuda.toolchain.builder"/>
+                            							
+                            <tool id="nvcc.linker.1366909017" name="NVCC linker" superClass="nvcc.linker"/>
+                            							
+                            <tool id="nvcc.archiver.1240532091" name="NVCC archiver" superClass="nvcc.archiver"/>
+                            							
+                            <tool id="nvcc.compiler.563387337" name="NVCC Compiler" superClass="nvcc.compiler">
+                                								
+                                <option id="nvcc.compiler.pic.646641353" superClass="nvcc.compiler.pic" useByScannerDiscovery="false"/>
+                                							
+                            </tool>
+                            						
+                        </toolChain>
+                        					
+                    </folderInfo>
+                    				
+                </configuration>
+                			
+            </storageModule>
+            			
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+            		
+        </cconfiguration>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="scannerConfiguration">
+        		
+        <autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+        		
+        <project id="smokeParticles.null.246052384" name="smokeParticles"/>
+        	
+    </storageModule>
+    	
+    <storageModule moduleId="refreshScope"/>
+    	
+    <storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+    
+</cproject>
